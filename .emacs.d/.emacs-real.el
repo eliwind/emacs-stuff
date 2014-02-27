@@ -529,6 +529,7 @@ point is."
 (ansi-color-for-comint-mode-on)  ; show ANSI color codes
 (setq gdb-many-windows t)    ; use many windows for debugging
 
+(require 'hlinum)
 (hlinum-activate)
 (global-linum-mode)
 
@@ -600,6 +601,7 @@ point is."
 (define-key-after
   (lookup-key global-map [menu-bar edit])
   [undo-seperator] '("--" . undo-seperator) 'redo)
+(fset 'undo 'undo-only)
 
 ;; set up nicer buffer switching and other stuff
 (ido-mode)
