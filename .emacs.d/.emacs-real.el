@@ -274,64 +274,6 @@ Normally input is edited in Emacs and sent a line at a time."
       (setq comint-input-sender 'telnet-simple-send)
       (setq telnet-count telnet-initial-count))))
 
-;; ;;---------------------------------------------------------------------------
-;; ;; Use perl COM client to interact with MSDEV
-;; ;;---------------------------------------------------------------------------
-;; (defun ewd-run-perl (iconify &rest stmts)
-;;   (let ((val (call-process "perl" nil nil nil "-e" (apply 'concat stmts))))
-;;     (if (and (= val 0) iconify)
-;;         (iconify-frame))
-;;     val))
-
-;; (defun ewd-switch-to-msdev ()
-;;   (interactive)
-;;   (save-some-buffers)
-;;   (ewd-run-perl t "require Win32::OLE;"
-;;                 "my $app = Win32::OLE->GetActiveObject('MSDev.Application');"
-;;                 "$app = Win32::OLE->new('MSDev.Application') if ! defined $app;"
-;;                 "exit 1 if ! defined $app;"
-;;                 ;; State 1 is Maximized, 2 is minimized, 3 is normal
-;;                 "$app->{'WindowState'} = 1 if $app->{'WindowState'} == 2;"
-;;                 "$app->{'Visible'}=1;"
-;;                 "$app->{'Active'}=1;"
-;;                 "exit 0;"))
-
-;; (defun ewd-msdev-debug ()
-;;   (interactive)
-;;   (save-some-buffers)
-;;   (ewd-run-perl t "require Win32::OLE;"
-;;                 "my $app = Win32::OLE->GetActiveObject('MSDev.Application');"
-;;                 "$app = Win32::OLE->new('MSDev.Application') if !defined $app;"
-;;                 "exit 1 if !defined $app;"
-;;                 "$app->{'WindowState'} = 1 if $app->{'WindowState'} == 2;"
-;;                 "$app->{'Visible'}=1;"
-;;                 "$app->{'Active'}=1;"
-;;                 "$debugger = $app->{'Debugger'};"
-;;                 "$debugger->Go();"
-;;                 "exit 0;"))
-
-;; (defun ewd-msdev-build ()
-;;   (interactive)
-;;   (save-some-buffers)
-;;   (if (eq 1 (ewd-run-perl nil "require Win32::OLE;"
-;;                           "my $app = Win32::OLE->GetActiveObject('MSDev.Application');"
-;;                           "if (defined $app) {exit 0;} else {exit 1};"))
-;;       (compile (ewd-get-compile-command))
-;;     (ewd-run-perl t "require Win32::OLE;"
-;;                   "my $app = Win32::OLE->GetActiveObject('MSDev.Application');"
-;;                   "$app->{'WindowState'} = 1 if $app->{'WindowState'} == 2;"
-;;                   "$app->{'Visible'}=1;"
-;;                   "$app->Build();"
-;;                   "exit 0;")))
-;; ;; get compile command
-;; (defun ewd-get-compile-command ()
-;;   "Get command to build project whose .dsp file is in current directory"
-;;   (let*
-;;       ((proj-dsp (car (directory-files "./" nil "\\.dsp$")))
-;;        (proj-name (if (null proj-dsp) (error "No .DSP file found in current directory!")
-;;                     (file-name-sans-extension proj-dsp))))
-;;     (format "MSDEV %s /MAKE \"%s - Win32 Debug\"" proj-dsp proj-name)))
-
 ;;----------------------------------------------------------------------------
 ;; Toggle keypad as prefix / keypad as numbers
 ;;----------------------------------------------------------------------------
@@ -407,21 +349,6 @@ point is."
   (interactive nil)
   (forward-char -1)
   (transpose-chars 1))
-
-;; Get the title bar string for the current project (based on the
-;; subdirectory under c:/dev)
-
-;; (defun ewd-get-project-title ()
-;;   "Gets the title bar string for the current project"
-;;    (let* 
-;; 	   ((devroot (if (eq window-system 'w32) "c:/dev/" "/localssd/edaniel/dev/"))
-;; 		(proj-name
-;; 		 (if (null buffer-file-name) nil
-;; 		   (ewd-filter (ewd-directories devroot)
-;; 					   (lambda(proj)
-;; 						 (string-match (concat proj "/")  buffer-file-name)))))
-;; 		(proj (if proj-name (file-name-nondirectory (car proj-name)))))
-;;      (if proj (concat "     {branch: " proj "}"))))
 
 ;;----------------------------------------------------------------------------
 ;; Set up shell and bash commands
@@ -539,14 +466,6 @@ point is."
 (setenv "TZ" nil)
 
 ;;----------------------------------------------------------------------------
-;; Set up cursor behavior (solid box when overwriting, blinking bar otherwise)
-;;----------------------------------------------------------------------------
-;; (when window-system
-;;   (require 'w32-cursor)
-;;   (blink-cursor-mode nil)
-;;   (w32-cursor-mode 1))
-
-;;----------------------------------------------------------------------------
 ;; Hide the tool bar
 ;;----------------------------------------------------------------------------
 (tool-bar-mode -1)
@@ -605,8 +524,8 @@ point is."
 (setq-default truncate-lines t)         ; don't wrap long lines... just have them go off the screen
 (setq confirm-kill-emacs 'y-or-n-p)     ; confirm before closing emacs
 (setq archive-zip-use-pkzip nil) ; don't use pkzip for zip files
-;;(setq ediff-split-window-function 'split-window-horizontally)	; show files side-by-side in ediff
-(setq ediff-split-window-function 'split-window-vertically)
+(setq ediff-split-window-function 'split-window-horizontally)	; show files side-by-side in ediff
+;;(setq ediff-split-window-function 'split-window-vertically)
 (ansi-color-for-comint-mode-on)  ; show ANSI color codes
 (setq gdb-many-windows t)    ; use many windows for debugging
 
@@ -620,26 +539,10 @@ point is."
 (make-variable-buffer-local 'tempo-interactive)  ; prompting to fill in templates
 (make-variable-buffer-local 'ps-line-number)     ; print with line numbers
 
-;; Frame and icon titles
-;; (setq frame-title-format '("GNU Emacs: " mode-line-frame-identification
-;;                            mode-line-buffer-identification
-;;                            (:eval (ewd-get-project-title))))
-;; (setq icon-title-format frame-title-format)
-
 ;; Paren matching
 (show-paren-mode t)                        ; highlight matching parens, etc
 (setq show-paren-style 'parenthesis)       ; highlight character, not expression
 (setq blink-matching-paren-distance 51200) ; distance to match paren as
-
-;; Set up info directories
-;; (require 'info)
-;; (mapc '(lambda (dir) (add-to-list 'Info-directory-list dir))
-;;       `("~/info"
-;;         "c:/cygwin/usr/info"
-;;         "c:/cygwin/usr/share/info"
-;;         "c:/cygwin/usr/info"
-;;         ,(concat (getenv "EMACS_DIR") "/info")
-;;         ,@ (ewd-directories "~/info")))
 
 ;; modeline options
 (which-func-mode t)                 ; show current function in modeline
@@ -660,9 +563,6 @@ point is."
 ;; (setq ps-n-up-border-p nil)
 (setq ps-spool-duplex t)
 
-
-;; Ange-FTP.  
-(setq ange-ftp-ftp-program-name "ftp.exe") ;; Use FTP from the path
 
 ;; Add "Get X font name" to menu
 (when (eq window-system 'w32)
@@ -701,20 +601,6 @@ point is."
   (lookup-key global-map [menu-bar edit])
   [undo-seperator] '("--" . undo-seperator) 'redo)
 
-;; ;; set up nicer buffer switching
-;; (autoload 'iswitchb-minibuffer-setup "iswitchb" "better buffer switching" t)
-;; (autoload 'iswitchb-buffer "iswitchb" "buffer switching" t)
-;; (add-hook 'minibuffer-setup-hook 'iswitchb-minibuffer-setup)
-;; (add-hook 'minibuffer-setup-hook
-;;           (lambda ()
-;;             (font-lock-mode 0)
-;;             (abbrev-mode 1)))
-
-;; (add-hook 'iswitchb-define-mode-map-hook
-;;           (lambda ()
-;;             (define-key iswitchb-mode-map [right] 'iswitchb-next-match)
-;;             (define-key iswitchb-mode-map [left] 'iswitchb-prev-match)))
-
 ;; set up nicer buffer switching and other stuff
 (ido-mode)
 
@@ -751,7 +637,6 @@ point is."
 ;; set up generic-x for windows-specific stuff
 (setq generic-define-mswindows-modes t)
 (require 'generic-x)
-;;(add-to-list 'generic-extras-enable-list 'javascript-generic-mode)
 
 ;;----------------------------------------------------------------------------
 ;; Set up syntax highlighting (font-lock)
@@ -819,10 +704,6 @@ point is."
 (add-to-list 'auto-mode-alist '("\\.ci\\'" . cperl-mode))
 
 
-;; a better Javascript mode.  Available from http://web.comhem.se/~u83406637/emacs/javascript.el
-(autoload 'javascript-mode "javascript" "A better Javascript mode" t)
-(add-to-list 'auto-mode-alist '("\\.js\\'" . javascript-mode))
-
 ;; read man pages without external programs.  Woman package written by
 ;; Francis J. Wright <F.J.Wright@qmw.ac.uk>. Available from
 ;; http://www.maths.qmw.ac.uk/~fjw/public_emacs/
@@ -831,18 +712,6 @@ point is."
   (setq woman-path "$EMACSDATA")
   (setq woman-manpath '("c:/cygwin/usr/man" "c:/cygwin/usr/share/man" "c:/cygwin/usr/local/man"))
   (setq woman-imenu t))
-
-;; a better HTML editing mode.  Written by Nelson Minar <nelson@santafe.edu>.
-;; Available from http://www.santafe.edu/~nelson/hhm-beta/.
-(autoload 'html-helper-mode "html-helper-mode" "HTML major mode." t)
-(setq html-helper-do-write-file-hooks t)
-(setq html-helper-build-new-buffer t)
-(setq html-helper-address-string
-      "Eli Daniel &lt;edaniel@endeca.com&gt;")
-(add-hook 'html-helper-mode-hook
-          (lambda () (setq tempo-interactive t)))
-(add-to-list 'auto-mode-alist '("\\.s?html?\\'" . html-helper-mode))
-
 
 ;;----------------------------------------------------------------------------
 ;; Set up JSP editing with mmm-mode
@@ -882,23 +751,6 @@ point is."
 ;;----------------------------------------------------------------------------
 ;; Set up version control
 ;;----------------------------------------------------------------------------
-
-;; ;; Use clearcase for version control
-;;
-;; (require 'clearcase)
-;; (setq clearcase-checkout-arguments '("-unreserved"))
-;; (setq clearcase-suppress-checkout-comments t)
-;; (define-key clearcase-mode-map "\C-xvp" 'clearcase-ediff-pred-current-buffer)
-;;
-;; ;; prompt to add new java files to clearcase
-;; (defadvice jde-gen-class-buffer (around ewd-maybe-add-to-p4 activate)
-;;   "Prompt to add new java files to clearcase"
-;;   (let ((add-file-to-p4 (y-or-n-p "Add this file to clearcase? ")))
-;;     ad-do-it
-;;     (when add-file-to-p4
-;;       (save-buffer)
-;;       (clearcase-commented-mkelem buffer-file-name t ""))))
-
 
 ;; Use svn for version control
 ;;
@@ -1017,10 +869,8 @@ point is."
    ("\C-h\C-v" . apropos-variable)
    ("\C-c;" . comment-region)
    ("\C-c:" . uncomment-region)
-;;   ("\C-t" . gosmacs-transpose-chars)
    ("\C-ck" . ewd-toggle-kp-usage)
    ("\C-cf" . ewd-get-x-font-name)
-;;   ("\C-xb" . iswitchb-buffer)
    ("\M-t" . tab-to-tab-stop)
    ("\M-g" . goto-line)
    ("\C-l" . ewd-font-lock-repaint)
@@ -1051,30 +901,6 @@ point is."
  '(ecb-source-path (quote ("c:\\dev\\" "/localdisk/edaniel/dev" "/localssd/edaniel/dev")))
  '(ecb-wget-setup (quote cons))
  '(which-function-mode t nil (which-func)))
-
-;; (custom-set-faces
-;;   ;; custom-set-faces was added by Custom.
-;;   ;; If you edit it by hand, you could mess it up, so be careful.
-;;   ;; Your init file should contain only one such instance.
-;;   ;; If there is more than one, they won't work right.
-;;  '(cperl-nonoverridable-face ((((class color)) (:foreground "Blue"))))
-;;  '(font-lock-builtin-face ((((class color)) (:foreground "Blue"))))
-;;  '(font-lock-comment-face ((((class color)) (:foreground "firebrick" :italic t))))
-;;  '(font-lock-constant-face ((((class color)) (:foreground "Blue"))))
-;;  '(font-lock-doc-face ((((class color)) (:foreground "firebrick" :italic t))))
-;;  '(font-lock-function-name-face ((((class color)) (:foreground "DarkGoldenrod"))))
-;;  '(font-lock-keyword-face ((((class color)) (:foreground "Blue"))))
-;;  '(font-lock-reference-face ((((class color)) (:foreground "Purple"))))
-;;  '(font-lock-string-face ((((class color)) (:foreground "DarkGreen"))))
-;;  '(font-lock-type-face ((((class color)) (:foreground "Red"))))
-;;  '(jde-java-font-lock-constant-face ((((class color) (background light)) (:foreground "Blue"))))
-;;  '(jde-java-font-lock-modifier-face ((((class color) (background light)) (:foreground "Blue"))))
-;;  '(jde-java-font-lock-number-face ((((class color) (background light)) (:foreground "Black"))))
-;;  '(jde-java-font-lock-package-face ((((class color) (background light)) (:foreground "blue4"))))
-;;  '(mode-line ((((class color)) (:foreground "floral white" :background "#402840"))))
-;;  '(region ((((class color)) (:background "#008080" :foreground "floral white"))))
-;;  '(show-paren-match ((((class color)) (:background "burlywood4"))))
-;;  '(xsl-fo-alternate-face ((((class color)) (:foreground "MidnightBlue")))))
 
 ;;---------------------------------------------------------------------------
 ;; Enable some functions
