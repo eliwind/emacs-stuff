@@ -598,7 +598,7 @@ point is."
 (define-key-after
   (lookup-key global-map [menu-bar edit])
   [undo-seperator] '("--" . undo-seperator) 'redo)
-(fset 'undo 'undo-only)
+(setq undo-no-redo t)
 
 ;; set up nicer buffer switching and other stuff
 (ido-mode)
