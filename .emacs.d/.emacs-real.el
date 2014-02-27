@@ -610,6 +610,8 @@ point is."
 (ansi-color-for-comint-mode-on)  ; show ANSI color codes
 (setq gdb-many-windows t)    ; use many windows for debugging
 
+(hlinum-activate)
+(global-linum-mode)
 
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'post-forward-angle-brackets) ; show directories in buffer names
