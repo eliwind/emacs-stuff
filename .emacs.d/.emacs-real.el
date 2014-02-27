@@ -353,6 +353,9 @@ point is."
 ;;----------------------------------------------------------------------------
 ;; Set up shell and bash commands
 ;;----------------------------------------------------------------------------
+;; use zsh rather than bash
+(setq explicit-shell-file-name "/usr/local/bin/zsh")
+
 ;; create a shell buffer, but not necessarily called *shell*
 (defun ewd-shell (&optional bufname)
 "Just like `shell', only takes buffer name as argument."
@@ -395,13 +398,6 @@ point is."
             (define-key shell-mode-map [down] 'ewd-comint-down)))
 
 
-(add-to-list 'load-path (concat user-emacs-directory "site-lisp"))
-;; (let ((site-lisp-dir (concat "~/site-lisp-" emacs-version)))
-;;   (add-to-list 'load-path site-lisp-dir)
-;;   (save-excursion
-;; 	(cd site-lisp-dir)
-;; 	(normal-top-level-add-subdirs-to-load-path)))
-
 
 ;;----------------------------------------------------------------------------
 ;; Package management
@@ -413,6 +409,7 @@ point is."
 ;;----------------------------------------------------------------------------
 (add-to-list 'exec-path "~/bin")
 (add-to-list 'exec-path "/usr/local/bin")
+(add-to-list 'load-path (concat user-emacs-directory "site-lisp"))
 
 ;;----------------------------------------------------------------------------
 ;; Load 'grep' library, which among other things prevents grep-find from recursing into .svn directories
