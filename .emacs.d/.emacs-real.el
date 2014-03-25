@@ -1,9 +1,6 @@
 ;;----------------------------------------------------------------------------
 ;; data structure manipuation functions
 ;;----------------------------------------------------------------------------
-;; load miscellaneous common lisp stuff
-(require 'cl)
-
 ;; alist manipulation
 (defun mapassoc (func alist)
   "map func down alist, listing results"
@@ -189,14 +186,13 @@ clobbering the mark."
          (if (> (ewd-buffer-count) 1) (bury-buffer)))
         (t (kill-buffer (current-buffer)))))
 
-;;----------------------------------------------------------------------------
-;; Tweak built-in behaviors
-;;----------------------------------------------------------------------------
-;; use y-or-n-p instead of yes-or-no-p
-(fset 'yes-or-no-p 'y-or-n-p)
 
+
+
+;;----------------------------------------------------------------------------
 ;; Make cursor stay in the same column when scrolling.  Thanks to
 ;; David Biesack (sasdjb@unx.sas.com).
+;;----------------------------------------------------------------------------
 (defvar default-column nil
   "The column to track in functions registered with `track-column'.
 This variable is buffer local")
@@ -251,28 +247,11 @@ All functions so advised will strive to maintain the same column."
 (track-column previous-line)
 (track-column next-line)
 
-;; telnet with telnet.exe written by Naftali Ramati (naftali@harmonic.co.il).
-;; Thanks to Zoltan Kemenczy (zoltan@nabu.isg.mot.com).
-(defun zoltan-telnet (host)
-  "Open a network login connection to host named HOST (a string).
-Communication with HOST is recorded in a buffer `*telnet-HOST*'.
-Normally input is edited in Emacs and sent a line at a time."
-  (interactive "sOpen telnet connection to host: ")
-  (let* ((comint-delimiter-argument-list '(?\  ?\t))
-         (name (concat "telnet-" (comint-arguments host 0 nil) ))
-         (buffer (get-buffer (concat "*" name "*")))
-         process)
-    (when (eq window-system 'w32)
-        (setq telnet-new-line "\n"))
-    (if (and buffer (get-buffer-process buffer))
-        (pop-to-buffer (concat "*" name "*"))
-      (pop-to-buffer (make-comint name telnet-program nil host))
-      (setq process (get-buffer-process (current-buffer)))
-      (set-process-filter process 'telnet-initial-filter)
-      (accept-process-output process)
-      (telnet-mode)
-      (setq comint-input-sender 'telnet-simple-send)
-      (setq telnet-count telnet-initial-count))))
+;;----------------------------------------------------------------------------
+;; Tweak built-in behaviors
+;;----------------------------------------------------------------------------
+;; use y-or-n-p instead of yes-or-no-p
+(fset 'yes-or-no-p 'y-or-n-p)
 
 ;;----------------------------------------------------------------------------
 ;; Toggle keypad as prefix / keypad as numbers
@@ -620,6 +599,29 @@ point is."
             (require 'dired-sort-menu)))
 
 ;; Make telnet-mode work on windows
+;; telnet with telnet.exe written by Naftali Ramati (naftali@harmonic.co.il).
+;; Thanks to Zoltan Kemenczy (zoltan@nabu.isg.mot.com).
+(defun zoltan-telnet (host)
+  "Open a network login connection to host named HOST (a string).
+Communication with HOST is recorded in a buffer `*telnet-HOST*'.
+Normally input is edited in Emacs and sent a line at a time."
+  (interactive "sOpen telnet connection to host: ")
+  (let* ((comint-delimiter-argument-list '(?\  ?\t))
+         (name (concat "telnet-" (comint-arguments host 0 nil) ))
+         (buffer (get-buffer (concat "*" name "*")))
+         process)
+    (when (eq window-system 'w32)
+        (setq telnet-new-line "\n"))
+    (if (and buffer (get-buffer-process buffer))
+        (pop-to-buffer (concat "*" name "*"))
+      (pop-to-buffer (make-comint name telnet-program nil host))
+      (setq process (get-buffer-process (current-buffer)))
+      (set-process-filter process 'telnet-initial-filter)
+      (accept-process-output process)
+      (telnet-mode)
+      (setq comint-input-sender 'telnet-simple-send)
+      (setq telnet-count telnet-initial-count))))
+
 (require 'telnet)
 (when (eq window-system 'w32)
 ;;   (setq telnet-program "~/bin/telnet.exe")
@@ -651,7 +653,6 @@ point is."
 ;;----------------------------------------------------------------------------
 (require 'color-theme)
 (require 'color-theme-solarized)
-(setq solarized-contrast 'high)
 (color-theme-solarized-dark)
 
 ;;----------------------------------------------------------------------------
