@@ -419,11 +419,9 @@ point is."
 ;;----------------------------------------------------------------------------
 ;; set up python
 ;;----------------------------------------------------------------------------
-(require 'python-mode)
-(add-to-list 'auto-mode-alist '("\\.py$" . python-mode))
-(setq py-electric-colon-active t)
 (add-hook 'python-mode-hook 'autopair-mode)
 (add-hook 'python-mode-hook 'yas-minor-mode)
+(add-hook 'python-mode-hook 'auto-complete-mode)
 
 (add-hook 'python-mode-hook
 	  (lambda ()
@@ -434,7 +432,6 @@ point is."
 		(local-set-key (kbd "M-.") 'jedi:goto-definition)))
 
 
-(add-hook 'python-mode-hook 'auto-complete-mode)
 
 ;;----------------------------------------------------------------------------
 ;; Make sure TZ env var isn't set
