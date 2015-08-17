@@ -460,9 +460,8 @@ point is."
         (left . 100)
         (width . 150)
         (height . 50)
-        (cursor-color . "brown4")
         (cursor-type . bar)
-        (font . "Menlo-14")
+        (font . "Monaco-12")
         (vertical-scroll-bars . right)))
 
 
@@ -843,6 +842,17 @@ Normally input is edited in Emacs and sent a line at a time."
           (lambda ()
             (modify-syntax-entry ?_ "w" c++-mode-syntax-table)
             (local-unset-key "\C-c:")))
+
+
+;;----------------------------------------------------------------------------
+;; Ruby programming
+;;----------------------------------------------------------------------------
+(add-to-list 'auto-mode-alist '("\\.rb\\'" . enh-ruby-mode))
+(eval-after-load 'enh-ruby-mode
+ '(remove-hook 'enh-ruby-mode-hook 'erm-define-faces))
+(add-hook 'enh-ruby-mode-hook 'robe-mode)
+(add-hook 'enh-ruby-mode-hook 'yard-mode)
+
 
 ;;----------------------------------------------------------------------------
 ;; Set global keybindings
