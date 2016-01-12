@@ -332,8 +332,8 @@ point is."
 ;;----------------------------------------------------------------------------
 ;; Set up shell and bash commands
 ;;----------------------------------------------------------------------------
-;; use zsh rather than bash
-(setq explicit-shell-file-name "/usr/local/bin/zsh")
+(require 'multi-term)
+(setq multi-term-program "/usr/local/bin/zsh")
 
 ;; create a shell buffer, but not necessarily called *shell*
 (defun ewd-shell (&optional bufname)
@@ -476,12 +476,12 @@ point is."
 (setq compilation-scroll-output t)      ; scroll output in compilation window
 (setq-default tab-width 4)              ; tab = 4 spaces
 (setq-default ediff-ignore-similar-regions t) ; ignore whitespace differences in ediff
-(setq-default indent-tabs-mode t)     ; use spaces (not tabs) for indenting
+(setq-default indent-tabs-mode nil)     ; use spaces (not tabs) for indenting
 (setq require-final-newline t)          ; always terminate last line in file
 (setq default-major-mode 'text-mode)    ; default mode is text mode
 (setq next-screen-context-lines 1)      ; # of lines of overlap when scrolling
 (setq auto-save-interval 300)           ; autosave every N characters typed
-(setq default-fill-column 77)           ; the column beyond which do word wrap
+(setq default-fill-column 72)           ; the column beyond which do word wrap
 (setq scroll-preserve-screen-position t); make pgup/dn remember current line
 (setq next-line-add-newlines nil)       ; don't scroll past end of file
 (global-auto-revert-mode 1)             ; autorevert buffers if files change
@@ -500,6 +500,7 @@ point is."
 ;;(setq ediff-split-window-function 'split-window-vertically)
 (ansi-color-for-comint-mode-on)  ; show ANSI color codes
 (setq gdb-many-windows t)    ; use many windows for debugging
+(setq ring-bell-function 'ignore)	; don't beep
 
 (require 'hlinum)
 (hlinum-activate)
@@ -852,6 +853,8 @@ Normally input is edited in Emacs and sent a line at a time."
  '(remove-hook 'enh-ruby-mode-hook 'erm-define-faces))
 (add-hook 'enh-ruby-mode-hook 'robe-mode)
 (add-hook 'enh-ruby-mode-hook 'yard-mode)
+(add-hook 'enh-ruby-mode-hook 'inf-ruby-minor-mode)
+
 
 
 ;;----------------------------------------------------------------------------
