@@ -2,38 +2,73 @@
 
 ;; ----- ido-last-directory-list -----
 (
+ ("/Users/eli/.emacs.d/" . "site-lisp/")
+ ("/Users/eli/emacs-stuff/.emacs.d/" . "site-lisp/")
+ ("/Users/eli/dev/traveller_android/app/src/main/java/com/bridj/rider/" . "network/")
+ ("/Users/eli/dev/traveller_android/app/src/main/java/com/bridj/" . "rider/")
+ ("/Users/eli/dev/traveller_android/app/src/main/java/com/" . "bridj/")
+ ("/Users/eli/dev/traveller_android/app/src/main/java/" . "com/")
+ ("/Users/eli/dev/traveller_android/app/src/main/" . "java/")
+ ("/Users/eli/dev/traveller_android/app/src/" . "main/")
+ ("/Users/eli/dev/traveller_android/app/" . "src/")
+ ("/Users/eli/dev/traveller_android/" . "app/")
+ ("/Users/eli/dev/traveller_ios/" . "bridj/")
+ ("/Users/eli/dev/bridj/app/views/admin/" . "travelers/")
+ ("/Users/eli/dev/bridj/app/views/" . "admin/")
+ ("/Users/eli/dev/SheetSync/" . "poll/")
+ ("/Users/eli/dev/bridj/config/" . "environments/")
+ ("/Users/eli/dev/bridj/app/helpers/api/v1/" . "traveler/")
+ ("/Users/eli/dev/bridj/app/helpers/api/" . "v1/")
+ ("/Users/eli/dev/bridj/app/helpers/" . "api/")
+ ("/Users/eli/dev/bridj/app/controllers/api/v1/" . "traveler/")
+ ("/Users/eli/dev/bridj/app/controllers/api/" . "v1/")
  ("/Library/Java/JavaVirtualMachines/jdk1.7.0_79.jdk/Contents/" . "Home/")
  ("/Library/Java/JavaVirtualMachines/jdk1.7.0_79.jdk/" . "Contents/")
  ("/Library/Java/JavaVirtualMachines/" . "jdk1.7.0_79.jdk/")
  ("/Library/Java/" . "JavaVirtualMachines/")
  ("/Library/" . "Java/")
- ("/Users/eli/emacs-stuff/" . ".emacs.d/")
+ ("/Users/eli/emacs-stuff/" . "site-lisp-23.4.1/")
  ("/Users/eli/dev/bridj/app/controllers/" . "admin/")
  ("/usr/local/" . "bin/")
  ("/usr/" . "local/")
  ("/" . "Library/")
- ("/Users/eli/dev/bridj/app/" . "workers/")
+ ("/Users/eli/dev/bridj/app/" . "views/")
  ("/Users/eli/dev/bridj/" . "app/")
- ("/Users/eli/dev/" . "bridj/")
+ ("/Users/eli/dev/" . "SheetSync/")
  ("/Users/eli/dotfiles/zsh/" . ".oh-my-zsh/")
- ("/Users/eli/" . ".emacs.d/")
+ ("/Users/eli/" . "emacs-stuff/")
 )
 
 ;; ----- ido-work-directory-list -----
 (
- "/Users/eli/"
  "/Users/eli/.emacs.d/"
- "/Users/eli/dev/bridj/app/workers/"
- "/Users/eli/dev/"
- "~/dev/bridj/app/workers/"
+ "/Users/eli/emacs-stuff/"
+ "/Users/eli/.emacs.d/site-lisp/"
+ "/Users/eli/"
  "/Users/eli/emacs-stuff/.emacs.d/"
- "/Users/eli/dev/bridj/app/services/"
- "/Users/eli/Desktop/"
- "/Users/eli/dev/bridj/db/"
- "/Users/eli/dev/bridj/app/models/"
- "/Users/eli/dev/bridj/lib/"
+ "/Users/eli/emacs-stuff/.emacs.d/site-lisp/"
+ "/Users/eli/dev/SheetSync/poll/"
+ "/Users/eli/dev/traveller_android/app/src/main/java/com/bridj/rider/network/"
+ "/Users/eli/dev/traveller_android/app/src/main/java/com/bridj/rider/"
+ "/Users/eli/dev/traveller_ios/bridj/"
  "/Users/eli/dev/bridj/"
+ "/Users/eli/dev/bridj/app/views/admin/travelers/"
  "/Users/eli/dev/bridj/app/controllers/admin/"
+ "/Users/eli/dev/bridj/app/models/"
+ "/Users/eli/Documents/"
+ "/Users/eli/dev/bridj/app/services/"
+ "/Users/eli/dev/bridj/db/"
+ "/Users/eli/dev/"
+ "/Users/eli/dev/SheetSync/sheetsync/"
+ "/Users/eli/dev/bridj/config/"
+ "/Users/eli/dev/bridj/config/environments/"
+ "/Users/eli/dev/bridj/app/helpers/api/v1/traveler/"
+ "/Users/eli/dev/bridj/app/controllers/api/v1/traveler/"
+ "/Users/eli/dev/bridj/app/controllers/api/v1/driver/"
+ "/Users/eli/dev/bridj/app/workers/"
+ "~/dev/bridj/app/workers/"
+ "/Users/eli/Desktop/"
+ "/Users/eli/dev/bridj/lib/"
  "/usr/local/bin/"
  "/Users/eli/dotfiles/zsh/.oh-my-zsh/"
  "/Users/eli/Downloads/"
@@ -41,20 +76,128 @@
 
 ;; ----- ido-work-file-list -----
 (
- ".zshrc"
- ".emacs-real.el"
- "notification_sender_worker.rb"
- "send_reward_email_worker.rb"
+ "init.el"
  ".emacs"
- "booking_service.rb"
- "invite.ics"
- "schema.rb"
- "route.rb"
- "trip.rb"
+ "site-start.el"
+ ".emacs-real.el"
+ "referrals.daily.sql"
+ "duplicate_users.daily.sql"
+ "referral_list.hourly.sql"
+ "SessionManager.java"
+ "TravellerApplication.java"
+ "BJGoogleMapsHelper.m"
 )
 
 ;; ----- ido-dir-file-cache -----
 (
+ ("/Users/eli/.emacs.d/" (22228 47006 0 0) "url/" "tramp" "site-lisp/" "init.el~" "init.el" "ido.last" "games/" "elpa/" "auto-save-list/" "ac-comphist.dat" ".python-environments/" ".gitignore" ".emacs~" ".emacs" ".DS_Store" "../" "./")
+
+ ("/Users/eli/emacs-stuff/" (22228 47039 0 0) "site-lisp-23.4.1/" "README.md" "jde-2.3.5.1/" ".git/" ".emacs.d/" ".emacs" "../" "./")
+
+ ("/Users/eli/.emacs.d/site-lisp/" (22228 46607 0 0) "w32-cursor.el" "site-start.el" "eol-conversion.el" "#site-start.el#" "../" "./")
+
+ ("/Users/eli/" (22228 46532 0 0) "Public/" "Pictures/" "Music/" "Movies/" "Library/" "emacs-stuff/" "Dropbox/" "Downloads/" "dotfiles/" "Documents/" "dev/" "Desktop/" "Applications/" ".zshrc" ".zsh_history" ".zsh-update" ".zlogin" ".zcompdump-Eli’s MacBook Air-5.0.8" ".zcompdump-Eli’s MacBook Air-5.0.5" ".virtualenvs/" ".viminfo" ".Trash/" ".terminfo/" ".subversion/" ".ssh/" ".sh_history" ".rvm/" ".psql_history" ".pry_history" ".profile" ".oh-my-zsh/" ".npm/" ".mkshrc" ".local/" ".lesshst" ".irb-history" ".gitconfig" ".gem/" ".emacs.d/" ".DS_Store" ".dropbox/" ".docker/" ".cups/" ".config/" ".CFUserTextEncoding" ".bashrc" ".bash_profile" ".bash_history" ".aws/" "../" "./")
+
+ ("/Users/eli/emacs-stuff/.emacs.d/site-lisp/" (22228 45809 0 0) "w32-cursor.el" "site-start.el" "eol-conversion.el" "../" "./")
+
+ ("/Users/eli/emacs-stuff/site-lisp-23.4.1/" (21924 13981 0 0) "xquery-mode.el" "winring.el" "w32-cursor.el" "visual-basic-mode.el" "tex-site.el" "subdirs.el" "source-safe.el" "semantic.cache" "redo.el" "python-mode.el-6.1.1/" "mmm-mode-0.4.7/" "latex-paren.el" "javascript.el" "iso88591.map" "ishl.el" "imenu.el" "html-helper-mode.el" "hhm-config.el" "gnuserv.el" "font-menus.el" "eol-conversion.el" "elib/" "ecb-2.32/" "dired-sort-menu.el" "cperl-mode.el" "color-theme-solarized/" "color-theme-6.6.0/" "clearcase.el" "auctex/" ".DS_Store" "../" "./")
+
+ ("/Users/eli/emacs-stuff/.emacs.d/" (22228 45632 0 0) "tramp" "site-lisp/" "ido.last" "games/" "elpa/" "auto-save-list/" "ac-comphist.dat" ".python-environments/" ".gitignore" ".emacs-real.el" ".DS_Store" "../" "./")
+
+ ("/Users/eli/dev/SheetSync/poll/" (22228 40312 0 0) "weekly_trip_ratings.daily.sql" "weekly_driver_ratings.hourly.sql" "weekly_cost_estimates_by_block.daily.sql" "weekly_alert_report.daily.sql" "walk_times.weekly.sql" "uncategorized_discount_codes_lastweek.hourly.sql" "trips_per_hour.weekly.sql" "trip_requests.hourly.sql" "trip_purchase_interval.hourly.sql" "route_saturation.hourly.sql" "ridership_by_neighborhood.daily.sql" "revenue_by_type.hourly.sql" "Reston_tripstarts.daily.sql-OFF" "referrals.daily.sql" "referral_list.hourly.sql" "purchase_type_and_price.hourly.sql" "pricing_change_analysis.hourly.sql" "NPS.daily.sql" "negative_trip_ratings.hourly.sql" "monthly_cohorts.daily.sql" "missed_passenger_discount_code_usage.hourly.sql" "member_usage.hourly.sql" "LTS_tripstarts.daily.sql-OFF" "late_trips_by_driver.weekly.sql" "late_starts_by_driver.daily.sql" "last_update.hourly.sql" "ios_versions.daily.sql" "ios_trip_finders_on_old_versions.daily.sql" "ios_buyers_on_old_versions.daily.sql" "intermediate_stops.weekly.sql" "fulfilled_no_purchase_list.hourly.sql" "duplicate_users.daily.sql" "duplicate_pass_purchase_by_week.daily.sql" "duplicate_pass_purchase.hourly.sql" "DPV_tripstarts.daily.sql-OFF" "discounts_by_type_and_price.hourly.sql" "discount_multipleusers.hourly.sql" "daily_ridership.hourly.sql" "daily_rider_zap.daily.sql" "daily_operating_hours.hourly.sql" "daily_late_pickups_by_affected_pax.weekly.sql" "daily_capacity.daily.sql" "daily_active_driver_tablets.daily.sql" "churned_user_list.hourly.sql" "block_count_by_drivers_by_week.weekly.sql" "alert_shift_report.hourly.sql" "action_tripstarts.daily.sql-OFF" "accounts_created.hourly.sql" ".gitignore" "../" "./")
+
+ ("/Users/eli/dev/SheetSync/" (22228 34782 0 0) "tests/" "sheetsync.cron" "sheetsync/" "setup.py" "run" "requirements_dev.txt" "requirements.txt" "README.md" "poll/" "Makefile" "keys/" "install.sh" "flags.pyc" "fabfile.pyc" "fabfile.py" "env.sh" "ecs/" "Dockerfile" "docker-cmd.sh" "csvout/" "config.yaml" ".gitignore" ".git/" "../" "./")
+
+ ("/Users/eli/dev/traveller_android/app/src/main/java/com/bridj/rider/views/" (22224 45630 0 0) "widgets/" "viewpagerindicator/" "TripsFragmentView.java" "TrackBridjMapView.java" "ShareReferralView.java" "presenters/" "MapViewPresenter.java" "listeners/" "fragments/" "customviews/" "activities/" "../" "./")
+
+ ("/Users/eli/dev/traveller_android/app/src/main/java/com/bridj/rider/views/activities/" (22224 47676 0 0) "TripFeedbackActivity.java" "SplashScreenActivity.java" "SingleFragmentActivity.java" "SignUpActivity.java" "ShareReferralActivity.java" "PassDetailsActivity.java" "MyPassesActivity.java" "LoginActivity.java" "LegalBridjActivity.java" "HomeActivity.java" "ForgotPasswordActivity.java" "BookRoundTripActivity.java" "BookingActivity.java" "BaseActivity.java" "AccountActivity.java" "AboutBridjActivity.java" "../" "./")
+
+ ("/Users/eli/dev/traveller_android/" (22224 45470 0 0) "settings.gradle" "README.md" "gradlew.bat" "gradlew" "gradle.properties" "gradle/" "circle.yml" "build.gradle" "app/" ".travis.yml" ".gitignore" ".git/" "../" "./")
+
+ ("/Users/eli/dev/traveller_android/app/src/main/java/com/bridj/rider/network/" (22025 31165 0 0) "SessionRequest.java" "SessionManager.java" "Session.java" "RestErrorHandler.java" "RestClient.java" "NotAuthorizedException.java" "LatLngConverter.java" "GsonIgnoreExclusionStrategy.java" "GeoJsonAdapter.java" "GeocoderClient.java" "BridjService.java" "BridjException.java" "ApiResponse.java" "../" "./")
+
+ ("/Users/eli/dev/traveller_android/app/src/main/java/com/bridj/rider/" (22025 31165 0 0) "views/" "utils/" "TravellerApplication.java" "tasks/" "services/" "receivers/" "network/" "models/" "intents/" "events/" "data/" "commands/" "adapters/" "../" "./")
+
+ ("/Users/eli/dev/traveller_android/app/src/main/java/com/bridj/" (22025 31165 0 0) "rider/" "../" "./")
+
+ ("/Users/eli/dev/traveller_android/app/src/main/java/com/" (22025 31165 0 0) "bridj/" "../" "./")
+
+ ("/Users/eli/dev/traveller_android/app/src/main/java/" (22025 31165 0 0) "com/" "../" "./")
+
+ ("/Users/eli/dev/traveller_android/app/src/main/" (22025 31165 0 0) "res/" "java/" "assets/" "AndroidManifest.xml" "../" "./")
+
+ ("/Users/eli/dev/traveller_android/app/src/" (22025 31165 0 0) "test/" "staging/" "production/" "main/" "instrumentationTest/" "../" "./")
+
+ ("/Users/eli/dev/traveller_android/app/" (22025 31165 0 0) "src/" "proguard-rules.pro" "manifest-merger-release-report.txt" "libs/" "keystore/" "build.gradle" "app.iml" "aars/" ".gitignore" "../" "./")
+
+ ("/Users/eli/dev/traveller_ios/" (22223 27011 0 0) "scripts/" "README.md" "Pods/" "Podfile.lock" "Podfile" "Localizable.strings" "Gemfile.lock" "Gemfile" "circle.yml" "bridjTests/" "BridjCommon/" "bridj.xcworkspace/" "bridj.xcodeproj/" "bridj-Bridging-Header.h" "bridj/" "boston3.gpx" "boston2.gpx" "boston.gpx" ".gitignore" ".git/" "../" "./")
+
+ ("/Users/eli/dev/traveller_ios/bridj/" (22223 27080 0 0) "ViewControllerHelpers.m" "ViewControllerHelpers.h" "UXModuleBase.swift" "UserAuthManager.m" "UserAuthManager.h" "UIView+Snapshot.m" "UIView+Snapshot.h" "UIView+FrameAdditions.m" "UIView+FrameAdditions.h" "UIColor+Custom.m" "UIColor+Custom.h" "TripAlertRemoteNotificationManager.m" "TripAlertRemoteNotificationManager.h" "TrackYourBridjViewController.m" "TrackYourBridjViewController.h" "TrackYourBridjView.xib" "TrackYourBridjView.m" "TrackYourBridjView.h" "StaticRegionMapView.m" "StaticRegionMapView.h" "SessionUpdateManager.m" "SessionUpdateManager.h" "Resources/" "RateTripView.xib" "RateTripView.m" "RateTripView.h" "RateTripManager.m" "RateTripManager.h" "RACSignal+BJAnimation.m" "RACSignal+BJAnimation.h" "PointerMarker.swift" "NSDictionary+BJParseHelper.m" "NSDictionary+BJParseHelper.h" "NSDate+String.m" "NSDate+String.h" "MainStoryboard.storyboard" "main.m" "LockAppManager.m" "LockAppManager.h" "ListTripsViewController.swift" "ListTripsView.xib" "ListTripsPickupSelectorView.xib" "ListTripsPickupSelectorView.swift" "ListTripsPickupHeaderView.xib" "ListTripsPickupHeaderView.swift" "ListTripsMapDetailView.xib" "ListTripsMapDetailView.swift" "ListTripsDayView.xib" "ListTripsDayView.swift" "ListTripsDayElementView.xib" "ListTripsDayElementView.swift" "ListTripsBookingFlowAdaptor.m" "ListTripsBookingFlowAdaptor.h" "LegacyHelpers.m" "LegacyHelpers.h" "InternalViewTableViewCell.m" "InternalViewTableViewCell.h" "InternalViewController.m" "InternalViewController.h" "Images.xcassets/" "HSLocalization/" "HelpshiftConfig.plist" "GMSPath+BJClipper.mm" "GMSPath+BJClipper.h" "FeatureSettings.m" "FeatureSettings.h" "ExampleUXView.xib" "ExampleUXView.swift" "ExampleUXPresenter.swift" "ExampleUXModule.swift" "ExampleUXManager.swift" "en.lproj/" "default2.gpx" "default.gpx" "CLLocation+BJParseHelper.m" "CLLocation+BJParseHelper.h" "clipper.hpp" "clipper.cpp" "bridj.entitlements" "bridj-Prefix.pch" "bridj-Info.plist" "BoardingPassViewController.m" "BoardingPassViewController.h" "BoardingPassView.xib" "BJWeekDiscountResponse.m" "BJWeekDiscountResponse.h" "BJWeek.m" "BJWeek.h" "BJWebViewController.m" "BJWebViewController.h" "BJUser.m" "BJUser.h" "BJTripViewModel.m" "BJTripViewModel.h" "BJTripsPopover.xib" "BJTripsPopover.m" "BJTripsPopover.h" "BJTripResponse.m" "BJTripResponse.h" "BJTextField.m" "BJTextField.h" "BJStripeHelper.m" "BJStripeHelper.h" "BJStartViewController.m" "BJStartViewController.h" "BJSignUpViewController.m" "BJSignUpViewController.h" "BJSignUpConfirmationView.xib" "BJSignUpConfirmationView.m" "BJSignUpConfirmationView.h" "BJSettings.m" "BJSettings.h" "BJServiceAreaZone.m" "BJServiceAreaZone.h" "BJServiceAreaViewModel.m" "BJServiceAreaViewModel.h" "BJServiceAreaResponse.m" "BJServiceAreaResponse.h" "BJServiceAreaBoundary.m" "BJServiceAreaBoundary.h" "BJSearchPlaceTableViewCell.m" "BJSearchPlaceTableViewCell.h" "BJScheduledTripResponse.m" "BJScheduledTripResponse.h" "BJScheduledTrip.m" "BJScheduledTrip.h" "BJScheduledItem.m" "BJScheduledItem.h" "BJRoute.m" "BJRoute.h" "BJRoundtripPopoverView.xib" "BJRoundtripPopoverView.m" "BJRoundtripPopoverView.h" "BJRequestLocation.m" "BJRequestLocation.h" "BJReferralViewController.swift" "BJQuestionAlertView.xib" "BJQuestionAlertView.m" "BJQuestionAlertView.h" "BJPromoCodesManager.m" "BJPromoCodesManager.h" "BJPromoCodeResponse.m" "BJPromoCodeResponse.h" "BJPromoCodePopup.xib" "BJPromoCodePopup.m" "BJPromoCodePopup.h" "BJPassTableViewCell.xib" "BJPassTableViewCell.m" "BJPassTableViewCell.h" "BJPassResponse.m" "BJPassResponse.h" "BJPassFilter.m" "BJPassFilter.h" "BJPassDirection.m" "BJPassDirection.h" "BJPass.m" "BJPass.h" "BJParseHelper.m" "BJParseHelper.h" "BJParentModalView.m" "BJParentModalView.h" "BJNotificationManager.m" "BJNotificationManager.h" "BJMigrationManager.m" "BJMigrationManager.h" "BJMenuWebViewController.m" "BJMenuWebViewController.h" "BJMenuTableViewCell.m" "BJMenuTableViewCell.h" "BJMainViewController.m" "BJMainViewController.h" "BJLoginViewController.m" "BJLoginViewController.h" "BJLocationManager.m" "BJLocationManager.h" "BJLocation.m" "BJLocation.h" "BJListPassesViewController.m" "BJListPassesViewController.h" "BJLabel.m" "BJLabel.h" "BJKeychainValuesMigrator.m" "BJKeychainValuesMigrator.h" "BJKeychain.m" "BJKeychain.h" "BJGoogleMapsHelper.m" "BJGoogleMapsHelper.h" "BJGeocodeHelper.m" "BJGeocodeHelper.h" "BJForgotPasswordViewController.m" "BJForgotPasswordViewController.h" "BJFindTripViewController.m" "BJFindTripViewController.h" "BJEndPoint.m" "BJEndPoint.h" "BJDiscount.m" "BJDiscount.h" "BJDirectionResponse.m" "BJDirectionResponse.h" "BJDirection.m" "BJDirection.h" "BJDateButton.xib" "BJDateButton.m" "BJDateButton.h" "BJCreditCardPopover.xib" "BJCreditCardPopover.m" "BJCreditCardPopover.h" "BJCreditCardInfo.m" "BJCreditCardInfo.h" "BJCoreViewController.m" "BJCoreViewController.h" "BJCoreTableViewCell.m" "BJCoreTableViewCell.h" "BJCorePassesViewController.m" "BJCorePassesViewController.h" "BJCoreNavigationViewController.m" "BJCoreNavigationViewController.h" "BJCopyLabel.m" "BJCopyLabel.h" "BJConstants.m" "BJConstants.h" "BJChargeResponseItem.m" "BJChargeResponseItem.h" "BJChargeResponse.m" "BJChargeResponse.h" "BJChargePassItem.m" "BJChargePassItem.h" "BJChangePasswordViewController.m" "BJChangePasswordViewController.h" "BJCardDetailsViewController.m" "BJCardDetailsViewController.h" "BJButton.m" "BJButton.h" "BJBusPosition.m" "BJBusPosition.h" "BJBookPopover.xib" "BJBookPopover.m" "BJBookPopover.h" "BJBoldLabel.m" "BJBoldLabel.h" "BJAppliedPromoCodePopup.xib" "BJAppliedPromoCodePopup.m" "BJAppliedPromoCodePopup.h" "BJAppDelegate.m" "BJAppDelegate.h" "BJAPIURLS.h" "BJAPICallHelper.m" "BJAPICallHelper.h" "BJAnalyticsManager.m" "BJAnalyticsManager.h" "BJAlertView.xib" "BJAlertView.m" "BJAlertView.h" "BJAddressFieldView.m" "BJAddressFieldView.h" "BJAccountViewController.m" "BJAccountViewController.h" "BeaconDemoManager.m" "BeaconDemoManager.h" "BCViewHelpersSwift.swift" "BCSecureKVStore.swift" "BCLog.swift" "AppEntryActionManager.m" "AppEntryActionManager.h" "AdminPushMessageManager.m" "AdminPushMessageManager.h" "../" "./")
+
+ ("/Users/eli/dev/bridj/app/views/admin/travelers/" (22212 33845 0 0) "show.html.erb" "service_requests.html.erb" "reset_password.html.erb" "new.html.erb" "index.html.erb" "edit.html.erb" "bookings_show.html.erb" "_form.html.erb" "../" "./")
+
+ ("/Users/eli/dev/bridj/app/views/admin/" (22212 33845 0 0) "zones/" "vehicles/" "user_sets/" "uploads/" "trips/" "trip_status/" "trip_imports/" "travelers/" "stops/" "shared/" "sessions/" "routes/" "registrations/" "notifications/" "feedbacks/" "dynamic_service_areas/" "drivers/" "driver_device_infos/" "driver_app_uploads/" "driver_activity_logs/" "discounts/" "dashboard/" "bookings/" "base/" "ab_tests/" "../" "./")
+
+ ("/Users/eli/dev/bridj/app/views/" (22212 33845 0 0) "shared/" "layouts/" "devise/" "apitome/" "api/" "admin/" "../" "./")
+
+ ("/Users/eli/dev/bridj/app/controllers/" (22212 33845 0 0) "concerns/" "application_controller.rb" "api/" "admin/" "../" "./")
+
+ ("/Users/eli/dev/bridj/app/services/" (22212 63524 0 0) "weekly_discount_service.rb" "upload_service.rb" "update_user_device.rb" "unrated_booking_for_traveler.rb" "trip_service.rb" "trip_price_service.rb" "time_formatter_service.rb" "stripe_customer_service.rb" "slacker.rb" "service_area_check.rb" "segment.rb" "scheduled_service.rb" "route_option.rb" "referral_code_service.rb" "pass_service.rb" "pass_animation_allocation_service.rb" "optimal_route_service.rb" "notification_service.rb" "next_trip_stop_service.rb" "neighborhood_finder.rb" "multiple_referral_discount_active.rb" "map_service.rb" "logging_service.rb" "invalid_promo_code_error.rb" "gcm_response_service.rb" "find_trip_prices_for_transit.rb" "feedback_request_service.rb" "double_booking_detection_service.rb" "discount_service.rb" "direction_service.rb" "direction_legs_aggregator_service.rb" "destroy_service.rb" "closest_stop_service.rb" "build_new_trip.rb" "booking_service.rb" "boarding_alighting_service.rb" "availability.rb" "alert_dispatch.rb" "admin_booking_service.rb" "../" "./")
+
+ ("/Users/eli/Downloads/" (22206 22954 0 0) "wsweeneyResumeJuly282015MobileDev.doc" "wrian-resume.pdf" "W4.pdf" "w4 boreiko.pdf" "Sync 7.pptx" "Stuart Terrett offer_letter.pdf" "Stuart Terrett offer_letter (1).pdf" "Stuart Terrett nda.pdf" "Stephen Karger.pdf" "staging_traveler.ipa" "staging_traveler-1.ipa" "staging_bridj_app_1_1.ipa" "SpotifyInstaller.zip" "Spotify options wire request.pdf" "Spectacle+0.8.10.zip" "SonosDesktopController60.dmg" "Slack for iOS Upload.mp4" "Slack for iOS Upload-1.mp4" "Skype_7.17.377.dmg" "SKMBT_C36016012615270.pdf" "Screen Shot 2015-09-03 at 3.37.10 PM.png" "Screen Shot 2015-09-02 at 8.38.01 AM.png" "scott-o-brien.pdf" "scott-o-brien (2).pdf" "scott-o-brien (1).pdf" "Sacramentorealestatetransactions.csv" "RoutingOptProgression.mov" "Roumen_Kassabov_Resume.docx" "Rich_Wagner_resume.docx" "Referral Mob .docx" "Rails Machine CC Authorization Form.pdf" "RAIDar.dmg" "question_2.rb" "question_1.rb" "PSequel.1.1.2.app.zip" "Pradeep_Reddy.pdf" "paul-freeman.pdf" "paul-freeman (1).pdf" "osinvoice.zip" "osinvoice/" "OfficeUsageAgreement.pdf" "OfficeUsageAgreement (2).pdf" "OfficeUsageAgreement (1).pdf" "offers.pdf" "OfferLetter-StephenKarger.pdf" "OfferLetter-StephenKarger (1).pdf" "OfferLetter-StephenKarger (1) (1).pdf" "OfferLetter-NoahDurell.pdf" "OfferLetter-ChrisCornelius.pdf" "OfferLetter-AlisonBoreiko.pdf" "Offer_Letter_JohnKinnebrew.pdf" "Offer_Letter_JohnKinnebrew-Signed.pdf" "Offer_Letter_JohnKinnebrew-Signed (1).pdf" "Offer Letter JohnKinnebrew.docx" "Offer Letter Boreiko.pdf" "Offer Letter - Chris Cornelius (signed).pdf" "Offer Letter - Chris Cornelius (signed) (1).pdf" "Offer Letter - Alison Boreiko.pdf" "not yet assigned.jpg" "Noah Durell.pdf" "Noah .pdf" "Noah -signed.pdf" "new vehicles.mp4" "NDA - Chris Cornelius (signed).pdf" "Miller_Neil.docx" "mike_atlas_resume_november_2015.pdf" "Max Stein-Golenbock Oculus resume.pdf" "Matt_Eagar_Resume.pdf" "Matt_Eagar_Resume (1).pdf" "Localytics Audit and Next Steps.xlsx" "kiwiberry.png" "Kiwi_berries_01.jpg" "Kinnebrew, John S - NSF Biosketch - 2015_11_25 - For NSF SBIR Proposal.docx" "July 20th Sync.pptx" "JarJarHS-SWE.jpg" "jarjar.png" "Jar_Jar_FU_400x400.jpg" "Invoice5885345290852950505.pdf" "Inv_4464_from_Celera_Networks_Inc_10808.pdf" "Inv_4464_from_Celera_Networks_Inc_10808 (1).pdf" "Install Spotify.app/" "IMG_2680.PNG" "IMG_2648.JPG" "IMG_2646.PNG" "IMG_2645.PNG" "IMG_2644.PNG" "i9 Boreiko.pdf" "i-9.pdf" "i-9 - Noah Durell.pdf" "himanshu-sharma.pdf" "Gungor_Basa_Academic_CV.pdf" "GoogleVoiceAndVideoSetup.dmg" "googlechrome.dmg" "googlechrome-2.dmg" "GitHub Desktop 210.zip" "Fred Faust's Resume.pdf" "Fred Faust's Resume (2).pdf" "Fred Faust's Resume (1).pdf" "Fithian_Dan.docx" "EvettCharlie3.docx" "error.jpg" "EmployeeorContractorConsultantNDAJohnKinnebrew.doc.pdf" "EmployeeorContractorConsultantNDAJohnKinnebrew-Signed.pdf" "Employee or Contractor Consultant NDA JohnKinnebrew.doc" "Emacs-24.5-1-universal.dmg" "Dropcam Clip (August 13 2015 at 136 PM).mp4" "DropboxInstaller.dmg" "Draft KCATA Worksheet for DBS Review .xlsx" "download.png" "document.pdf" "document (4).pdf" "document (3).pdf" "document (2).pdf" "document (1).pdf" "DockerToolbox-1.9.1b.pkg" "direct deposit.pdf" "Dave Alton.pdf" "DanPletea_2015.doc" "Daniel, Eli, Invoice Option Exercise, August 2015.pdf" "Daniel, Eli, Invoice Option Exercise, August 2015 (1).pdf" "dan-thiffault.pdf" "dan-thiffault (2).pdf" "dan-thiffault (1).pdf" "credentials.csv" "CopyofBridjFormofEmployeeorContractorConsultantNDAtemplate-NoahDurell.pdf" "CopyofBridjFormofEmployeeorContractorConsultantNDAtemplate-NoahDurell-signed.pdf" "Cootey_Philip.docx" "CN5057.pdf" "CN5057 (1).pdf" "CN5018.pdf" "CN5018 (1).pdf" "CN4975.pdf" "CN4875.pdf" "CN4853.pdf" "CN4655.pdf" "CN4528.Pdf" "CN4528 (1).Pdf" "CN4334.pdf" "cisdem-documentreader.dmg" "Chris Cornelius.pdf" "certs/" "C360_Series_v3.9.0_Letter.zip" "C360_Series_v3.9.0_Letter (1).zip" "Brother_ScannerDrivers_1_7_10_0.dmg" "Bridjin30.pptx" "BridjFormofEmployeeorContractorConsultantNDA-StephenKarger.pdf" "BridjFormofEmployeeorContractorConsultantNDA-StephenKarger (1).pdf" "BridjFormofEmployeeorContractorConsultantNDA-ChrisCornelius.pdf" "BridjFormofEmployeeorContractorConsultantNDA-AlisonBoreiko.pdf" "Bridj_Skillcycle_Elongated Contingency Agreement.pdf" "bridj_production_2015_11_16.dmp" "bridj_1.5.6_24de0_f77e02b.ipa" "bridj_1.5.6_24ddf.5771ea4.ipa" "bridj.ipa" "Bridj-Staging_1.6.1_160122.1078.0.ipa" "Bridj-Staging_1.6.1_160122.1078.0 (1).ipa" "Bridj-Staging_1.5.17_160119.1071.0.ipa" "Bridj-Staging_1.5.16_160104.934.0.ipa" "Bridj-Staging_1.5.15_151217.925.0.ipa" "Bridj-Staging_1.5.14_151125.914.5.ipa" "Bridj-Staging_1.5.14_151125.914.3.ipa" "Bridj-Staging_1.5.14_151125.914.0-2.ipa" "Bridj-PreRelease_1.5.17_160112.937.0.ipa" "Bridj-PreRelease_1.5.10_151019.842.0.ipa" "Bridj Office Usage Agreement - 283 Newbury St - 2016-01.pdf" "Bridj EE Presenation.pdf" "Bridj EE Presenation (1).pdf" "Bridj Current configuration.xps" "Bridj Current configuration.pdf" "bizhub_C360_109.pkg" "bizhub_C360_109 2.pkg" "BitTorrent.dmg" "Arora_Puneet_Resume.pdf" "Andre_Todman_Resume.docx" "AllCerts.zip" "AllCerts (1).zip" "ACHInfo+.pdf" "Aakash Patel SMU & CM & BR pdf.pdf" "Aakash Patel SMU & CM & BR pdf (1).pdf" "9549_LYTeacherRecommendation.pdf" "66LexingtonAveCondoFees.pdf" "66LexingtonAveCondoFees (1).pdf" "2015_10_20_14_31_09.gz" "2015_10_20_14_31_09" "2015_08_17_22_22_27.gz" "2015_08_17_22_22_27 (1).gz" "2015_08_17_22_22_27 (1)" "2015_08_17_22_22_27" "2015_08_17_22_04_15.gz" "2015_08_17_22_04_15" "20151020-104036-profiles.csv" "20150728_bridj_production.dmp" "117985115.png" "117985113.png" "117985111.png" "117985110.png" "117985109.png" "10151_ReleaseofStudentRecords.pdf" ".localized" ".DS_Store" "../" "./")
+
+ ("/Users/eli/dev/bridj/app/controllers/admin/" (22212 33845 0 0) "zones_controller.rb" "vehicles_controller.rb" "user_sets_controller.rb" "user_set_users_controller.rb" "uploads_controller.rb" "trips_controller.rb" "trip_status_controller.rb" "trip_prices_controller.rb" "trip_imports_controller.rb" "travelers_controller.rb" "stops_controller.rb" "sessions_controller.rb" "routes_controller.rb" "registrations_controller.rb" "notifications_controller.rb" "feedbacks_controller.rb" "dynamic_service_areas_controller.rb" "drivers_controller.rb" "driver_device_infos_controller.rb" "driver_app_uploads_controller.rb" "driver_activity_logs_controller.rb" "discounts_controller.rb" "dashboard_controller.rb" "bookings_controller.rb" "base_controller.rb" "alerts_controller.rb" "ab_tests_controller.rb" "../" "./")
+
+ ("/Users/eli/Desktop/" (22206 22954 0 0) "rear.txt" "payments.csv" "conf.txt" "Bridj-Staging_1.6.1_160128.1099.0.ipa" ".localized" ".DS_Store" "../" "./")
+
+ ("/Users/eli/dev/bridj/app/controllers/api/v1/driver/" (22212 33845 0 0) "trips_controller.rb" "trip_monitors_controller.rb" "sessions_controller.rb" "device_info_controller.rb" "base_controller.rb" "assignments_controller.rb" "../" "./")
+
+ ("/Users/eli/dev/bridj/app/controllers/api/v1/traveler/" (22212 33845 0 0) "weekly_discounts_controller.rb" "trips_controller.rb" "trip_details_controller.rb" "test_stripe_tokens_controller.rb" "stops_controller.rb" "sessions_controller.rb" "service_area_controller.rb" "request_service_controller.rb" "registrations_controller.rb" "rateable_trips_controller.rb" "promo_codes_controller.rb" "payment_methods_controller.rb" "passes_controller.rb" "neighborhoods_controller.rb" "localytics_migrations_controller.rb" "feedback_controller.rb" "feature_settings_controller.rb" "dynamic_service_area_controller.rb" "directions_controller.rb" "bookings_controller.rb" "base_controller.rb" "authentication_controller.rb" "../" "./")
+
+ ("/Users/eli/dev/bridj/app/models/" (22212 33845 0 0) "zone.rb" "weekly_trip.rb" "vehicle.rb" "user_set_user.rb" "user_set_discount.rb" "user_set.rb" "user_device.rb" "user.rb" "trip_stop_stat.rb" "trip_stop.rb" "trip_price.rb" "trip_monitor.rb" "trip_import.rb" "trip_access_log.rb" "trip.rb" "traveler_booking_request.rb" "traveler.rb" "stop.rb" "service_area.rb" "route.rb" "reward_discount.rb" "request_service.rb" "referral_discount.rb" "push_tokens.rb" "push_message_payload.rb" "push_message.rb" "pass_animation.rb" "pass.rb" "now_trip.rb" "notification.rb" "location.rb" "janky_membership.rb" "feedback.rb" "feature_access.rb" "feature.rb" "driver_device_info.rb" "driver_device_group.rb" "driver_app_upload.rb" "driver_api_session_links.rb" "driver_activity_log.rb" "driver.rb" "discount_user.rb" "discount.rb" "daily_trip.rb" "concerns/" "booking.rb" "block.rb" "availability_matrix.rb" "assignment.rb" "app_version_user_device.rb" "app_version_request.rb" "app_version.rb" "app_download_link.rb" "animation_allocation.rb" "alert.rb" "admin_booking_request.rb" "admin_activity_log.rb" "admin.rb" ".keep" "../" "./")
+
+ ("/Users/eli/dev/bridj/config/" (22212 33845 0 0) "vagrant/" "secrets.yml.sample" "secrets.yml" "scout_apm.yml" "routes.rb" "resque.yml" "newrelic.yml" "moonshine.yml" "moonshine/" "locales/" "initializers/" "google_maps_config.yml" "god/" "environments/" "environment.rb" "deploy.rb.orig" "deploy.rb" "deploy.orig/" "deploy/" "database.yml.sample" "database.yml" "cucumber.yml" "clock.rb" "certificates/" "boot.rb" "aws/" "application.rb" "../" "./")
+
+ ("/Applications/Emacs.app/Contents/Resources/lisp/" (22212 58641 0 0) "xt-mouse.elc" "xt-mouse.el.gz" "xml.elc" "xml.el.gz" "x-dnd.elc" "x-dnd.el.gz" "woman.elc" "woman.el.gz" "winner.elc" "winner.el.gz" "window.elc" "window.el.gz" "windmove.elc" "windmove.el.gz" "widget.elc" "widget.el.gz" "wid-edit.elc" "wid-edit.el.gz" "wid-browse.elc" "wid-browse.el.gz" "whitespace.elc" "whitespace.el.gz" "wdired.elc" "wdired.el.gz" "w32-vars.elc" "w32-vars.el.gz" "w32-fns.elc" "w32-fns.el.gz" "w32-common-fns.elc" "w32-common-fns.el.gz" "vt100-led.elc" "vt100-led.el.gz" "vt-control.elc" "vt-control.el.gz" "view.elc" "view.el.gz" "version.elc" "version.el.gz" "vcursor.elc" "vcursor.el.gz" "vc/" "userlock.elc" "userlock.el.gz" "url/" "uniquify.elc" "uniquify.el.gz" "type-break.elc" "type-break.el.gz" "tutorial.elc" "tutorial.el.gz" "tree-widget.elc" "tree-widget.el.gz" "tooltip.elc" "tooltip.el.gz" "tool-bar.elc" "tool-bar.el.gz" "tmm.elc" "tmm.el.gz" "timezone.elc" "timezone.el.gz" "time.elc" "time.el.gz" "time-stamp.elc" "time-stamp.el.gz" "thumbs.elc" "thumbs.el.gz" "thingatpt.elc" "thingatpt.el.gz" "textmodes/" "term.elc" "term.el.gz" "term/" "tempo.elc" "tempo.el.gz" "tar-mode.elc" "tar-mode.el.gz" "talk.elc" "talk.el.gz" "tabify.elc" "tabify.el.gz" "t-mouse.elc" "t-mouse.el.gz" "subr.elc" "subr.el.gz" "subdirs.el" "strokes.elc" "strokes.el.gz" "startup.elc" "startup.el.gz" "speedbar.elc" "speedbar.el.gz" "soundex.elc" "soundex.el.gz" "sort.elc" "sort.el.gz" "skeleton.elc" "skeleton.el.gz" "simple.elc" "simple.el.gz" "shell.elc" "shell.el.gz" "shadowfile.elc" "shadowfile.el.gz" "ses.elc" "ses.el.gz" "server.elc" "server.el.gz" "select.elc" "select.el.gz" "scroll-lock.elc" "scroll-lock.el.gz" "scroll-bar.elc" "scroll-bar.el.gz" "scroll-all.elc" "scroll-all.el.gz" "sb-image.elc" "sb-image.el.gz" "saveplace.elc" "saveplace.el.gz" "savehist.elc" "savehist.el.gz" "ruler-mode.elc" "ruler-mode.el.gz" "rot13.elc" "rot13.el.gz" "rfn-eshadow.elc" "rfn-eshadow.el.gz" "reveal.elc" "reveal.el.gz" "reposition.elc" "reposition.el.gz" "replace.elc" "replace.el.gz" "repeat.elc" "repeat.el.gz" "register.elc" "register.el.gz" "rect.elc" "rect.el.gz" "recentf.elc" "recentf.el.gz" "README" "ps-samp.elc" "ps-samp.el.gz" "ps-print.elc" "ps-print.el.gz" "ps-mule.elc" "ps-mule.el.gz" "ps-def.elc" "ps-def.el.gz" "ps-bdf.elc" "ps-bdf.el.gz" "progmodes/" "profiler.elc" "profiler.el.gz" "proced.elc" "proced.el.gz" "printing.elc" "printing.el.gz" "play/" "pcomplete.elc" "pcomplete.el.gz" "pcmpl-x.elc" "pcmpl-x.el.gz" "pcmpl-unix.elc" "pcmpl-unix.el.gz" "pcmpl-rpm.elc" "pcmpl-rpm.el.gz" "pcmpl-linux.elc" "pcmpl-linux.el.gz" "pcmpl-gnu.elc" "pcmpl-gnu.el.gz" "pcmpl-cvs.elc" "pcmpl-cvs.el.gz" "password-cache.elc" "password-cache.el.gz" "paren.elc" "paren.el.gz" "outline.elc" "outline.el.gz" "org/" "obsolete/" "nxml/" "novice.elc" "novice.el.gz" "notifications.elc" "notifications.el.gz" "newcomment.elc" "newcomment.el.gz" "net/" "mwheel.elc" "mwheel.el.gz" "msb.elc" "msb.el.gz" "mpc.elc" "mpc.el.gz" "mouse.elc" "mouse.el.gz" "mouse-drag.elc" "mouse-drag.el.gz" "mouse-copy.elc" "mouse-copy.el.gz" "misearch.elc" "misearch.el.gz" "misc.elc" "misc.el.gz" "minibuffer.elc" "minibuffer.el.gz" "minibuf-eldef.elc" "minibuf-eldef.el.gz" "midnight.elc" "midnight.el.gz" "mh-e/" "menu-bar.elc" "menu-bar.el.gz" "md4.elc" "md4.el.gz" "mb-depth.elc" "mb-depth.el.gz" "master.elc" "master.el.gz" "man.elc" "man.el.gz" "makesum.elc" "makesum.el.gz" "mail/" "macros.elc" "macros.el.gz" "ls-lisp.elc" "ls-lisp.el.gz" "lpr.elc" "lpr.el.gz" "locate.elc" "locate.el.gz" "loadup.el" "loadhist.elc" "loadhist.el.gz" "loaddefs.el" "linum.elc" "linum.el.gz" "leim/" "ldefs-boot.el" "language/" "kmacro.elc" "kmacro.el.gz" "kermit.elc" "kermit.el.gz" "json.elc" "json.el.gz" "jka-compr.elc" "jka-compr.el.gz" "jka-cmpr-hook.elc" "jka-cmpr-hook.el.gz" "jit-lock.elc" "jit-lock.el.gz" "isearchb.elc" "isearchb.el.gz" "isearch.elc" "isearch.el.gz" "international/" "informat.elc" "informat.el.gz" "info.elc" "info.el.gz" "info-xref.elc" "info-xref.el.gz" "info-look.elc" "info-look.el.gz" "indent.elc" "indent.el.gz" "imenu.elc" "imenu.el.gz" "image.elc" "image.el.gz" "image-mode.elc" "image-mode.el.gz" "image-file.elc" "image-file.el.gz" "image-dired.elc" "image-dired.el.gz" "iimage.elc" "iimage.el.gz" "ielm.elc" "ielm.el.gz" "ido.elc" "ido.el.gz" "icomplete.elc" "icomplete.el.gz" "ibuffer.elc" "ibuffer.el.gz" "ibuf-macs.elc" "ibuf-macs.el.gz" "ibuf-ext.elc" "ibuf-ext.el.gz" "htmlfontify.elc" "htmlfontify.el.gz" "hl-line.elc" "hl-line.el.gz" "hippie-exp.elc" "hippie-exp.el.gz" "hilit-chg.elc" "hilit-chg.el.gz" "hi-lock.elc" "hi-lock.el.gz" "hfy-cmap.elc" "hfy-cmap.el.gz" "hexl.elc" "hexl.el.gz" "hex-util.elc" "hex-util.el.gz" "help.elc" "help.el.gz" "help-mode.elc" "help-mode.el.gz" "help-macro.elc" "help-macro.el.gz" "help-fns.elc" "help-fns.el.gz" "help-at-pt.elc" "help-at-pt.el.gz" "gs.elc" "gs.el.gz" "gnus/" "generic-x.elc" "generic-x.el.gz" "fringe.elc" "fringe.el.gz" "frameset.elc" "frameset.el.gz" "frame.elc" "frame.el.gz" "forms.elc" "forms.el.gz" "format.elc" "format.el.gz" "format-spec.elc" "format-spec.el.gz" "font-lock.elc" "font-lock.el.gz" "font-core.elc" "font-core.el.gz" "follow.elc" "follow.el.gz" "foldout.elc" "foldout.el.gz" "flow-ctrl.elc" "flow-ctrl.el.gz" "finder.elc" "finder.el.gz" "finder-inf.el" "find-lisp.elc" "find-lisp.el.gz" "find-file.elc" "find-file.el.gz" "find-dired.elc" "find-dired.el.gz" "find-cmd.elc" "find-cmd.el.gz" "filesets.elc" "filesets.el.gz" "files.elc" "files.el.gz" "files-x.elc" "files-x.el.gz" "filenotify.elc" "filenotify.el.gz" "filecache.elc" "filecache.el.gz" "ffap.elc" "ffap.el.gz" "faces.elc" "faces.el.gz" "facemenu.elc" "facemenu.el.gz" "face-remap.elc" "face-remap.el.gz" "ezimage.elc" "ezimage.el.gz" "expand.elc" "expand.el.gz" "eshell/" "erc/" "epg.elc" "epg.el.gz" "epg-config.elc" "epg-config.el.gz" "epa.elc" "epa.el.gz" "epa-mail.elc" "epa-mail.el.gz" "epa-hook.elc" "epa-hook.el.gz" "epa-file.elc" "epa-file.el.gz" "epa-dired.elc" "epa-dired.el.gz" "env.elc" "env.el.gz" "emulation/" "emacs-parallel/" "emacs-lock.elc" "emacs-lock.el.gz" "emacs-lisp/" "elide-head.elc" "elide-head.el.gz" "electric.elc" "electric.el.gz" "elec-pair.elc" "elec-pair.el.gz" "ehelp.elc" "ehelp.el.gz" "edmacro.elc" "edmacro.el.gz" "echistory.elc" "echistory.el.gz" "ebuff-menu.elc" "ebuff-menu.el.gz" "dynamic-setting.elc" "dynamic-setting.el.gz" "double.elc" "double.el.gz" "dos-w32.elc" "dos-w32.el.gz" "dos-vars.elc" "dos-vars.el.gz" "dos-fns.elc" "dos-fns.el.gz" "doc-view.elc" "doc-view.el.gz" "dnd.elc" "dnd.el.gz" "disp-table.elc" "disp-table.el.gz" "dirtrack.elc" "dirtrack.el.gz" "dired.elc" "dired.el.gz" "dired-x.elc" "dired-x.el.gz" "dired-aux.elc" "dired-aux.el.gz" "dframe.elc" "dframe.el.gz" "desktop.elc" "desktop.el.gz" "descr-text.elc" "descr-text.el.gz" "delsel.elc" "delsel.el.gz" "delim-col.elc" "delim-col.el.gz" "dabbrev.elc" "dabbrev.el.gz" "custom.elc" "custom.el.gz" "cus-theme.elc" "cus-theme.el.gz" "cus-start.elc" "cus-start.el.gz" "cus-load.el" "cus-face.elc" "cus-face.el.gz" "cus-edit.elc" "cus-edit.el.gz" "cus-dep.elc" "cus-dep.el.gz" "COPYING" "composite.elc" "composite.el.gz" "completion.elc" "completion.el.gz" "comint.elc" "comint.el.gz" "color.elc" "color.el.gz" "cmuscheme.elc" "cmuscheme.el.gz" "chistory.elc" "chistory.el.gz" "cedet/" "cdl.elc" "cdl.el.gz" "case-table.elc" "case-table.el.gz" "calendar/" "calculator.elc" "calculator.el.gz" "calc/" "button.elc" "button.el.gz" "buff-menu.elc" "buff-menu.el.gz" "bs.elc" "bs.el.gz" "bookmark.elc" "bookmark.el.gz" "bindings.elc" "bindings.el.gz" "battery.elc" "battery.el.gz" "avoid.elc" "avoid.el.gz" "autorevert.elc" "autorevert.el.gz" "autoinsert.elc" "autoinsert.el.gz" "autoarg.elc" "autoarg.el.gz" "array.elc" "array.el.gz" "arc-mode.elc" "arc-mode.el.gz" "apropos.elc" "apropos.el.gz" "ansi-color.elc" "ansi-color.el.gz" "allout.elc" "allout.el.gz" "allout-widgets.elc" "allout-widgets.el.gz" "align.elc" "align.el.gz" "abbrev.elc" "abbrev.el.gz" "../" "./")
+
+ ("/Users/eli/dev/bridj/db/" (22212 33845 0 0) "structure.sql" "seeds.rb" "now_trip_seeds.rb" "migrate/" "../" "./")
+
+ ("/Users/eli/dev/bridj/" (22212 33845 0 0) "vendor/" "tmp/" "test/" "spec/" "script/" "README.rdoc" "README.md" "Rakefile" "public/" "merge" "log/" "lib/" "Guardfile" "Gemfile.lock" "Gemfile" "features/" "feature_drafts/" "doc/" "db/" "coverage/" "config.ru" "config/" "Capfile.orig" "Capfile" "bin/" "app/" ".ruby-version" ".ruby-gemset" ".rspec" ".gitignore" ".git/" "../" "./")
+
+ ("/Users/eli/dev/" (22203 45244 0 0) "traveller_ios/" "traveller_android/" "SheetSync/" "sciencewhale/" "post.body.2" "post.body" "localytics_scraper/" "gen_service_area.js" "example/" "censusflow/" "bridj-android/" "bridj/" "../" "./")
+
+ ("/Users/eli/dev/SheetSync/sheetsync/" (22167 51452 0 0) "upload_to_drive.py" "sheetsync.py" "query.py" "log_and_notify.py" "helpers.py" "flags.py" "csv_upload.py" "config.py" "__init__.py" "../" "./")
+
+ ("/Users/eli/Documents/" (22203 43512 0 0) "wsweeneyResumeJuly282015MobileDev.doc" "Winter Wyman agreement.pdf" "Spotify_options_wire_request_(1).PDF" "skillcycle.pdf" "OfferLetter-StuartTerrett.pdf" "Offer Letter EliDaniel.docx" "Naguibagua Memo 15.docx" "metrics.txt" "MendozaVictor.docx" "ICI.pdf" "genero.pdf" "drivers_osx_tu3-etg(2.2.0).zip" "drivers_osx_tu3-etg(2.2.0)/" "Doller_Matt.docx" "DanPletea_2015.doc" "Bridj_Skillcycle_ContingencyAgreement (1).docx" "bridj.png" "Bridj Oculus fee agreement.pdf" "Bridj Form of Employee or Contractor Consultant NDA Eli Daniel.doc" "Bridj Form of Employee or Contractor Consultant NDA - Stuart Terrett.pdf" "borat.jpg" "AttraResume2015.docx" "a16z.txt" ".localized" ".DS_Store" "../" "./")
+
+ ("/Users/" (22099 41042 0 0) "Shared/" "Guest/" "eli/" ".localized" "../" "./")
+
+ ("/Users/eli/dev/bridj/config/environments/" (22157 35782 0 0) "test.rb" "staging.rb" "production.rb" "development.rb" "ci.rb" "../" "./")
+
+ ("/usr/local/bin/" (22127 9182 0 0) "zsh-5.0.8" "zsh" "xmlpatternsvalidator" "xmlpatterns" "wheel" "virtualenvwrapper_lazy.sh" "virtualenvwrapper.sh" "virtualenv-clone" "virtualenv-3.4" "virtualenv" "VirtualBox" "vboxwebsrv" "VBoxVRDP" "VBoxManage" "VBoxHeadless" "VBoxDTrace" "VBoxBalloonCtrl" "VBoxAutostart" "vbox-img" "vacuumlo" "vacuumdb" "uic" "syncqt.pl" "smtpd2.py" "smtpd2.7.py" "smtpd.py" "ruby" "ri" "reindexdb" "rdoc" "rcc" "rake" "qtplugininfo" "qtpaths" "qtdiag" "qmltestrunner" "qmlscene" "qmlprofiler" "qmlplugindump" "qmlmin" "qmllint" "qmlimportscanner" "qmleasing" "qml1plugindump" "qmake" "qlalr" "qhelpgenerator" "qhelpconverter" "qdoc" "qdbusxml2cpp" "qdbuscpp2xml" "qdbus" "qcollectiongenerator" "pythonw2.7" "pythonw2" "pythonw" "python2.7-config" "python2.7" "python2-config" "python2" "python-config" "python" "pydoc2.7" "pydoc2" "pydoc" "psql" "postmaster" "postgres" "pltcl_loadmod" "pltcl_listmod" "pltcl_delmod" "pkg-config" "pip2.7" "pip2" "pip" "pgbench" "pg_xlogdump" "pg_upgrade" "pg_test_timing" "pg_test_fsync" "pg_standby" "pg_restore" "pg_resetxlog" "pg_recvlogical" "pg_receivexlog" "pg_isready" "pg_dumpall" "pg_dump" "pg_ctl" "pg_controldata" "pg_config" "pg_basebackup" "pg_archivecleanup" "pcretest" "pcregrep" "pcre-config" "pbr" "oid2name" "npm" "node" "moc" "macdeployqt" "macchangeqt" "lupdate" "lrelease" "lconvert" "ksba-config" "irb" "initdb" "ifnames" "idle2.7" "idle2" "idle" "grunt" "gpg-error-config" "gpg-error" "glibtoolize" "glibtool" "gitk" "github" "git-upload-pack" "git-upload-archive" "git-subtree" "git-shell" "git-receive-pack" "git-lfs" "git-cvsserver" "git-credential-osxkeychain" "git" "gem" "gdbmtool" "gdbm_load" "gdbm_dump" "erb" "emacsclient" "ecpg" "easy_install-2.7" "easy_install" "dropuser" "droplang" "dropdb" "docker-machine-driver-vmwarevsphere" "docker-machine-driver-vmwarevcloudair" "docker-machine-driver-vmwarefusion" "docker-machine-driver-virtualbox" "docker-machine-driver-softlayer" "docker-machine-driver-rackspace" "docker-machine-driver-openstack" "docker-machine-driver-none" "docker-machine-driver-hyperv" "docker-machine-driver-google" "docker-machine-driver-generic" "docker-machine-driver-exoscale" "docker-machine-driver-digitalocean" "docker-machine-driver-azure" "docker-machine-driver-amazonec2" "docker-machine" "docker-compose" "docker" "createuser" "createlang" "createdb" "clusterdb" "brew" "autoupdate" "autoscan" "autoreconf" "automake-1.15" "automake" "autom4te" "autoheader" "autoconf" "aclocal-1.15" "aclocal" "2to3-2.7" "2to3-2" "2to3" "../" "./")
+
+ ("/Users/eli/dev/bridj/lib/" (22093 58222 0 0) "tasks/" "custom_logger.rb" "bridj_gcm.rb" "bridj_apn.rb" "assets/" "../" "./")
+
+ ("~/dev/bridj/app/workers/" (22126 4845 0 0) "trip_import_worker.rb" "send_reward_email_worker.rb" "push_token_audit_worker.rb" "notification_sender_worker.rb" "email_worker.rb" "apns_feedback_worker.rb" "../" "./")
+
+ ("/Users/eli/dev/bridj/app/workers/" (22126 4845 0 0) "trip_import_worker.rb" "send_reward_email_worker.rb" "push_token_audit_worker.rb" "notification_sender_worker.rb" "email_worker.rb" "apns_feedback_worker.rb" "../" "./")
+
+ ("/Users/eli/dev/bridj/app/helpers/api/v1/traveler/" (22029 34611 0 0) "sessions_helper.rb" "request_service_helper.rb" "registrations_helper.rb" "passes_helper.rb" "feedback_helper.rb" "bookings_helper.rb" "base_helper.rb" "../" "./")
+
+ ("/Users/eli/dev/bridj/app/helpers/api/v1/" (21929 8191 0 0) "trips_helper.rb" "traveler/" "sessions_helper.rb" "registrations_helper.rb" "driver/" "base_helper.rb" "../" "./")
+
+ ("/Users/eli/dev/bridj/app/helpers/api/" (21929 8191 0 0) "v1/" "../" "./")
+
+ ("/Users/eli/dev/bridj/app/helpers/traveler/" (22093 58222 0 0) "base_helper.rb" "../" "./")
+
+ ("/Users/eli/dev/bridj/app/helpers/" (21929 8191 0 0) "traveler/" "application_helper.rb" "api/" "admin/" "../" "./")
+
+ ("/Users/eli/dev/bridj/app/controllers/api/v1/" (22121 55377 0 0) "trips_controller.rb" "traveler/" "token_authentication.rb" "sessions_controller.rb" "driver/" "device_management.rb" "base_controller.rb" "../" "./")
+
+ ("/Users/eli/dev/bridj/app/controllers/traveler/" (21929 8191 0 0) "base_controller.rb" "../" "./")
+
+ ("/Users/eli/dev/bridj/app/" (22086 26611 0 0) "workers/" "views/" "services/" "presenters/" "models/" "manifests/" "mailers/" "importers/" "helpers/" "controllers/" "assets/" "../" "./")
+
  ("/Library/Java/JavaVirtualMachines/jdk1.7.0_79.jdk/Contents/Home/" (21800 6950 0 0) "THIRDPARTYLICENSEREADME.txt" "THIRDPARTYLICENSEREADME-JAVAFX.txt" "src.zip" "release" "README.html" "man/" "LICENSE" "lib/" "jre/" "include/" "db/" "COPYRIGHT" "bin/" "../" "./")
 
  ("/Library/Java/JavaVirtualMachines/jdk1.7.0_79.jdk/Contents/" (21800 6863 0 0) "MacOS/" "Info.plist" "Home/" "../" "./")
@@ -69,63 +212,19 @@
 
  ("/Users/eli/dotfiles/zsh/" (21955 49809 0 0) ".zshrc" ".zsh_history" ".zsh-update" ".oh-my-zsh/" ".#.zshrc" "../" "./")
 
- ("/Users/eli/" (21955 49793 0 0) "Public/" "Pictures/" "Music/" "Movies/" "Library/" "emacs-stuff/" "Dropbox/" "Downloads/" "dotfiles/" "Documents/" "dev/" "Desktop/" "Applications/" ".zshrc" ".zsh_history" ".zsh-update" ".zcompdump-Eli’s MacBook Air-5.0.8" ".zcompdump-Eli’s MacBook Air-5.0.5" ".Trash/" ".ssh/" ".oh-my-zsh/" ".emacs.d/" ".emacs" ".DS_Store" ".dropbox/" ".cups/" ".CFUserTextEncoding" ".bash_history" "../" "./")
-
- ("/Users/eli/emacs-stuff/.emacs.d/" (21955 49749 0 0) "tramp" "site-lisp/" "ido.last" "elpa/" "auto-save-list/" ".gitignore" ".emacs-real.el" ".DS_Store" "../" "./")
-
- ("/Users/eli/.emacs.d/" (21955 44754 0 0) "tramp" "site-lisp/" "ido.last" "elpa/" "auto-save-list/" ".gitignore" ".emacs-real.el" ".DS_Store" "../" "./")
-
  ("/Users/eli/emacs-stuff/.emacs.d/elpa/enh-ruby-mode-20150711.1530/" (21955 44454 0 0) "ruby/" "enh-ruby-mode.elc" "enh-ruby-mode.el" "enh-ruby-mode-pkg.el" "enh-ruby-mode-autoloads.el" "../" "./")
-
- ("~/dev/bridj/app/workers/" (21955 43836 0 0) "send_reward_email_worker.rb" "notification_sender_worker.rb" "../" "./")
-
- ("/Users/eli/dev/bridj/app/workers/" (21955 43836 0 0) "send_reward_email_worker.rb" "notification_sender_worker.rb" "../" "./")
-
- ("/Users/eli/emacs-stuff/" (21955 43504 0 0) "site-lisp-23.4.1/" "README.md" "jde-2.3.5.1/" ".git/" ".emacs.d/" ".emacs" "../" "./")
-
- ("/Users/eli/dev/bridj/app/services/" (21935 65418 0 0) "weekly_discount_service.rb" "upload_service.rb" "trip_stop_service.rb" "trip_service.rb" "trip_price_service.rb" "time_formatter_service.rb" "stripe_service.rb" "service_area_check.rb" "segment.rb" "scheduled_service.rb" "route_option.rb" "rollback_operations_service.rb" "referral_code_service.rb" "pass_service.rb" "pass_animation_allocation_service.rb" "optimal_route_service.rb" "now_trip_service.rb" "notification_service.rb" "multiple_referral_discount_active.rb" "map_service.rb" "logging_service.rb" "invalid_promo_code_error.rb" "find_trip_service.rb" "feedback_request_service.rb" "discount_service.rb" "direction_service.rb" "direction_legs_aggregator_service.rb" "delay_service.rb" "closest_stop_service.rb" "booking_service.rb" "boarding_alighting_service.rb" "availability.rb" "admin_booking_service.rb" "../" "./")
-
- ("/Users/eli/Desktop/" (21943 53898 0 0) "sheep.gif" "Screen Shot 2015-07-20 at 9.36.37 AM.png" "Screen Shot 2015-07-20 at 9.35.54 AM.png" "Screen Shot 2015-07-20 at 11.41.54 AM.png" "invite.ics" ".localized" ".DS_Store" "../" "./")
-
- ("/Users/eli/dev/bridj/app/models/" (21935 54661 0 0) "zone.rb" "weekly_trip.rb" "vehicle.rb" "user_set_user.rb" "user_set_discount.rb" "user_set.rb" "user_device.rb" "user.rb" "trip_stop_stat.rb" "trip_stop.rb" "trip_price.rb" "trip_monitor.rb" "trip_access_log.rb" "trip.rb" "traveler.rb" "stop.rb" "service_area.rb" "route.rb" "reward_discount.rb" "request_service.rb" "referral_discount.rb" "push_message.rb" "pass_animation.rb" "pass.rb" "now_trip.rb" "notification.rb" "location_stats.rb" "location.rb" "janky_membership.rb" "feedback.rb" "feature_access.rb" "feature.rb" "driver_activity_log.rb" "driver.rb" "discount_user.rb" "discount.rb" "daily_trip.rb" "concerns/" "booking.rb" "block.rb" "availability_matrix.rb" "assignment.rb" "animation_allocation.rb" "admin_activity_log.rb" "admin.rb" ".keep" "../" "./")
 
  ("/Users/eli/dev/bridj/app/controllers/api/" (21929 8191 0 0) "v1/" "../" "./")
 
- ("/Users/eli/dev/bridj/app/controllers/api/v1/" (21929 8191 0 0) "trips_controller.rb" "traveler/" "sessions_controller.rb" "registrations_controller.rb" "driver/" "base_controller.rb" "../" "./")
-
- ("/Users/eli/dev/bridj/app/controllers/api/v1/driver/" (21929 8191 0 0) "trips_controller.rb" "trip_monitors_controller.rb" "sessions_controller.rb" "registrations_controller.rb" "base_controller.rb" "assignments_controller.rb" "../" "./")
-
- ("/Users/eli/dev/bridj/config/" (21929 8191 0 0) "vagrant/" "secrets.yml.sample" "secrets.yml" "routes.rb" "resque.yml" "newrelic.yml" "moonshine.yml" "moonshine/" "locales/" "initializers/" "google_maps_config.yml" "god/" "environments/" "environment.rb" "deploy.rb.orig" "deploy.rb" "deploy.orig/" "deploy/" "database.yml.sample" "cucumber.yml" "certificates/" "boot.rb" "application.rb" "../" "./")
-
  ("/Users/eli/dev/bridj/config/deploy/" (21929 8191 0 0) "vagrant.rb" "staging.rb" "production.rb" "ci.rb" "../" "./")
 
- ("/Users/eli/dev/bridj/lib/" (21929 8191 0 0) "tasks/" "bridj_gcm.rb" "bridj_apn.rb" "assets/" "../" "./")
-
- ("/Users/eli/dev/bridj/app/controllers/admin/" (21929 8191 0 0) "zones_controller.rb" "vehicles_controller.rb" "user_sets_controller.rb" "user_set_users_controller.rb" "uploads_controller.rb" "trips_controller.rb" "trip_status_controller.rb" "trip_prices_controller.rb" "travelers_controller.rb" "stops_controller.rb" "sessions_controller.rb" "routes_controller.rb" "registrations_controller.rb" "notifications_controller.rb" "feedbacks_controller.rb" "dynamic_service_areas_controller.rb" "drivers_controller.rb" "driver_activity_logs_controller.rb" "discounts_controller.rb" "dashboard_controller.rb" "bookings_controller.rb" "base_controller.rb" "ab_tests_controller.rb" "../" "./")
-
- ("/Users/eli/dev/bridj/app/controllers/" (21929 8191 0 0) "traveler/" "concerns/" "application_controller.rb" "api/" "admin/" "../" "./")
-
  ("/Users/eli/dev/bridj/app/manifests/" (21929 8191 0 0) "worker_manifest.rb" "templates/" "redis_manifest.rb" "lib/" "haproxy_manifest.rb" "database_manifest.rb" "base_manifest.rb" "application_manifest.rb" ".md" "../" "./")
-
- ("/usr/local/bin/" (21929 27341 0 0) "zsh-5.0.8" "zsh" "pcretest" "pcregrep" "pcre-config" "gdbmtool" "gdbm_load" "gdbm_dump" "emacsclient" "brew" "../" "./")
 
  ("/usr/local/" (21929 8269 0 0) "SUPPORTERS.md" "share/" "README.md" "opt/" "LICENSE.txt" "Library/" "lib/" "include/" "CONTRIBUTING.md" "CODEOFCONDUCT.md" "Cellar/" "bin/" ".yardopts" ".gitignore" ".git/" "../" "./")
 
  ("/usr/" (21929 8252 0 0) "X11R6/" "X11/" "standalone/" "share/" "sbin/" "local/" "libexec/" "lib/" "include/" "bin/" "../" "./")
 
- ("/Users/" (21923 55742 0 0) "Shared/" "Guest/" "eli/" ".localized" "../" "./")
-
- ("/Users/eli/dev/bridj/db/" (21929 8191 0 0) "seeds.rb" "schema.rb" "now_trip_seeds.rb" "migrate/" "../" "./")
-
- ("/Users/eli/dev/bridj/app/" (21929 8191 0 0) "workers/" "views/" "services/" "models/" "manifests/" "mailers/" "helpers/" "controllers/" "assets/" "../" "./")
-
- ("/Users/eli/dev/bridj/" (21929 8191 0 0) "vendor/" "test/" "spec/" "script/" "README.rdoc" "README.md" "Rakefile" "public/" "log/" "lib/" "Guardfile" "Gemfile.lock" "Gemfile" "features/" "feature_drafts/" "db/" "coverage/" "config.ru" "config/" "Capfile.orig" "Capfile" "bin/" "app/" ".ruby-version" ".ruby-gemset" ".rspec" ".gitignore" ".git/" "../" "./")
-
- ("/Users/eli/dev/" (21929 8181 0 0) "bridj/" "../" "./")
-
  ("/Users/eli/dotfiles/zsh/.oh-my-zsh/" (21924 13947 0 0) "tools/" "themes/" "templates/" "README.textile" "plugins/" "oh-my-zsh.sh" "MIT-LICENSE.txt" "log/" "lib/" "custom/" "cache/" ".oh-my-zsh" "../" "./")
-
- ("/Users/eli/Downloads/" (21928 10618 0 0) "SpotifyInstaller.zip" "Spectacle+0.8.10.zip" "question_2.rb" "question_1.rb" "Install Spotify.app/" "GoogleVoiceAndVideoSetup.dmg" "googlechrome.dmg" "googlechrome-2.dmg" "Emacs-24.5-1-universal.dmg" "DropboxInstaller.dmg" "C360_Series_v3.9.0_Letter.zip" "bizhub_C360_109.pkg" ".localized" ".DS_Store" "../" "./")
 )
 
 ;; ----- ido-unc-hosts-cache -----

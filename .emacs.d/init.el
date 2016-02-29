@@ -1,3 +1,11 @@
+;; Set up package system
+(require 'package)
+(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
+(add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/"))
+
+(package-initialize)
+
+
 ;;----------------------------------------------------------------------------
 ;; data structure manipuation functions
 ;;----------------------------------------------------------------------------
@@ -145,7 +153,7 @@ clobbering the mark."
 ;; on whether we're at a shell mode prompt
 (defun ewd-comint-up (arg)
   (interactive "p")
-  (if (comint-after-pmark-p)
+  (if (comint-pmark-p)
       (comint-previous-input arg)
     (previous-line arg)))
 
@@ -155,6 +163,22 @@ clobbering the mark."
   (interactive "p")
   (if (comint-after-pmark-p)
       (comint-next-input arg)
+    (next-line arg)))
+
+;; move cursor to the previous line or get previous history item, depending
+;; on whether we're at a shell mode prompt
+(defun ewd-term-up (arg)
+  (interactive "p")
+  (if (term-after-pmark-p)
+      (term-send-up)
+    (previous-line arg)))
+
+;; move cursor to the next line or get next history item, depending
+;; on whether we're at a shell mode prompt
+(defun ewd-term-down (arg)
+  (interactive "p")
+  (if (term-after-pmark-p)
+      (term-send-down)
     (next-line arg)))
 
 ;;----------------------------------------------------------------------------
@@ -376,6 +400,11 @@ point is."
             (define-key shell-mode-map [up] 'ewd-comint-up)
             (define-key shell-mode-map [down] 'ewd-comint-down)))
 
+(add-hook 'term-mode-hook
+          (lambda ()
+            (define-key term-raw-map [up] 'ewd-term-up)
+            (define-key term-raw-map [down] 'ewd-term-down)))
+
 
 
 ;;----------------------------------------------------------------------------
@@ -513,10 +542,12 @@ point is."
 (make-variable-buffer-local 'tempo-interactive)  ; prompting to fill in templates
 (make-variable-buffer-local 'ps-line-number)     ; print with line numbers
 
-;; Paren matching
-(show-paren-mode t)                        ; highlight matching parens, etc
-(setq show-paren-style 'parenthesis)       ; highlight character, not expression
-(setq blink-matching-paren-distance 51200) ; distance to match paren as
+;; ;; Paren matching
+;; (show-paren-mode t)                        ; highlight matching parens, etc
+;; (setq show-paren-style 'parenthesis)       ; highlight character, not expression
+;; (setq blink-matching-paren-distance 51200) ; distance to match paren as
+(require 'smartparens-config)
+(show-smartparens-global-mode +1)
 
 ;; modeline options
 (which-func-mode t)                 ; show current function in modeline
@@ -855,7 +886,10 @@ Normally input is edited in Emacs and sent a line at a time."
 (add-hook 'enh-ruby-mode-hook 'yard-mode)
 (add-hook 'enh-ruby-mode-hook 'inf-ruby-minor-mode)
 
-
+;;----------------------------------------------------------------------------
+;; Magit for git integration
+;;----------------------------------------------------------------------------
+(global-magit-file-mode)
 
 ;;----------------------------------------------------------------------------
 ;; Set global keybindings
@@ -868,8 +902,8 @@ Normally input is edited in Emacs and sent a line at a time."
    ([home] . beginning-of-line)
    ([C-home] . ewd-beginning-of-buffer-nomark)
    ([apps] . execute-extended-command)
-   ([C-right] . forward-sexp)
-   ([C-left] . backward-sexp)
+   ([C-right] . sp-forward-sexp)
+   ([C-left] . sp-backward-sexp)
    ("\M-!" . ewd-insert-shell-command)
    ("\C-cd" . ediff-buffers)
    ("\C-x\C-p" . yic-prev-buffer)
