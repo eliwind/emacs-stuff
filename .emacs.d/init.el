@@ -1,10 +1,13 @@
+;;; init.el -- emacs initialization
+;;; Commentary:
+;;; Code:
+
 ;; Set up package system
 (require 'package)
 (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
 (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/"))
 
 (package-initialize)
-
 
 ;;----------------------------------------------------------------------------
 ;; data structure manipuation functions
@@ -217,13 +220,17 @@ clobbering the mark."
 ;; Make cursor stay in the same column when scrolling.  Thanks to
 ;; David Biesack (sasdjb@unx.sas.com).
 ;;----------------------------------------------------------------------------
+(defvar default-column-tracking-functions
+  '(scroll-up
+    scroll-down
+    previous-line
+    next-line)
+  "List of functions which track the current column")
+
 (defvar default-column nil
   "The column to track in functions registered with `track-column'.
 This variable is buffer local")
 (make-variable-buffer-local 'default-column)
-
-(defvar default-column-tracking-functions nil
-  "List of functions which track the current column")
 
 (defun default-column ()
   "Return the default column to track in cursor motion functions
@@ -232,18 +239,20 @@ which are advised by `track-column'"
       default-column
     (setq default-column (current-column))))
 
-(defmacro track-column(function)
-  "Advise FUNCTION to keep track of the default column.
-All functions so advised will strive to maintain the same column."
-  (add-to-list 'default-column-tracking-functions function)
-  `(defadvice ,function (around ,(track-column-advice-name function) first activate)
-  "Keep cursor in the same column."
+(defun track-column-advice (orig-fun &rest args)
+    "Keep cursor in the same column if possible"
   (let ((col (default-column)))
-    ad-do-it
-    (move-to-column col))))
+    (apply orig-fun args)
+    (move-to-column col)))
 
 (defun track-column-advice-name (function)
   (make-symbol (format "track-column-in-%s" function)))
+
+(defun track-column-for (function)
+  (add-to-list 'default-column-tracking-functions function)
+  (add-function :around function (track-column-advice-name function)))
+
+(mapc 'track-column-for default-column-tracking-functions)
 
 ;; Make subsequently opened frames offset from the first one
 (defvar ewd-frame-offset 25
@@ -265,11 +274,6 @@ All functions so advised will strive to maintain the same column."
          (leftpos (cdr left)))
     (setcdr top (+ toppos ewd-frame-offset))
     (setcdr left (+ leftpos ewd-frame-offset))))
-
-(track-column scroll-up)
-(track-column scroll-down)
-(track-column previous-line)
-(track-column next-line)
 
 ;;----------------------------------------------------------------------------
 ;; Tweak built-in behaviors
@@ -609,7 +613,6 @@ point is."
 
 ;; set up nicer buffer switching and other stuff
 (ido-mode)
-
           
 ;; make end-of-line conversion easier.  The eol-conversion package was written
 ;; by Francis J. Wright <F.J.Wright@qmw.ac.uk>.  Available from
@@ -786,7 +789,7 @@ Normally input is edited in Emacs and sent a line at a time."
 
 ;; prompt to add new java files to subversion
 (defadvice jde-gen-class-buffer (around ewd-maybe-add-to-svn activate)
-  "Prompt to add new java files to subversion"
+  "Prompt to add new java files to subversion."
   (let ((add-file-to-svn (y-or-n-p "Add this file to subversion? ")))
     ad-do-it
     (when add-file-to-svn
@@ -952,3 +955,5 @@ Normally input is edited in Emacs and sent a line at a time."
 (put 'downcase-region 'disabled nil)
 (put 'upcase-region 'disabled nil)
 (put 'narrow-to-region 'disabled nil)
+
+;;; init ends here
