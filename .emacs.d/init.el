@@ -156,7 +156,7 @@ clobbering the mark."
 ;; on whether we're at a shell mode prompt
 (defun ewd-comint-up (arg)
   (interactive "p")
-  (if (comint-pmark-p)
+  (if (comint-after-pmark-p)
       (comint-previous-input arg)
     (previous-line arg)))
 
@@ -224,7 +224,8 @@ clobbering the mark."
   '(scroll-up
     scroll-down
     previous-line
-    next-line)
+    next-line
+    forward-line)
   "List of functions which track the current column")
 
 (defvar default-column nil
@@ -362,6 +363,7 @@ point is."
 ;;----------------------------------------------------------------------------
 (require 'multi-term)
 (setq multi-term-program "/usr/local/bin/zsh")
+(setq shell-file-name "/usr/local/bin/zsh")
 
 ;; create a shell buffer, but not necessarily called *shell*
 (defun ewd-shell (&optional bufname)
@@ -437,7 +439,8 @@ point is."
 (require 'yasnippet)
 (require 'flycheck)
 (global-flycheck-mode t)
-(setq-default flycheck-pylintrc "~/dev/lib/trunk/echonest/pylintrc")
+;(setq-default flycheck-pylintrc "~/dev/lib/trunk/echonest/pylintrc")
+(setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc))
 
 (global-set-key [f7] 'find-file-in-repository)
 
@@ -511,29 +514,27 @@ point is."
 (setq-default ediff-ignore-similar-regions t) ; ignore whitespace differences in ediff
 (setq-default indent-tabs-mode nil)     ; use spaces (not tabs) for indenting
 (setq require-final-newline t)          ; always terminate last line in file
-(setq default-major-mode 'text-mode)    ; default mode is text mode
+(setq-default major-mode 'text-mode)    ; default mode is text mode
 (setq next-screen-context-lines 1)      ; # of lines of overlap when scrolling
 (setq auto-save-interval 300)           ; autosave every N characters typed
-(setq default-fill-column 72)           ; the column beyond which do word wrap
+(setq-default fill-column 70)           ; the column beyond which do word wrap
 (setq scroll-preserve-screen-position t); make pgup/dn remember current line
 (setq next-line-add-newlines nil)       ; don't scroll past end of file
 (global-auto-revert-mode 1)             ; autorevert buffers if files change
 (setq revert-without-query '(".*"))     ; revert all files automatically
 (setq w32-swap-mouse-buttons t)         ; swap middle and right mouse buttons on Windows
 (mouse-avoidance-mode 'animate)         ; make cursor get out of the way when I type near it
-(setq w32-enable-synthesized-fonts nil)   ; enable synthesized italics/bold on Windows
+(setq w32-enable-synthesized-fonts nil) ; enable synthesized italics/bold on Windows
 (setq w32-list-proportional-fonts t)	; include proportional fonts in the font dialog
 (setq max-specpdl-size 4000)            ; boost number of Lisp bindings allowed
 (setq max-lisp-eval-depth 10000)         ; boost eval depth
 (setq backup-directory-alist '(("." . "/tmp/emacs-backups"))) ; put all backups in one place
 (setq-default truncate-lines t)         ; don't wrap long lines... just have them go off the screen
 (setq confirm-kill-emacs 'y-or-n-p)     ; confirm before closing emacs
-(setq archive-zip-use-pkzip nil) ; don't use pkzip for zip files
-(setq ediff-split-window-function 'split-window-horizontally)	; show files side-by-side in ediff
-;;(setq ediff-split-window-function 'split-window-vertically)
-(ansi-color-for-comint-mode-on)  ; show ANSI color codes
-(setq gdb-many-windows t)    ; use many windows for debugging
-(setq ring-bell-function 'ignore)	; don't beep
+(ansi-color-for-comint-mode-on)         ; show ANSI color codes
+(setq gdb-many-windows t)               ; use many windows for debugging
+(setq ring-bell-function 'ignore)	    ; don't beep
+(setq split-height-threshold nil)       ; split windows horizontally
 
 (require 'hlinum)
 (hlinum-activate)
@@ -554,7 +555,7 @@ point is."
 (show-smartparens-global-mode +1)
 
 ;; modeline options
-(which-func-mode t)                 ; show current function in modeline
+(which-function-mode t)             ; show current function in modeline
 (column-number-mode t)              ; show current column number
 (setq display-time-day-and-date t)  ; display day and date
 (display-time)                      ; display the time
