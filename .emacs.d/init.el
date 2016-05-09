@@ -4,7 +4,7 @@
 
 ;; Set up package system
 (require 'package)
-(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
+;(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
 (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/"))
 
 (package-initialize)
@@ -60,20 +60,13 @@ as L."
 (defun ewd-scroll-left ()
   "Move cursor forward one page-width (or to end of line if that comes first)."
   (interactive)
-  (let* ((rest-of-line (- (line-end-position) (point)))    
-         (page-width (- (window-width) 10))
-         (scroll-width (min rest-of-line page-width)))
-    (forward-char scroll-width)))
+  (scroll-left 10))
 
 ;; scroll a page to the left
 (defun ewd-scroll-right ()
   "Move cursor backward one page-width (or to beginning of line if that comes first)."
   (interactive)
-  (let* ((rest-of-line (- (point) (line-beginning-position)))
-         (page-width (- (window-width) 10))
-         (scroll-width (min rest-of-line page-width)))
-    (backward-char scroll-width)))
-
+  (scroll-right 10))
 
 ;; execute a shell command, inserting output at point
 (defun ewd-insert-shell-command (str)
@@ -524,7 +517,7 @@ point is."
 (setq revert-without-query '(".*"))     ; revert all files automatically
 (setq w32-swap-mouse-buttons t)         ; swap middle and right mouse buttons on Windows
 (mouse-avoidance-mode 'animate)         ; make cursor get out of the way when I type near it
-(setq w32-enable-synthesized-fonts nil) ; enable synthesized italics/bold on Windows
+(setq w32-enable-synthesized-fonts nil) ; enable synthesized italics/bold on Windows
 (setq w32-list-proportional-fonts t)	; include proportional fonts in the font dialog
 (setq max-specpdl-size 4000)            ; boost number of Lisp bindings allowed
 (setq max-lisp-eval-depth 10000)         ; boost eval depth
@@ -683,10 +676,12 @@ Normally input is edited in Emacs and sent a line at a time."
 ;;----------------------------------------------------------------------------
 ;; Color theme
 ;;----------------------------------------------------------------------------
-(require 'color-theme)
-(require 'color-theme-solarized)
-(color-theme-solarized-dark)
+(setq solarized-distinct-fringe-background t)
+(setq solarized-use-variable-pitch nil)
+(setq solarized-use-less-bold t)
+(setq solarized-use-more-italic t)
 
+(load-theme 'solarized-dark t)
 ;;----------------------------------------------------------------------------
 ;; Emacs 23 only features
 ;;----------------------------------------------------------------------------
@@ -883,12 +878,15 @@ Normally input is edited in Emacs and sent a line at a time."
 ;;----------------------------------------------------------------------------
 ;; Ruby programming
 ;;----------------------------------------------------------------------------
-(add-to-list 'auto-mode-alist '("\\.rb\\'" . enh-ruby-mode))
-(eval-after-load 'enh-ruby-mode
- '(remove-hook 'enh-ruby-mode-hook 'erm-define-faces))
-(add-hook 'enh-ruby-mode-hook 'robe-mode)
-(add-hook 'enh-ruby-mode-hook 'yard-mode)
-(add-hook 'enh-ruby-mode-hook 'inf-ruby-minor-mode)
+;; (add-to-list 'auto-mode-alist '("\\.rb\\'" . enh-ruby-mode))
+;; (eval-after-load 'enh-ruby-mode
+;;   '(remove-hook 'enh-ruby-mode-hook 'erm-define-faces))
+;; (add-hook 'enh-ruby-mode-hook 'robe-mode)
+;; (add-hook 'enh-ruby-mode-hook 'yard-mode)
+;; (add-hook 'enh-ruby-mode-hook 'inf-ruby-minor-mode)
+(add-hook 'ruby-mode-hook 'robe-mode)
+(add-hook 'ruby-mode-hook 'yard-mode)
+(add-hook 'ruby-mode-hook 'inf-ruby-minor-mode)
 
 ;;----------------------------------------------------------------------------
 ;; Magit for git integration
@@ -908,6 +906,8 @@ Normally input is edited in Emacs and sent a line at a time."
    ([apps] . execute-extended-command)
    ([C-right] . sp-forward-sexp)
    ([C-left] . sp-backward-sexp)
+   ([wheel-right] . ewd-scroll-left)
+   ([wheel-left] . ewd-scroll-right)
    ("\M-!" . ewd-insert-shell-command)
    ("\C-cd" . ediff-buffers)
    ("\C-x\C-p" . yic-prev-buffer)
@@ -937,18 +937,25 @@ Normally input is edited in Emacs and sent a line at a time."
 ;; Stuff from M-x customize
 ;;---------------------------------------------------------------------------
 (custom-set-variables
-  ;; custom-set-variables was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
- '(dired-sort-menu-saved-config (quote ((dired-actual-switches . "-al") (ls-lisp-ignore-case) (ls-lisp-dirs-first . t))))
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(dired-sort-menu-saved-config
+   (quote
+    ((dired-actual-switches . "-al")
+     (ls-lisp-ignore-case)
+     (ls-lisp-dirs-first . t))))
  '(ecb-jde-set-directories-buffer-to-jde-sourcepath (quote replace))
  '(ecb-layout-name "left3")
  '(ecb-options-version "2.32")
  '(ecb-primary-secondary-mouse-buttons (quote mouse-1--mouse-2))
- '(ecb-source-path (quote ("c:\\dev\\" "/localdisk/edaniel/dev" "/localssd/edaniel/dev")))
+ '(ecb-source-path
+   (quote
+    ("c:\\dev\\" "/localdisk/edaniel/dev" "/localssd/edaniel/dev")))
  '(ecb-wget-setup (quote cons))
- '(which-function-mode t nil (which-func)))
+ )
+
 
 ;;---------------------------------------------------------------------------
 ;; Enable some functions
@@ -956,5 +963,8 @@ Normally input is edited in Emacs and sent a line at a time."
 (put 'downcase-region 'disabled nil)
 (put 'upcase-region 'disabled nil)
 (put 'narrow-to-region 'disabled nil)
+(put 'scroll-left 'disabled nil)
+(put 'scroll-right 'disabled nil)
+     
 
 ;;; init ends here
