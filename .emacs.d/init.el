@@ -504,11 +504,29 @@ point is."
 (setq ring-bell-function 'ignore)	    ; don't beep
 (setq split-height-threshold nil)       ; split windows horizontally
 
+;;----------------------------------------------------------------------------
+;; Line numbers and fringe
+;;----------------------------------------------------------------------------
 (require 'hlinum)
 (unless window-system
-  (setq linum-format "%d "))
+  (add-hook 'linum-before-numbering-hook
+	    (lambda ()
+	      (setq-local linum-format-fmt
+			  (let ((w (length (number-to-string
+					    (count-lines (point-min) (point-max))))))
+			    (concat "%" (number-to-string w) "d"))))))
+
+(defun linum-format-func (line)
+  (concat
+   (propertize (format linum-format-fmt line) 'face 'linum)
+   (propertize " " 'face 'fringe)))
+
+(unless window-system
+  (setq linum-format 'linum-format-func))
+
 (hlinum-activate)
 (global-linum-mode)
+
 
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'post-forward-angle-brackets) ; show directories in buffer names
