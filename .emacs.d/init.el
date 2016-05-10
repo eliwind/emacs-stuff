@@ -21,38 +21,6 @@
   "map func down alist, ignoring results"
   (mapc (lambda (entry) (funcall func (car entry) (cdr entry))) alist))
 
-(defun mapapply (func list)
-  "Map func down list of lists, applying the func to each list of arguments.
-Return a list of the results."
-  (mapcar (lambda (entry) (ewd-apply func entry)) list))
-
-;; list/dotted pair manipulation
-(defun ewd-filter (l pred)
-  "return a list containing only the elements of L for which PRED is true"
-  (cond ((null l) '())
-        ((funcall pred (car l)) (cons (car l) (ewd-filter (cdr l) pred)))
-        (t (ewd-filter (cdr l) pred))))
-
-(defun ewd-fold (init op list)
-  "OP is a function taking two arguments.  For each element in LIST, call OP
-on the accumulated result so far (beginning with INIT) and the element."
-  (if (null list) init
-    (ewd-fold (funcall op init (car list)) op (cdr list))))
-
-(defun ewd-apply (func &rest args)
-  "Act just like `apply', only the final argument can end with a dotted pair
-instead of nil."
-  (let ((revargs (reverse args)))
-    (apply 'apply func (nreverse (cons (ewd-standardize (car revargs))
-                                      (cdr revargs))))))
-(defun ewd-standardize (l)
-  "Return a standard list (ending in nil) which contains the same elements
-as L."
-  (cond
-   ((null l) '())
-   ((not (listp l)) (list l))
-   (t (cons (car l) (ewd-standardize (cdr l))))))
-
 ;;----------------------------------------------------------------------------
 ;; Interactive editing commands
 ;;----------------------------------------------------------------------------
@@ -330,17 +298,22 @@ which are advised by `track-column'"
 ;; Get list of directories in a directory
 (defun ewd-directories (dir)
   "Return list of subdirectories of DIR, excluding \".\" and \"..\"."
-  (let ((dirs (ewd-filter (directory-files dir t) '(lambda (f) (file-directory-p f)))))
-    (ewd-filter dirs '(lambda (f) (not (string-match "\\.\\.?$" f))))))
+  (remove-if-not
+   (lambda (f)
+     (and 
+      (file-directory-p f)
+      (not (string-match "\\.\\.?$" f))))
+   (directory-files dir t)))
 
 ;; Get current number of non-internal buffers
 (defun ewd-buffer-count (&optional FRAME)
   "Return number of non-internal buffers currently alive.  If FRAME is
 specified,count buffers in FRAME."
-  (ewd-fold 0 (lambda (buffers each)
-                (if (eq ?  (string-to-char (buffer-name each))) buffers
-                  (+ 1 buffers)))
-            (buffer-list FRAME)))
+  (count-if 
+   (lambda (buffer)
+     (not (eq ?  (string-to-char (buffer-name buffer)))))
+   (buffer-list FRAME)
+   ))
 
 ;; Change how charaters are transposed
 (defun gosmacs-transpose-chars ()
@@ -484,6 +457,7 @@ point is."
 ;; Set up environment
 ;;----------------------------------------------------------------------------
 ;; Set up frame position and coloring
+(setq frame-background-mode 'dark)
 (setq default-frame-alist
       '((top . 50)
         (left . 100)
@@ -530,6 +504,8 @@ point is."
 (setq split-height-threshold nil)       ; split windows horizontally
 
 (require 'hlinum)
+(unless window-system
+  (setq linum-format "%d "))
 (hlinum-activate)
 (global-linum-mode)
 
@@ -675,13 +651,12 @@ Normally input is edited in Emacs and sent a line at a time."
 
 ;;----------------------------------------------------------------------------
 ;; Color theme
-;;----------------------------------------------------------------------------
-(setq solarized-distinct-fringe-background t)
-(setq solarized-use-variable-pitch nil)
-(setq solarized-use-less-bold t)
-(setq solarized-use-more-italic t)
+;; ----------------------------------------------------------------------------
+;; color-theme-solarized from MELPA, hacked to switch definitions for
+;; region and secondary-selection
+(load-theme 'solarized t)
+(enable-theme 'solarized)
 
-(load-theme 'solarized-dark t)
 ;;----------------------------------------------------------------------------
 ;; Emacs 23 only features
 ;;----------------------------------------------------------------------------
