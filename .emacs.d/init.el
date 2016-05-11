@@ -543,6 +543,15 @@ point is."
 (show-smartparens-global-mode +1)
 
 ;; modeline options
+(setq which-func-format
+  `("["
+    (:propertize which-func-current
+		 local-map ,which-func-keymap
+		 face font-lock-function-name-face
+		 help-echo "mouse-1: go to beginning\n\
+mouse-2: toggle rest visibility\n\
+mouse-3: go to end")
+    "]"))
 (which-function-mode t)             ; show current function in modeline
 (column-number-mode t)              ; show current column number
 (setq display-time-day-and-date t)  ; display day and date
