@@ -452,24 +452,24 @@ point is."
 (unless window-system
   (setq linum-format 'linum-format-func))
 
+(line-number-mode -1)
 (hlinum-activate)
 (global-linum-mode)
+;;(which-function-mode t)             ; show current function in modeline
+;(column-number-mode nil)              ; show current column number
+;(setq display-time-day-and-date nil)  ; display day and date
+;(display-time)                      ; display the time
 
 ;; modeline options
-(setq which-func-format
-  `("["
-    (:propertize which-func-current
-		 local-map ,which-func-keymap
-		 face font-lock-function-name-face
-		 help-echo "mouse-1: go to beginning\n\
-mouse-2: toggle rest visibility\n\
-mouse-3: go to end")
-    "]"))
-(which-function-mode t)             ; show current function in modeline
-(column-number-mode t)              ; show current column number
-(setq display-time-day-and-date t)  ; display day and date
-(display-time)                      ; display the time
-
+;; (setq which-func-format
+;;   `("["
+;;     (:propertize which-func-current
+;; 		 local-map ,which-func-keymap
+;; 		 face font-lock-function-name-face
+;; 		 help-echo "mouse-1: go to beginning\n\
+;; mouse-2: toggle rest visibility\n\
+;; mouse-3: go to end")
+;;     "]"))
 
 ;;----------------------------------------------------------------------------
 ;; Set up additional packages
@@ -597,6 +597,10 @@ Normally input is edited in Emacs and sent a line at a time."
 ;; region and secondary-selection
 (load-theme 'solarized t)
 (enable-theme 'solarized)
+(setq sml/theme 'respectful)
+(setq sml/no-confirm-load-theme t)
+(setq sml/mule-info "%Z")
+(sml/setup)
 
 ;; a better Perl mode.  Available from ftp://ftp.math.ohio-state.edu/pub/users/ilya/perl/
 (defalias 'perl-mode 'cperl-mode)
@@ -640,7 +644,7 @@ Normally input is edited in Emacs and sent a line at a time."
 (require 'xquery-mode)
 
 ;; Use jsp-helper-mode + mmm-mode for JSP files
-(add-to-list 'auto-mode-alist '("\\.xq$" . xquery-mode)))
+(add-to-list 'auto-mode-alist '("\\.xq$" . xquery-mode))
 
 ;;----------------------------------------------------------------------------
 ;; Use nxml-mode for xml files
@@ -648,6 +652,15 @@ Normally input is edited in Emacs and sent a line at a time."
 (setq nxml-child-indent 4)
 (add-to-list 'auto-mode-alist '("\\.x[ms]l\\'" . nxml-mode))
 (add-to-list 'auto-mode-alist '("\\.wsdl\\'" . nxml-mode))
+
+;; prompt to add new java files to subversion
+(defadvice jde-gen-class-buffer (around ewd-maybe-add-to-svn activate)
+  "Prompt to add new java files to subversion."
+  (let ((add-file-to-svn (y-or-n-p "Add this file to subversion? ")))
+    ad-do-it
+    (when add-file-to-svn
+      (save-buffer)
+      (vc-register))))
 
 ;;----------------------------------------------------------------------------
 ;; Set up C/C++ programming
