@@ -171,7 +171,7 @@ clobbering the mark."
   (interactive)
   (cond ((equal (buffer-name) "*scratch*")
          (delete-region (point-min) (point-max))
-         (if (> (ewd-buffer-count) 1) (bury-buffer)))
+         (bury-buffer))
         (t (kill-buffer (current-buffer)))))
 
 
@@ -295,26 +295,6 @@ which are advised by `track-column'"
 ;;----------------------------------------------------------------------------
 ;; Miscellaneous utility functions
 ;;----------------------------------------------------------------------------
-;; Get list of directories in a directory
-(defun ewd-directories (dir)
-  "Return list of subdirectories of DIR, excluding \".\" and \"..\"."
-  (remove-if-not
-   (lambda (f)
-     (and 
-      (file-directory-p f)
-      (not (string-match "\\.\\.?$" f))))
-   (directory-files dir t)))
-
-;; Get current number of non-internal buffers
-(defun ewd-buffer-count (&optional FRAME)
-  "Return number of non-internal buffers currently alive.  If FRAME is
-specified,count buffers in FRAME."
-  (count-if 
-   (lambda (buffer)
-     (not (eq ?  (string-to-char (buffer-name buffer)))))
-   (buffer-list FRAME)
-   ))
-
 ;; Change how charaters are transposed
 (defun gosmacs-transpose-chars ()
   "The real way to transpose characters with ^T: always
@@ -380,11 +360,6 @@ point is."
 
 
 ;;----------------------------------------------------------------------------
-;; Package management
-;;----------------------------------------------------------------------------
-(package-initialize)
-
-;;----------------------------------------------------------------------------
 ;; set up exec-path
 ;;----------------------------------------------------------------------------
 (add-to-list 'exec-path "~/bin")
@@ -392,10 +367,10 @@ point is."
 (add-to-list 'load-path (concat user-emacs-directory "site-lisp"))
 
 ;;----------------------------------------------------------------------------
-;; Load 'grep' library, which among other things prevents grep-find from recursing into .svn directories
-;;----------------------------------------------------------------------------
+;; Load 'grep' library, which among other things prevents grep-find
+;; from recursing into .svn directories
+;; ----------------------------------------------------------------------------
 (require 'grep)
-
 
 ;;----------------------------------------------------------------------------
 ;; Set up auxiliary stuff for python
