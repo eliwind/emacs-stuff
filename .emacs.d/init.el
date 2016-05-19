@@ -436,6 +436,9 @@ point is."
 ;; Line numbers, fringe, and modeline
 ;;----------------------------------------------------------------------------
 (require 'hlinum)
+(defvar linum-format-fmt
+  "Buffer-local variable for format of line numbers in left margin")
+
 (unless window-system
   (add-hook 'linum-before-numbering-hook
 	    (lambda ()
@@ -455,21 +458,15 @@ point is."
 (line-number-mode -1)
 (hlinum-activate)
 (global-linum-mode)
-;;(which-function-mode t)             ; show current function in modeline
-;(column-number-mode nil)              ; show current column number
-;(setq display-time-day-and-date nil)  ; display day and date
-;(display-time)                      ; display the time
 
-;; modeline options
-;; (setq which-func-format
-;;   `("["
-;;     (:propertize which-func-current
-;; 		 local-map ,which-func-keymap
-;; 		 face font-lock-function-name-face
-;; 		 help-echo "mouse-1: go to beginning\n\
-;; mouse-2: toggle rest visibility\n\
-;; mouse-3: go to end")
-;;     "]"))
+(require 'smart-mode-line)
+(setq sml/theme 'respectful)
+(setq sml/no-confirm-load-theme t)
+(setq sml/modified-char "*")
+(setq sml/read-only-char "%%")
+(setq sml/show-eol t)
+(setq rm-blacklist (mapconcat 'identity '("FlyC" "ARev") "\\|"))
+(sml/setup)
 
 ;;----------------------------------------------------------------------------
 ;; Set up additional packages
@@ -597,10 +594,6 @@ Normally input is edited in Emacs and sent a line at a time."
 ;; region and secondary-selection
 (load-theme 'solarized t)
 (enable-theme 'solarized)
-(setq sml/theme 'respectful)
-(setq sml/no-confirm-load-theme t)
-(setq sml/mule-info "%Z")
-(sml/setup)
 
 ;; a better Perl mode.  Available from ftp://ftp.math.ohio-state.edu/pub/users/ilya/perl/
 (defalias 'perl-mode 'cperl-mode)
@@ -789,6 +782,12 @@ Normally input is edited in Emacs and sent a line at a time."
     ((dired-actual-switches . "-al")
      (ls-lisp-ignore-case)
      (ls-lisp-dirs-first . t))))
+)
+
+
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  )
-
-
