@@ -4,7 +4,6 @@
 
 ;; Set up package system
 (require 'package)
-;(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
 (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/"))
 
 (package-initialize)
@@ -148,19 +147,7 @@ clobbering the mark."
 ;;----------------------------------------------------------------------------
 ;; Buffer manipulation functions
 ;;----------------------------------------------------------------------------
-(defun ewd-buf-exists-p (bufname)
-  "Non-nil if a buffer named BUFNAME exists."
-  (member bufname (mapcar 'buffer-name (buffer-list))))
-
-(defun yic-prev-buffer ()
-  "Switch to previous buffer in current window."
-  (interactive)
-  (let ((buffers (nreverse (buffer-list))))
-    (while (eq (string-to-char (buffer-name (car buffers))) ? )
-      (setq buffers (cdr buffers)))
-    (switch-to-buffer (car buffers))))
-						
-(defun yic-other-buffer ()
+(defun ewd-other-buffer ()
   "Switch to the other buffer (2nd in list-buffer) in current window."
   (interactive)
   (switch-to-buffer (other-buffer)))
@@ -308,44 +295,8 @@ point is."
 ;; Set up shell and bash commands
 ;;----------------------------------------------------------------------------
 (require 'multi-term)
-(setq multi-term-program "/usr/local/bin/zsh")
-(setq shell-file-name "/usr/local/bin/zsh")
-
-;; create a shell buffer, but not necessarily called *shell*
-(defun ewd-shell (&optional bufname)
-"Just like `shell', only takes buffer name as argument."
-  (interactive)
-  (require 'shell)
-  (if (null bufname) (setq bufname "shell"))
-  (if (not (comint-check-proc (concat "*" bufname "*")))
-      (let* ((prog (or explicit-shell-file-name
-		       (getenv "ESHELL")
-		       (getenv "SHELL")
-		       "/bin/sh"))		     
-	     (name (file-name-nondirectory prog))
-	     (startfile (concat "~/.emacs_" name))
-	     (xargs-name (intern-soft (concat "explicit-" name "-args")))
-	     shell-buffer)
-	(save-excursion
-	  (set-buffer (apply 'make-comint bufname prog
-			     (if (file-exists-p startfile) startfile)
-			     (if (and xargs-name (boundp xargs-name))
-				 (symbol-value xargs-name)
-			       '("-i"))))
-	  (setq shell-buffer (current-buffer))
-	  (shell-mode))
-	(pop-to-buffer shell-buffer))
-    (pop-to-buffer (concat "*" bufname "*"))))
-
-;; create a bash buffer called *bash*
-(defun ewd-bash()
-  "Runs the bash shell"
-  (interactive)
-  (let* ((shell-file-name "bash")
-         (explicit-shell-file-name shell-file-name)
-         (explicit-sh-args '("-login" "-i"))
-         (w32-quote-process-args ?\")) ;; Use Cygnus quoting rules.
-    (ewd-shell "bash")))
+(setq multi-term-program "zsh")
+(setq shell-file-name "zsh")
 
 (add-hook 'shell-mode-hook
           (lambda ()
@@ -388,7 +339,6 @@ point is."
 ; auto-complete mode extra settings
 (setq
  ac-auto-start 2
- ac-override-local-map nil
  ac-use-menu-map t
  ac-candidate-limit 20)
 
@@ -480,7 +430,7 @@ point is."
 (setq split-height-threshold nil)       ; split windows horizontally
 
 ;;----------------------------------------------------------------------------
-;; Line numbers and fringe
+;; Line numbers, fringe, and modeline
 ;;----------------------------------------------------------------------------
 (require 'hlinum)
 (unless window-system
@@ -502,21 +452,6 @@ point is."
 (hlinum-activate)
 (global-linum-mode)
 
-
-(require 'uniquify)
-(setq uniquify-buffer-name-style 'post-forward-angle-brackets) ; show directories in buffer names
-
-;; Allow some variables to be set on a mode-by-mode-basis
-(make-variable-buffer-local 'tempo-interactive)  ; prompting to fill in templates
-(make-variable-buffer-local 'ps-line-number)     ; print with line numbers
-
-;; ;; Paren matching
-;; (show-paren-mode t)                        ; highlight matching parens, etc
-;; (setq show-paren-style 'parenthesis)       ; highlight character, not expression
-;; (setq blink-matching-paren-distance 51200) ; distance to match paren as
-(require 'smartparens-config)
-(show-smartparens-global-mode +1)
-
 ;; modeline options
 (setq which-func-format
   `("["
@@ -531,6 +466,18 @@ mouse-3: go to end")
 (column-number-mode t)              ; show current column number
 (setq display-time-day-and-date t)  ; display day and date
 (display-time)                      ; display the time
+
+
+(require 'uniquify)
+(setq uniquify-buffer-name-style 'post-forward-angle-brackets) ; show directories in buffer names
+
+;; Allow some variables to be set on a mode-by-mode-basis
+(make-variable-buffer-local 'tempo-interactive)  ; prompting to fill in templates
+(make-variable-buffer-local 'ps-line-number)     ; print with line numbers
+
+;; ;; Paren matching
+(require 'smartparens-config)
+(show-smartparens-global-mode +1)
 
 ;; Make .com, .out, and .tpl files be text rather than binary
 (when (eq window-system 'w32) 
@@ -628,7 +575,6 @@ Normally input is edited in Emacs and sent a line at a time."
 
 (require 'telnet)
 (when (eq window-system 'w32)
-;;   (setq telnet-program "~/bin/telnet.exe")
   (fset 'telnet 'zoltan-telnet))
 
 ;; Set up msb to make a spiffy, organized buffer menu
@@ -644,61 +590,12 @@ Normally input is edited in Emacs and sent a line at a time."
 (require 'generic-x)
 
 ;;----------------------------------------------------------------------------
-;; Set up syntax highlighting (font-lock)
-;;----------------------------------------------------------------------------
-(when window-system
-  (require 'font-lock-menus)
-  (global-font-lock-mode t)
-  (setq font-lock-maximum-decoration '((c++-mode . 2) (cperl-mode . 1) (t . t)))
-)
-
-;;----------------------------------------------------------------------------
 ;; Color theme
 ;; ----------------------------------------------------------------------------
 ;; color-theme-solarized from MELPA, hacked to switch definitions for
 ;; region and secondary-selection
 (load-theme 'solarized t)
 (enable-theme 'solarized)
-
-;;----------------------------------------------------------------------------
-;; Emacs 23 only features
-;;----------------------------------------------------------------------------
-(when (>= emacs-major-version 23)
-  ;; (load "cedet")
-  ;; (load "semantic")
-  ;; (global-semantic-decoration-mode -1)
-  ;; (global-semantic-stickyfunc-mode -1)
-  ;; (add-to-list 'load-path (concat (getenv "JDE_HOME") "/lisp"))
-
-  ;; Set up JDE for Java programming
-  ;; (require 'jde)
-  ;; (add-hook 'jde-mode-hook
-  ;; 			(lambda ()
-  ;; 			  ;; use jde-import-organize instead of jde-import-sort
-  ;; 			  (fset 'jde-import-sort 'jde-import-organize)
-  ;; 			  ;; set local variables
-  ;; 			  (setq ps-line-number t)))
-
-  ;; ;; Use ECB for code browsing
-  ;; (require 'ecb)
-  ;; (setq ecb-tip-of-the-day nil)
-  ;; (require 'winring)
-  ;; (add-hook 'ecb-activate-hook
-  ;; 			(lambda ()
-  ;; 			  (ecb-winman-winring-enable-support)
-  ;; 			  (winring-initialize)))
-
-  ;; (add-to-list 'auto-mode-alist '("\\.java.in$" . jde-mode))
-  ;; (add-to-list 'auto-mode-alist '("\\.java.server$" . jde-mode))
-  
-  ;; run the class in the current buffer in junit
-  (defun ewd-run-junit ()
-	"Runs junit on the current class"
-	(interactive)
-	(let ((jde-run-option-application-args (list (jde-run-get-main-class)))
-		  (jde-run-read-app-args nil)
-		  (jde-run-application-class "junit.textui.TestRunner"))
-	  (jde-run 1))))
 
 ;; a better Perl mode.  Available from ftp://ftp.math.ohio-state.edu/pub/users/ilya/perl/
 (defalias 'perl-mode 'cperl-mode)
@@ -748,18 +645,9 @@ Normally input is edited in Emacs and sent a line at a time."
 ;;----------------------------------------------------------------------------
 ;; Use nxml-mode for xml files
 ;;----------------------------------------------------------------------------
-(when (>= emacs-major-version 23)
-  (setq nxml-child-indent 4)
-  (add-to-list 'auto-mode-alist '("\\.x[ms]l\\'" . nxml-mode))
-  (add-to-list 'auto-mode-alist '("\\.wsdl\\'" . nxml-mode)))
-
-;;----------------------------------------------------------------------------
-;; Set up version control
-;;----------------------------------------------------------------------------
-
-;; Use svn for version control
-;;
-(setq vc-svn-program "svn")
+(setq nxml-child-indent 4)
+(add-to-list 'auto-mode-alist '("\\.x[ms]l\\'" . nxml-mode))
+(add-to-list 'auto-mode-alist '("\\.wsdl\\'" . nxml-mode))
 
 ;; prompt to add new java files to subversion
 (defadvice jde-gen-class-buffer (around ewd-maybe-add-to-svn activate)
@@ -769,11 +657,6 @@ Normally input is edited in Emacs and sent a line at a time."
     (when add-file-to-svn
       (save-buffer)
       (vc-register))))
-
-;; ;; Use perforce for version control
-;;
-;; (require 'p4)
-;; (setq p4-executable "c:/program files/perforce/p4.exe")
 
 ;;----------------------------------------------------------------------------
 ;; Set up C/C++ programming
@@ -814,24 +697,23 @@ Normally input is edited in Emacs and sent a line at a time."
                                    (arglist-close . c-lineup-close-paren)
                                    (inextern-lang . 0)))))
 
-(when window-system
-  ;; define extra C types to font-lock
-  (setq c-font-lock-extra-types
-        (append
-         '("BOOL" "BSTR" "LPC?\\(W\\|T\\|OLE\\)?STR" "HRESULT"
-           "BYTE" "DWORD" "SOCKET" "idl_char"
-           "idl_boolean" "idl_byte" "idl_\\(short\\|long\\)_float"
-           "idl_u?\\(small\\|short\\|long\\)_int"
-           "boolean32" "unsigned\\(32\\|16\\)"
-           "SAFEARRAY" "boolean" "UINT" "ULONG")
-         c-font-lock-extra-types))
+;; define extra C types to font-lock
+(setq c-font-lock-extra-types
+      (append
+       '("BOOL" "BSTR" "LPC?\\(W\\|T\\|OLE\\)?STR" "HRESULT"
+         "BYTE" "DWORD" "SOCKET" "idl_char"
+         "idl_boolean" "idl_byte" "idl_\\(short\\|long\\)_float"
+         "idl_u?\\(small\\|short\\|long\\)_int"
+         "boolean32" "unsigned\\(32\\|16\\)"
+         "SAFEARRAY" "boolean" "UINT" "ULONG")
+       c-font-lock-extra-types))
 
-  ;; define extra C++ types to font-lock
-  (setq c++-font-lock-extra-types
-        (append
-         c-font-lock-extra-types
-         '("C[A-Z][a-z]\\w*")
-         c++-font-lock-extra-types)))
+;; define extra C++ types to font-lock
+(setq c++-font-lock-extra-types
+      (append
+       c-font-lock-extra-types
+       '("C[A-Z][a-z]\\w*")
+       c++-font-lock-extra-types))
 
 ;; Make .h files go into C++-mode instead of C-mode
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
@@ -856,12 +738,6 @@ Normally input is edited in Emacs and sent a line at a time."
 ;;----------------------------------------------------------------------------
 ;; Ruby programming
 ;;----------------------------------------------------------------------------
-;; (add-to-list 'auto-mode-alist '("\\.rb\\'" . enh-ruby-mode))
-;; (eval-after-load 'enh-ruby-mode
-;;   '(remove-hook 'enh-ruby-mode-hook 'erm-define-faces))
-;; (add-hook 'enh-ruby-mode-hook 'robe-mode)
-;; (add-hook 'enh-ruby-mode-hook 'yard-mode)
-;; (add-hook 'enh-ruby-mode-hook 'inf-ruby-minor-mode)
 (add-hook 'ruby-mode-hook 'robe-mode)
 (add-hook 'ruby-mode-hook 'yard-mode)
 (add-hook 'ruby-mode-hook 'inf-ruby-minor-mode)
@@ -888,9 +764,9 @@ Normally input is edited in Emacs and sent a line at a time."
    ([wheel-left] . ewd-scroll-right)
    ("\M-!" . ewd-insert-shell-command)
    ("\C-cd" . ediff-buffers)
-   ("\C-x\C-p" . yic-prev-buffer)
-   ("\C-x\C-n" . bury-buffer)
-   ("\C-x\C-o" . yic-other-buffer)
+   ("\C-x\C-p" . previous-buffer)
+   ("\C-x\C-n" . next-buffer)
+   ("\C-x\C-o" . ewd-other-buffer)
    ("\C-x\C-k" . ewd-kill-current-buffer)
    ("\C-h\C-v" . apropos-variable)
    ("\C-c;" . comment-region)
@@ -901,10 +777,6 @@ Normally input is edited in Emacs and sent a line at a time."
    ("\M-g" . goto-line)
    ("\C-l" . ewd-font-lock-repaint)
    ("\C-m" . newline-and-indent)
-   ("\C-c\C-v\M-n" . jde-gen-class-buffer)
-   ("\C-c\C-v\M-i" . jde-gen-interface-buffer)
-   ("\C-c\C-v\C-j" . ewd-run-junit)
-   ("\C-c\C-v\M-y" . jde-show-class-source)
    ("\M-\C-_" . redo)
    ([C-next] . ewd-scroll-left)
    ([C-prior] . ewd-scroll-right)
@@ -924,7 +796,6 @@ Normally input is edited in Emacs and sent a line at a time."
     ((dired-actual-switches . "-al")
      (ls-lisp-ignore-case)
      (ls-lisp-dirs-first . t))))
- '(ecb-jde-set-directories-buffer-to-jde-sourcepath (quote replace))
  '(ecb-layout-name "left3")
  '(ecb-options-version "2.32")
  '(ecb-primary-secondary-mouse-buttons (quote mouse-1--mouse-2))
