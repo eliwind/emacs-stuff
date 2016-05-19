@@ -1,7 +1,3 @@
-;;; init.el -- emacs initialization
-;;; Commentary:
-;;; Code:
-
 ;; Set up package system
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/"))
@@ -47,9 +43,8 @@
 pos is passed as an argument to recenter."
   (interactive "P")
   (recenter pos)
-  (when window-system
-	(save-excursion
-	  (font-lock-fontify-region (window-start) (window-end)))))
+  (save-excursion
+    (font-lock-fontify-region (window-start) (window-end))))
 
 ;; duplicate current line
 (require 'misc)
@@ -161,9 +156,6 @@ clobbering the mark."
          (bury-buffer))
         (t (kill-buffer (current-buffer)))))
 
-
-
-
 ;;----------------------------------------------------------------------------
 ;; Make cursor stay in the same column when scrolling.  Thanks to
 ;; David Biesack (sasdjb@unx.sas.com).
@@ -203,7 +195,9 @@ which are advised by `track-column'"
 
 (mapc 'track-column-for default-column-tracking-functions)
 
+;;----------------------------------------------------------------------------
 ;; Make subsequently opened frames offset from the first one
+;;----------------------------------------------------------------------------
 (defvar ewd-frame-offset 25
   "*Amount to offset each subsequently created frame")
 (defadvice x-create-frame-with-faces (before ewd-create-frame activate)
@@ -229,6 +223,13 @@ which are advised by `track-column'"
 ;;----------------------------------------------------------------------------
 ;; use y-or-n-p instead of yes-or-no-p
 (fset 'yes-or-no-p 'y-or-n-p)
+
+;; Enable some functions
+(put 'downcase-region 'disabled nil)
+(put 'upcase-region 'disabled nil)
+(put 'narrow-to-region 'disabled nil)
+(put 'scroll-left 'disabled nil)
+(put 'scroll-right 'disabled nil)
 
 ;;----------------------------------------------------------------------------
 ;; Toggle keypad as prefix / keypad as numbers
@@ -324,6 +325,18 @@ point is."
 (require 'grep)
 
 ;;----------------------------------------------------------------------------
+;; Ruby programming
+;;----------------------------------------------------------------------------
+(add-hook 'ruby-mode-hook 'robe-mode)
+(add-hook 'ruby-mode-hook 'yard-mode)
+(add-hook 'ruby-mode-hook 'inf-ruby-minor-mode)
+
+;;----------------------------------------------------------------------------
+;; Magit for git integration
+;;----------------------------------------------------------------------------
+(global-magit-file-mode)
+
+;;----------------------------------------------------------------------------
 ;; Set up auxiliary stuff for python
 ;;----------------------------------------------------------------------------
 (require 'auto-complete)
@@ -331,17 +344,13 @@ point is."
 (require 'yasnippet)
 (require 'flycheck)
 (global-flycheck-mode t)
-;(setq-default flycheck-pylintrc "~/dev/lib/trunk/echonest/pylintrc")
 (setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc))
-
-(global-set-key [f7] 'find-file-in-repository)
 
 ; auto-complete mode extra settings
 (setq
  ac-auto-start 2
  ac-use-menu-map t
  ac-candidate-limit 20)
-
 
 ;;----------------------------------------------------------------------------
 ;; set up python
@@ -380,9 +389,8 @@ point is."
 
 
 ;;----------------------------------------------------------------------------
-;; Set up environment
-;;----------------------------------------------------------------------------
 ;; Set up frame position and coloring
+;;----------------------------------------------------------------------------
 (setq frame-background-mode 'dark)
 (setq default-frame-alist
       '((top . 50)
@@ -393,14 +401,9 @@ point is."
         (font . "Monaco-12")
         (vertical-scroll-bars . right)))
 
-
-;; Make emacs use the clipboard
-(when (= emacs-major-version 23)
-  (setq x-select-enable-clipboard t)
-  (setq interprogram-paste-function 'x-cut-buffer-or-selection-value))
-
-
-;; Environment
+;;----------------------------------------------------------------------------
+;; Set up environment
+;;----------------------------------------------------------------------------
 (setq grep-find-use-xargs 'exec)		; use -print0 and xargs -0
 (setq compilation-scroll-output t)      ; scroll output in compilation window
 (setq-default tab-width 4)              ; tab = 4 spaces
@@ -468,56 +471,10 @@ mouse-3: go to end")
 (display-time)                      ; display the time
 
 
-(require 'uniquify)
-(setq uniquify-buffer-name-style 'post-forward-angle-brackets) ; show directories in buffer names
-
-;; Allow some variables to be set on a mode-by-mode-basis
-(make-variable-buffer-local 'tempo-interactive)  ; prompting to fill in templates
-(make-variable-buffer-local 'ps-line-number)     ; print with line numbers
-
-;; ;; Paren matching
-(require 'smartparens-config)
-(show-smartparens-global-mode +1)
-
-;; Make .com, .out, and .tpl files be text rather than binary
-(when (eq window-system 'w32) 
-  (setq file-name-buffer-file-type-alist
-		(cons '("\\.\\([Cc][Oo][Mm]\\|out\\|tpl\\)$") file-name-buffer-file-type-alist)))
-
-;; Printing
-(setq ps-printer-name "//corpprint/15-Development")
-;; (setq ps-landscape-mode t)
-;; (setq ps-n-up-printing 2)
-;; (setq ps-n-up-margin 0)
-;; (setq ps-n-up-border-p nil)
-(setq ps-spool-duplex t)
-
-
-;; Add "Get X font name" to menu
-(when (eq window-system 'w32)
-       (define-key-after (lookup-key global-map [menu-bar edit])
-         [select-font-menu-separator] '("--" . select-font-menu-separator) t)
-       (define-key-after (lookup-key global-map [menu-bar edit])
-         [get-font-name] '("Get X font name" . ewd-get-x-font-name) t))
-
-;; Map arrow keys to correct functions in dial-in
-(add-hook 'term-setup-hook
-          (function
-           (lambda ()
-             (define-key esc-map "["  nil)
-             (define-key esc-map "[A" 'previous-line)
-             (define-key esc-map "[B" 'next-line)
-             (define-key esc-map "[C" 'forward-char)
-             (define-key esc-map "[D" 'backward-char)
-             (define-key esc-map "[OA" 'previous-line)
-             (define-key esc-map "[OB" 'next-line)
-             (define-key esc-map "[OC" 'forward-char)
-             (define-key esc-map "[OD" 'backward-char)
-             )))
-
 ;;----------------------------------------------------------------------------
 ;; Set up additional packages
 ;;----------------------------------------------------------------------------
+;; emacs-server
 (server-start)
 
 ;; use a more windowsy undo-redo system
@@ -548,6 +505,50 @@ mouse-3: go to end")
 (add-hook 'dired-load-hook
           (lambda ()
             (require 'dired-sort-menu)))
+
+;; show directories in buffer names
+(require 'uniquify)
+(setq uniquify-buffer-name-style 'post-forward-angle-brackets) 
+
+;; Allow some variables to be set on a mode-by-mode-basis
+(make-variable-buffer-local 'tempo-interactive)  ; prompting to fill in templates
+(make-variable-buffer-local 'ps-line-number)     ; print with line numbers
+
+;; ;; Paren matching
+(require 'smartparens-config)
+(show-smartparens-global-mode +1)
+
+;; Make .com, .out, and .tpl files be text rather than binary
+(when (eq window-system 'w32) 
+  (setq file-name-buffer-file-type-alist
+		(cons '("\\.\\([Cc][Oo][Mm]\\|out\\|tpl\\)$") file-name-buffer-file-type-alist)))
+
+;; Printing
+(setq ps-printer-name "//corpprint/15-Development")
+(setq ps-spool-duplex t)
+
+;; Add "Get X font name" to menu
+(when (eq window-system 'w32)
+       (define-key-after (lookup-key global-map [menu-bar edit])
+         [select-font-menu-separator] '("--" . select-font-menu-separator) t)
+       (define-key-after (lookup-key global-map [menu-bar edit])
+         [get-font-name] '("Get X font name" . ewd-get-x-font-name) t))
+
+;; Map arrow keys to correct functions in dial-in
+(add-hook 'term-setup-hook
+          (function
+           (lambda ()
+             (define-key esc-map "["  nil)
+             (define-key esc-map "[A" 'previous-line)
+             (define-key esc-map "[B" 'next-line)
+             (define-key esc-map "[C" 'forward-char)
+             (define-key esc-map "[D" 'backward-char)
+             (define-key esc-map "[OA" 'previous-line)
+             (define-key esc-map "[OB" 'next-line)
+             (define-key esc-map "[OC" 'forward-char)
+             (define-key esc-map "[OD" 'backward-char)
+             )))
+
 
 ;; Make telnet-mode work on windows
 ;; telnet with telnet.exe written by Naftali Ramati (naftali@harmonic.co.il).
@@ -636,11 +637,10 @@ Normally input is edited in Emacs and sent a line at a time."
 ;;----------------------------------------------------------------------------
 ;; Set up XQuery editing with xquery-mode
 ;;----------------------------------------------------------------------------
-(when (>= emacs-major-version 23)
-  (require 'xquery-mode)
+(require 'xquery-mode)
 
-  ;; Use jsp-helper-mode + mmm-mode for JSP files
-  (add-to-list 'auto-mode-alist '("\\.xq$" . xquery-mode)))
+;; Use jsp-helper-mode + mmm-mode for JSP files
+(add-to-list 'auto-mode-alist '("\\.xq$" . xquery-mode)))
 
 ;;----------------------------------------------------------------------------
 ;; Use nxml-mode for xml files
@@ -648,15 +648,6 @@ Normally input is edited in Emacs and sent a line at a time."
 (setq nxml-child-indent 4)
 (add-to-list 'auto-mode-alist '("\\.x[ms]l\\'" . nxml-mode))
 (add-to-list 'auto-mode-alist '("\\.wsdl\\'" . nxml-mode))
-
-;; prompt to add new java files to subversion
-(defadvice jde-gen-class-buffer (around ewd-maybe-add-to-svn activate)
-  "Prompt to add new java files to subversion."
-  (let ((add-file-to-svn (y-or-n-p "Add this file to subversion? ")))
-    ad-do-it
-    (when add-file-to-svn
-      (save-buffer)
-      (vc-register))))
 
 ;;----------------------------------------------------------------------------
 ;; Set up C/C++ programming
@@ -736,18 +727,6 @@ Normally input is edited in Emacs and sent a line at a time."
 
 
 ;;----------------------------------------------------------------------------
-;; Ruby programming
-;;----------------------------------------------------------------------------
-(add-hook 'ruby-mode-hook 'robe-mode)
-(add-hook 'ruby-mode-hook 'yard-mode)
-(add-hook 'ruby-mode-hook 'inf-ruby-minor-mode)
-
-;;----------------------------------------------------------------------------
-;; Magit for git integration
-;;----------------------------------------------------------------------------
-(global-magit-file-mode)
-
-;;----------------------------------------------------------------------------
 ;; Set global keybindings
 ;;----------------------------------------------------------------------------
 (mapa 'global-set-key
@@ -781,6 +760,7 @@ Normally input is edited in Emacs and sent a line at a time."
    ([C-next] . ewd-scroll-left)
    ([C-prior] . ewd-scroll-right)
    ("\C-xv=" . ediff-revision)
+   ("\C-xf" . find-file-in-repository)
    ))
 
 ;;---------------------------------------------------------------------------
@@ -796,24 +776,6 @@ Normally input is edited in Emacs and sent a line at a time."
     ((dired-actual-switches . "-al")
      (ls-lisp-ignore-case)
      (ls-lisp-dirs-first . t))))
- '(ecb-layout-name "left3")
- '(ecb-options-version "2.32")
- '(ecb-primary-secondary-mouse-buttons (quote mouse-1--mouse-2))
- '(ecb-source-path
-   (quote
-    ("c:\\dev\\" "/localdisk/edaniel/dev" "/localssd/edaniel/dev")))
- '(ecb-wget-setup (quote cons))
  )
 
 
-;;---------------------------------------------------------------------------
-;; Enable some functions
-;;---------------------------------------------------------------------------
-(put 'downcase-region 'disabled nil)
-(put 'upcase-region 'disabled nil)
-(put 'narrow-to-region 'disabled nil)
-(put 'scroll-left 'disabled nil)
-(put 'scroll-right 'disabled nil)
-     
-
-;;; init ends here
