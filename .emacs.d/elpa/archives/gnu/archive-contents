@@ -421,9 +421,9 @@
 	(:url . "https://github.com/abo-abo/swiper"))])
  (javaimp .
 	  [(0 6)
-	   nil "Add and reorder Java import statements in Maven projects" single
-	   ((:url . "http://elpa.gnu.org/packages/javaimp.html")
-	    (:keywords "java" "maven" "programming"))])
+	   nil "Add and reorder Java import statements in Maven projects" tar
+	   ((:keywords "java" "maven" "programming")
+	    (:url . "http://elpa.gnu.org/packages/javaimp.html"))])
  (jgraph-mode .
 	      [(1 1)
 	       ((cl-lib

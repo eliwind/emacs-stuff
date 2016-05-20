@@ -378,7 +378,8 @@ point is."
 ;; Hide the tool bar
 ;;----------------------------------------------------------------------------
 (tool-bar-mode -1)
-(unless window-system (menu-bar-mode -1))
+(menu-bar-mode -1)
+(scroll-bar-mode -1)
 
 ;;----------------------------------------------------------------------------
 ;; Set personal information
@@ -491,6 +492,7 @@ point is."
           (lambda()
             (define-key ido-completion-map
               "\C-xg" 'ido-enter-magit-status)))
+(smex-initialize)
           
 ;; make end-of-line conversion easier.  The eol-conversion package was written
 ;; by Francis J. Wright <F.J.Wright@qmw.ac.uk>.  Available from
@@ -741,7 +743,7 @@ Normally input is edited in Emacs and sent a line at a time."
 ;;----------------------------------------------------------------------------
 (mapa 'global-set-key
  `(([f4] . next-error)
-   ([f11] . ewd-dup-line)
+   ([f11] . ewd-dup-line-line)
    ([end] . end-of-line)
    ([C-end] . ewd-end-of-buffer-nomark)
    ([home] . beginning-of-line)
@@ -767,6 +769,10 @@ Normally input is edited in Emacs and sent a line at a time."
    ("\C-l" . ewd-font-lock-repaint)
    ("\C-m" . newline-and-indent)
    ("\M-\C-_" . redo)
+   ("\M-\\" . hippie-expand)
+   ("\M-x" . smex)
+   ("\M-X" . smex-major-mode-commands)
+   ("\C-c\C-c\M-x" . smex-major-mode-commands)
    ([C-next] . ewd-scroll-left)
    ([C-prior] . ewd-scroll-right)
    ("\C-xv=" . ediff-revision)
