@@ -487,6 +487,10 @@ point is."
 
 ;; set up nicer buffer switching and other stuff
 (ido-mode)
+(add-hook 'ido-setup-hook
+          (lambda()
+            (define-key ido-completion-map
+              "\C-xg" 'ido-enter-magit-status)))
           
 ;; make end-of-line conversion easier.  The eol-conversion package was written
 ;; by Francis J. Wright <F.J.Wright@qmw.ac.uk>.  Available from
