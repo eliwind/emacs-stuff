@@ -298,6 +298,7 @@ point is."
 (require 'multi-term)
 (setq multi-term-program "zsh")
 (setq shell-file-name "zsh")
+(setq term-term-name "xterm-16color")
 
 (add-hook 'shell-mode-hook
           (lambda ()
@@ -401,7 +402,7 @@ point is."
         (width . 150)
         (height . 50)
         (cursor-type . bar)
-        (font . "Monaco-12")
+        (font . "Menlo-12")
         (vertical-scroll-bars . right)))
 
 ;;----------------------------------------------------------------------------
