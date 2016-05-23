@@ -600,11 +600,46 @@ Normally input is edited in Emacs and sent a line at a time."
 ;; Color theme
 ;; ----------------------------------------------------------------------------
 ;; color-theme-solarized from MELPA, hacked to switch definitions for
-;; region and secondary-selection
+;; region and secondary-selection, and to add the right colors for
+;; bold ANSI term colors.
+
+;; define some faces that arguably should exist out of the box
+(defface term-color-brblack nil "")
+(defface term-color-brred nil "")
+(defface term-color-brgreen nil "")
+(defface term-color-bryellow nil "")
+(defface term-color-brblue nil "")
+(defface term-color-brmagenta nil "")
+(defface term-color-brcyan nil "")
+(defface term-color-brwhite nil "")
+
+;; load theme (which is hacked to set specs for these new faces)
 (load-theme 'solarized t)
 (enable-theme 'solarized)
 
+;; set up advice to use the appropriate colors instead of bolding the
+;; underlying colors
+(defun ansi-term--ewd-get-bold-color (oldfun &rest args)
+  (let ((ansi-term-color-vector 
+         (if term-ansi-current-bold
+             '[term
+               term-color-brblack
+               term-color-brred
+               term-color-brgreen
+               term-color-bryellow
+               term-color-brblue
+               term-color-brmagenta
+               term-color-brcyan
+               term-color-brwhite]
+           ansi-term-color-vector)))
+    (when (>= (car args) 30)
+      (setq term-ansi-current-bold nil))
+    (apply oldfun args)))
+(advice-add 'term-handle-colors-array :around #'ansi-term--ewd-get-bold-color)
+
+;;----------------------------------------------------------------------------
 ;; a better Perl mode.  Available from ftp://ftp.math.ohio-state.edu/pub/users/ilya/perl/
+;;----------------------------------------------------------------------------
 (defalias 'perl-mode 'cperl-mode)
 (autoload 'cperl-mode "cperl-mode" "better mode for editing Perl programs" t)
 (add-hook 'cperl-mode-hook
