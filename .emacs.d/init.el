@@ -381,7 +381,7 @@ point is."
 ;; Hide the tool bar
 ;;----------------------------------------------------------------------------
 (tool-bar-mode -1)
-(menu-bar-mode (not (eq window-system nil)))
+(menu-bar-mode (if window-system 1 -1))
 (scroll-bar-mode -1)
 
 ;;----------------------------------------------------------------------------
@@ -614,6 +614,7 @@ Normally input is edited in Emacs and sent a line at a time."
 (defface term-color-brwhite nil "")
 
 ;; load theme (which is hacked to set specs for these new faces)
+(setq solarized-bold nil)
 (load-theme 'solarized t)
 (enable-theme 'solarized)
 
