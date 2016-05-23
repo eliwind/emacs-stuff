@@ -830,8 +830,7 @@ Normally input is edited in Emacs and sent a line at a time."
    (quote
     ((dired-actual-switches . "-al")
      (ls-lisp-ignore-case)
-     (ls-lisp-dirs-first . t))))
-)
+     (ls-lisp-dirs-first . t)))))
 
 
 (custom-set-faces
@@ -839,4 +838,7 @@ Normally input is edited in Emacs and sent a line at a time."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+
+ ;; Make sure line numbers aren't italic
+ '(linum ((t (:slant normal))))
  )
