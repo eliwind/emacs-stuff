@@ -402,8 +402,8 @@ point is."
         (width . 150)
         (height . 50)
         (cursor-type . bar)
-        (font . "Menlo-12")
-        (vertical-scroll-bars . right)))
+        (font . "Monaco-12")
+        ))
 
 ;;----------------------------------------------------------------------------
 ;; Set up environment
