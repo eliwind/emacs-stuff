@@ -8,9 +8,8 @@
 (require 'auto-package-update)
 (setq auto-package-update-interval 7)
 (setq auto-package-update-delete-old-versions t)
+(auto-package-update-at-time "12:00")
 (auto-package-update-maybe)
-(auto-package-update-now)
-
 
 ;;----------------------------------------------------------------------------
 ;; data structure manipuation functions
