@@ -336,8 +336,6 @@ point is."
 ;; Magit for git integration
 ;;----------------------------------------------------------------------------
 (global-magit-file-mode)
-(require 'magit-gh-pulls)
-(add-hook 'magit-mode-hook 'turn-on-magit-gh-pulls)
 
 ;;----------------------------------------------------------------------------
 ;; Set up auxiliary stuff for python

@@ -1,10 +1,10 @@
 ;;; hlinum.el --- Extension for linum.el to highlight current line number
 
-;; Copyright (C) 2011-2015  by Tomoya Tanjo
+;; Copyright (C) 2011-2016  by Tomoya Tanjo
 
 ;; Author: Tomoya Tanjo <ttanjo@gmail.com>
 ;; URL: https://github.com/tom-tan/hlinum-mode/
-;; Package-Version: 20150621.1933
+;; Package-Version: 20160521.2112
 ;; Package-Requires: ((cl-lib "0.2"))
 ;; Keywords: convenience, extensions
 
