@@ -288,18 +288,6 @@ which are advised by `track-column'"
          (setq ewd-kp-usage 'num))))
 
 ;;----------------------------------------------------------------------------
-;; Miscellaneous utility functions
-;;----------------------------------------------------------------------------
-;; Change how charaters are transposed
-(defun gosmacs-transpose-chars ()
-  "The real way to transpose characters with ^T: always
-transpose the previous two characters from where the
-point is."
-  (interactive nil)
-  (forward-char -1)
-  (transpose-chars 1))
-
-;;----------------------------------------------------------------------------
 ;; Set up shell and bash commands
 ;;----------------------------------------------------------------------------
 (require 'multi-term)
@@ -355,10 +343,9 @@ point is."
 (setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc))
 
 ; auto-complete mode extra settings
-(setq
- ac-auto-start 2
- ac-use-menu-map t
- ac-candidate-limit 20)
+(setq ac-auto-start 2)
+(setq ac-use-menu-map t)
+(setq ac-candidate-limit 20)
 
 ;;----------------------------------------------------------------------------
 ;; set up python
@@ -395,7 +382,6 @@ point is."
 
 (setq user-mail-address "eli.daniel@gmail.com")
 (setq user-full-name "Eli Daniel")
-
 
 ;;----------------------------------------------------------------------------
 ;; Set up frame position and coloring
@@ -564,29 +550,28 @@ point is."
 ;; Make telnet-mode work on windows
 ;; telnet with telnet.exe written by Naftali Ramati (naftali@harmonic.co.il).
 ;; Thanks to Zoltan Kemenczy (zoltan@nabu.isg.mot.com).
-(defun zoltan-telnet (host)
-  "Open a network login connection to host named HOST (a string).
+(when (eq window-system 'w32)
+  (defun zoltan-telnet (host)
+    "Open a network login connection to host named HOST (a string).
 Communication with HOST is recorded in a buffer `*telnet-HOST*'.
 Normally input is edited in Emacs and sent a line at a time."
-  (interactive "sOpen telnet connection to host: ")
-  (let* ((comint-delimiter-argument-list '(?\  ?\t))
-         (name (concat "telnet-" (comint-arguments host 0 nil) ))
-         (buffer (get-buffer (concat "*" name "*")))
-         process)
-    (when (eq window-system 'w32)
+    (interactive "sOpen telnet connection to host: ")
+    (let* ((comint-delimiter-argument-list '(?\  ?\t))
+           (name (concat "telnet-" (comint-arguments host 0 nil) ))
+           (buffer (get-buffer (concat "*" name "*")))
+           process)
+      (when (eq window-system 'w32)
         (setq telnet-new-line "\n"))
-    (if (and buffer (get-buffer-process buffer))
-        (pop-to-buffer (concat "*" name "*"))
-      (pop-to-buffer (make-comint name telnet-program nil host))
-      (setq process (get-buffer-process (current-buffer)))
-      (set-process-filter process 'telnet-initial-filter)
-      (accept-process-output process)
-      (telnet-mode)
-      (setq comint-input-sender 'telnet-simple-send)
-      (setq telnet-count telnet-initial-count))))
-
-(require 'telnet)
-(when (eq window-system 'w32)
+      (if (and buffer (get-buffer-process buffer))
+          (pop-to-buffer (concat "*" name "*"))
+        (pop-to-buffer (make-comint name telnet-program nil host))
+        (setq process (get-buffer-process (current-buffer)))
+        (set-process-filter process 'telnet-initial-filter)
+        (accept-process-output process)
+        (telnet-mode)
+        (setq comint-input-sender 'telnet-simple-send)
+        (setq telnet-count telnet-initial-count))))
+  (require 'telnet)
   (fset 'telnet 'zoltan-telnet))
 
 ;; Set up msb to make a spiffy, organized buffer menu
@@ -608,7 +593,8 @@ Normally input is edited in Emacs and sent a line at a time."
 ;; region and secondary-selection, and to add the right colors for
 ;; bold ANSI term colors.
 
-;; define some faces that arguably should exist out of the box
+;; define separate faces for "bright" term colors instead of applying
+;; bold to the non-bright colors
 (defface term-color-brblack nil "")
 (defface term-color-brred nil "")
 (defface term-color-brgreen nil "")
