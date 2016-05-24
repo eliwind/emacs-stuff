@@ -7,3 +7,4 @@ ido.last
 smex-items
 var/
 var/pcache
+.last-package-update-day
