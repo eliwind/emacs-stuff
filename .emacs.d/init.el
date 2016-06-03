@@ -138,6 +138,7 @@ clobbering the mark."
       (term-send-up)
     (previous-line arg)))
 
+(require 'term)
 ;; move cursor to the next line or get next history item, depending
 ;; on whether we're at a shell mode prompt
 (defun ewd-term-down (arg)
@@ -145,6 +146,13 @@ clobbering the mark."
   (if (term-after-pmark-p)
       (term-send-down)
     (next-line arg)))
+
+;; toggle term mode between char and line
+(defun ewd-toggle-term-mode ()
+  (interactive)
+  (if (term-in-line-mode)
+      (term-char-mode)
+    (term-line-mode)))
 
 ;;----------------------------------------------------------------------------
 ;; Buffer manipulation functions
@@ -295,6 +303,7 @@ which are advised by `track-column'"
 (setq shell-file-name "zsh")
 (setq term-term-name "xterm-16color")
 
+(require 'shell)
 (add-hook 'shell-mode-hook
           (lambda ()
             (define-key shell-mode-map [up] 'ewd-comint-up)
@@ -302,8 +311,15 @@ which are advised by `track-column'"
 
 (add-hook 'term-mode-hook
           (lambda ()
+            (define-key term-mode-map [up] 'ewd-term-up)
             (define-key term-raw-map [up] 'ewd-term-up)
-            (define-key term-raw-map [down] 'ewd-term-down)))
+            (define-key term-mode-map [down] 'ewd-term-down)
+            (define-key term-raw-map [down] 'ewd-term-down)
+            (define-key term-mode-map "\C-c\C-j" 'ewd-toggle-term-mode)
+            (define-key term-mode-map "\C-c\C-k" 'ewd-toggle-term-mode)
+            (define-key term-raw-map "\C-c\C-j" 'ewd-toggle-term-mode)
+            (define-key term-raw-map "\C-c\C-k" 'ewd-toggle-term-mode)
+            ))
 
 
 
@@ -395,6 +411,13 @@ which are advised by `track-column'"
         (cursor-type . bar)
         (font . "Monaco-12")
         ))
+
+;;----------------------------------------------------------------------------
+;; Save/restore window layouts
+;;----------------------------------------------------------------------------
+(require 'workgroups2)
+(setq wg-prefix-key "\C-cw")
+(workgroups-mode 1)
 
 ;;----------------------------------------------------------------------------
 ;; Set up environment
