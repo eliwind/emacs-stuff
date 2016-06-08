@@ -309,7 +309,7 @@ NAME defaults to \"ruby\". COMMAND defaults to the default entry
 in `inf-ruby-implementations'.
 
 \(Type \\[describe-mode] in the process buffer for the list of commands.)"
-
+ss
   (interactive)
   (setq command (or command (cdr (assoc inf-ruby-default-implementation
                                         inf-ruby-implementations))))

@@ -1,3 +1,4 @@
+
 ;; Set up package system
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/"))
@@ -300,10 +301,10 @@ which are advised by `track-column'"
 ;;----------------------------------------------------------------------------
 (require 'multi-term)
 (setq multi-term-program "zsh")
-(setq shell-file-name "zsh")
 (setq term-term-name "xterm-16color")
 
 (require 'shell)
+(setq shell-file-name "zsh")
 (add-hook 'shell-mode-hook
           (lambda ()
             (define-key shell-mode-map [up] 'ewd-comint-up)
@@ -342,6 +343,7 @@ which are advised by `track-column'"
 (add-hook 'ruby-mode-hook 'robe-mode)
 (add-hook 'ruby-mode-hook 'yard-mode)
 (add-hook 'ruby-mode-hook 'inf-ruby-minor-mode)
+(global-rbenv-mode t)
 
 ;;----------------------------------------------------------------------------
 ;; Magit for git integration
@@ -651,6 +653,15 @@ Normally input is edited in Emacs and sent a line at a time."
       (setq term-ansi-current-bold nil))
     (apply oldfun args)))
 (advice-add 'term-handle-colors-array :around #'ansi-term--ewd-get-bold-color)
+
+;; solarized sets up term-colors automatically (for term-mode etc),
+;; but doesn't seem to set up ansi-colors (for comint-mode), so set them
+;; to the same values as term-mode.  
+(setq ansi-color-names-vector
+      (map 'vector 'face-foreground
+           [term-color-black term-color-red term-color-green term-color-yellow term-color-blue term-color-cyan term-color-white]))
+(setq ansi-color-faces-vector [default default default italic underline success warning error])
+(setq ansi-color-map (ansi-color-make-color-map))
 
 ;;----------------------------------------------------------------------------
 ;; a better Perl mode.  Available from ftp://ftp.math.ohio-state.edu/pub/users/ilya/perl/
