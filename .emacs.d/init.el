@@ -433,7 +433,7 @@ which are advised by `track-column'"
 (setq-default major-mode 'text-mode)    ; default mode is text mode
 (setq next-screen-context-lines 1)      ; # of lines of overlap when scrolling
 (setq auto-save-interval 300)           ; autosave every N characters typed
-(setq-default fill-column 70)           ; the column beyond which do word wrap
+(setq-default fill-column 72)           ; the column beyond which do word wrap
 (setq scroll-preserve-screen-position t); make pgup/dn remember current line
 (setq next-line-add-newlines nil)       ; don't scroll past end of file
 (global-auto-revert-mode 1)             ; autorevert buffers if files change
@@ -806,7 +806,7 @@ Normally input is edited in Emacs and sent a line at a time."
 ;; Set global keybindings
 ;;----------------------------------------------------------------------------
 (mapa 'global-set-key
- `(([f4] . next-error)
+ '(([f4] . next-error)
    ([f11] . ewd-dup-line-line)
    ([end] . end-of-line)
    ([C-end] . ewd-end-of-buffer-nomark)
@@ -843,6 +843,17 @@ Normally input is edited in Emacs and sent a line at a time."
    ("\C-xf" . find-file-in-repository)
    ))
 
+;; Reset some faces; these won't get clobbered by M-x customize-face
+(mapa 'face-spec-set
+  '(
+    ;; Make sure line numbers are not italic
+    (linum . ((t :slant normal))) 
+
+    ;; Set some faces to inherit from base ones (so they get solarized)
+    (sh-heredoc . ((t (:inherit font-lock-string-face)))) 
+    (sh-quoted-exec . ((t (:inherit font-lock-preprocessor-face))))
+    ))
+
 ;;---------------------------------------------------------------------------
 ;; Stuff from M-x customize
 ;;---------------------------------------------------------------------------
@@ -863,7 +874,4 @@ Normally input is edited in Emacs and sent a line at a time."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
-
- ;; Make sure line numbers aren't italic
- '(linum ((t (:slant normal))))
  )
