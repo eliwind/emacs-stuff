@@ -1,4 +1,3 @@
-
 ;; Set up package system
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/"))
@@ -843,17 +842,6 @@ Normally input is edited in Emacs and sent a line at a time."
    ("\C-xf" . find-file-in-repository)
    ))
 
-;; Reset some faces; these won't get clobbered by M-x customize-face
-(mapa 'face-spec-set
-  '(
-    ;; Make sure line numbers are not italic
-    (linum . ((t :slant normal))) 
-
-    ;; Set some faces to inherit from base ones (so they get solarized)
-    (sh-heredoc . ((t (:inherit font-lock-string-face)))) 
-    (sh-quoted-exec . ((t (:inherit font-lock-preprocessor-face))))
-    ))
-
 ;;---------------------------------------------------------------------------
 ;; Stuff from M-x customize
 ;;---------------------------------------------------------------------------
@@ -874,4 +862,6 @@ Normally input is edited in Emacs and sent a line at a time."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(linum ((t :slant normal))) 
+ '(sh-heredoc ((t (:inherit font-lock-string-face))))
+ '(sh-quoted-exec ((t (:inherit font-lock-preprocessor-face)))))
