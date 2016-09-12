@@ -314,7 +314,6 @@ in `inf-ruby-implementations'.
   (setq command (or command (cdr (assoc inf-ruby-default-implementation
                                         inf-ruby-implementations))))
   (setq name (or name "ruby"))
-
   (if (not (comint-check-proc inf-ruby-buffer))
       (let ((commandlist (split-string-and-unquote command))
             (buffer (current-buffer))

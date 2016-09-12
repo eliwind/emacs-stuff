@@ -122,7 +122,7 @@
 (defun rbenv/list ()
   (append '("system")
           (split-string (rbenv--call-process "versions" "--bare") "\n")))
-
+ 
 (defun rbenv--setup ()
   (when (not rbenv--initialized)
     (dolist (path-config rbenv-binary-paths)
