@@ -1,3 +1,4 @@
+
 ;; Set up package system
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/"))
@@ -339,9 +340,14 @@ which are advised by `track-column'"
 ;;----------------------------------------------------------------------------
 ;; Ruby programming
 ;;----------------------------------------------------------------------------
-(add-hook 'ruby-mode-hook 'robe-mode)
-(add-hook 'ruby-mode-hook 'yard-mode)
-(add-hook 'ruby-mode-hook 'inf-ruby-minor-mode)
+(add-hook 'ruby-mode-hook
+          (lambda()
+            (robe-mode)
+            (yard-mode)
+            (inf-ruby-minor-mode)
+            (rbenv-use-corresponding)))
+
+(require 'rbenv)
 (global-rbenv-mode t)
 
 ;;----------------------------------------------------------------------------
@@ -367,17 +373,16 @@ which are advised by `track-column'"
 ;;----------------------------------------------------------------------------
 ;; set up python
 ;;----------------------------------------------------------------------------
-(add-hook 'python-mode-hook 'autopair-mode)
-(add-hook 'python-mode-hook 'yas-minor-mode)
-(add-hook 'python-mode-hook 'auto-complete-mode)
-
 (add-hook 'python-mode-hook
-	  (lambda ()
-	    (jedi:setup)
-	    (jedi:ac-setup)
-		(local-set-key "\C-cd" 'jedi:show-doc)
-		(local-set-key (kbd "M-SPC") 'jedi:complete)
-		(local-set-key (kbd "M-.") 'jedi:goto-definition)))
+          (lambda ()
+            (autopair-mode)
+            (yas-minor-mode)
+            (auto-complete-mode)
+            (jedi:setup)
+            (jedi:ac-setup)
+            (local-set-key "\C-cd" 'jedi:show-doc)
+            (local-set-key (kbd "M-SPC") 'jedi:complete)
+            (local-set-key (kbd "M-.") 'jedi:goto-definition)))
 
 
 
@@ -714,15 +719,6 @@ Normally input is edited in Emacs and sent a line at a time."
 (setq nxml-child-indent 4)
 (add-to-list 'auto-mode-alist '("\\.x[ms]l\\'" . nxml-mode))
 (add-to-list 'auto-mode-alist '("\\.wsdl\\'" . nxml-mode))
-
-;; prompt to add new java files to subversion
-(defadvice jde-gen-class-buffer (around ewd-maybe-add-to-svn activate)
-  "Prompt to add new java files to subversion."
-  (let ((add-file-to-svn (y-or-n-p "Add this file to subversion? ")))
-    ad-do-it
-    (when add-file-to-svn
-      (save-buffer)
-      (vc-register))))
 
 ;;----------------------------------------------------------------------------
 ;; Set up C/C++ programming
