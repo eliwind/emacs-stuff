@@ -307,11 +307,19 @@ which are advised by `track-column'"
 (setq shell-file-name "zsh")
 (add-hook 'shell-mode-hook
           (lambda ()
+            ;; disable linum-mode
+            (linum-mode -1)
+            (linum-mode-set-explicitly)
+            
             (define-key shell-mode-map [up] 'ewd-comint-up)
             (define-key shell-mode-map [down] 'ewd-comint-down)))
 
 (add-hook 'term-mode-hook
           (lambda ()
+            ;; disable linum-mode
+            (linum-mode -1)
+            (linum-mode-set-explicitly)
+            
             (define-key term-mode-map [up] 'ewd-term-up)
             (define-key term-raw-map [up] 'ewd-term-up)
             (define-key term-mode-map [down] 'ewd-term-down)
@@ -415,7 +423,7 @@ which are advised by `track-column'"
         (width . 150)
         (height . 50)
         (cursor-type . bar)
-        (font . "Monaco-12")
+        (font . "Menlo-12")
         ))
 
 ;;----------------------------------------------------------------------------
@@ -496,7 +504,8 @@ which are advised by `track-column'"
 ;; Set up additional packages
 ;;----------------------------------------------------------------------------
 ;; emacs-server
-(server-start)
+(if window-system
+    (server-start))
 
 ;; use a more windowsy undo-redo system
 (require 'redo+)
