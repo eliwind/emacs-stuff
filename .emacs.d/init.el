@@ -12,17 +12,20 @@
 (auto-package-update-at-time "12:00")
 (auto-package-update-maybe)
 
+(eval-after-load 'dash '(dash-enable-font-lock))
+
 ;;----------------------------------------------------------------------------
 ;; data structure manipuation functions
 ;;----------------------------------------------------------------------------
+
 ;; alist manipulation
 (defun mapassoc (func alist)
   "map func down alist, listing results"
-  (mapcar (lambda (entry) (funcall func (car entry) (cdr entry))) alist))
+  (--map (funcall func (car it) (cdr it)) alist))
 
 (defun mapa (func alist)
   "map func down alist, ignoring results"
-  (mapc (lambda (entry) (funcall func (car entry) (cdr entry))) alist))
+  (--each alist (funcall func (car it) (cdr it))))
 
 ;;----------------------------------------------------------------------------
 ;; Interactive editing commands
@@ -209,7 +212,7 @@ which are advised by `track-column'"
   (add-to-list 'default-column-tracking-functions function)
   (add-function :around function (track-column-advice-name function)))
 
-(mapc 'track-column-for default-column-tracking-functions)
+(-each default-column-tracking-functions 'track-column-for)
 
 ;;----------------------------------------------------------------------------
 ;; Make subsequently opened frames offset from the first one
@@ -364,7 +367,7 @@ which are advised by `track-column'"
 (setq company-tooltip-align-annotations t)
 
 ;; formats the buffer before saving
-(add-hook 'before-save-hook 'tide-format-before-save)
+;(add-hook 'before-save-hook 'tide-format-before-save)
 
 (add-hook 'typescript-mode-hook #'setup-tide-mode)
 
@@ -487,6 +490,13 @@ which are advised by `track-column'"
 (setq ring-bell-function 'ignore)	    ; don't beep
 (setq split-height-threshold nil)       ; split windows horizontally
 
+
+;;----------------------------------------------------------------------------
+;; Line numbers, fringe, and modeline
+;;----------------------------------------------------------------------------
+(when (memq window-system '(mac ns x))
+  (exec-path-from-shell-initialize))
+
 ;;----------------------------------------------------------------------------
 ;; Line numbers, fringe, and modeline
 ;;----------------------------------------------------------------------------
@@ -531,15 +541,15 @@ which are advised by `track-column'"
     (server-start))
 
 ;; use a more windowsy undo-redo system
-(require 'redo+)
-(define-key-after
-  (lookup-key global-map [menu-bar edit])
-  [redo]
-  '("Redo" . redo) 'undo)
-(define-key-after
-  (lookup-key global-map [menu-bar edit])
-  [undo-seperator] '("--" . undo-seperator) 'redo)
-(setq undo-no-redo t)
+;; (require 'redo+)
+;; (define-key-after
+;;   (lookup-key global-map [menu-bar edit])
+;;   [redo]
+;;   '("Redo" . redo) 'undo)
+;; (define-key-after
+;;   (lookup-key global-map [menu-bar edit])
+;;   [undo-seperator] '("--" . undo-seperator) 'redo)
+;; (setq undo-no-redo t)
 
 ;; set up nicer buffer switching and other stuff
 (ido-mode)
@@ -607,34 +617,6 @@ which are advised by `track-column'"
              (define-key esc-map "[OD" 'backward-char)
              )))
 
-
-;; Make telnet-mode work on windows
-;; telnet with telnet.exe written by Naftali Ramati (naftali@harmonic.co.il).
-;; Thanks to Zoltan Kemenczy (zoltan@nabu.isg.mot.com).
-(when (eq window-system 'w32)
-  (defun zoltan-telnet (host)
-    "Open a network login connection to host named HOST (a string).
-Communication with HOST is recorded in a buffer `*telnet-HOST*'.
-Normally input is edited in Emacs and sent a line at a time."
-    (interactive "sOpen telnet connection to host: ")
-    (let* ((comint-delimiter-argument-list '(?\  ?\t))
-           (name (concat "telnet-" (comint-arguments host 0 nil) ))
-           (buffer (get-buffer (concat "*" name "*")))
-           process)
-      (when (eq window-system 'w32)
-        (setq telnet-new-line "\n"))
-      (if (and buffer (get-buffer-process buffer))
-          (pop-to-buffer (concat "*" name "*"))
-        (pop-to-buffer (make-comint name telnet-program nil host))
-        (setq process (get-buffer-process (current-buffer)))
-        (set-process-filter process 'telnet-initial-filter)
-        (accept-process-output process)
-        (telnet-mode)
-        (setq comint-input-sender 'telnet-simple-send)
-        (setq telnet-count telnet-initial-count))))
-  (require 'telnet)
-  (fset 'telnet 'zoltan-telnet))
-
 ;; Set up msb to make a spiffy, organized buffer menu
 (require 'msb)
 (add-to-list 'msb-menu-cond
@@ -653,6 +635,18 @@ Normally input is edited in Emacs and sent a line at a time."
 ;; color-theme-solarized from MELPA, hacked to switch definitions for
 ;; region and secondary-selection, and to add the right colors for
 ;; bold ANSI term colors.
+;;
+;; In solarized-definitions.el:
+;;   - switch definitions for `region' and `secondary-selection'
+;;   - add the following to the term-color section:
+;;      (term-color-brblack (,@fg-base03 ,@bg-base03))
+;;      (term-color-brred (,@fg-orange ,@bg-orange))
+;;      (term-color-brgreen (,@fg-base01 ,@bg-base01))
+;;      (term-color-bryellow (,@fg-base00 ,@bg-base00))
+;;      (term-color-brblue (,@fg-base0 ,@bg-base0))
+;;      (term-color-brmagenta (,@fg-violet ,@bg-violet))
+;;      (term-color-brcyan (,@fg-base1 ,@bg-base1))
+;;      (term-color-brwhite (,@fg-base3 ,@bg-base3))
 
 ;; define separate faces for "bright" term colors instead of applying
 ;; bold to the non-bright colors
@@ -708,34 +702,6 @@ Normally input is edited in Emacs and sent a line at a time."
           (lambda()
             (setq cperl-indent-level 4)))
 (add-to-list 'auto-mode-alist '("\\.ci\\'" . cperl-mode))
-
-
-;; read man pages without external programs.  Woman package written by
-;; Francis J. Wright <F.J.Wright@qmw.ac.uk>. Available from
-;; http://www.maths.qmw.ac.uk/~fjw/public_emacs/
-(when (eq window-system 'w32)
-  (autoload 'woman "woman" "Read man pages without external programs" t)
-  (setq woman-path "$EMACSDATA")
-  (setq woman-manpath '("c:/cygwin/usr/man" "c:/cygwin/usr/share/man" "c:/cygwin/usr/local/man"))
-  (setq woman-imenu t))
-
-;;----------------------------------------------------------------------------
-;; Set up JSP editing with mmm-mode
-;;----------------------------------------------------------------------------
-(require 'mmm-mode)
-(require 'mmm-sample)
-
-;; Use jsp-helper-mode + mmm-mode for JSP files
-(add-to-list 'auto-mode-alist '("\\.jsp$" . html-helper-mode))
-
-;; Use mmm-mode to activate jde mode for the Java part of the JSP file
-;; and javascript mode for any JavaScript code in it.
-(mmm-add-mode-ext-class 'html-helper-mode "\\.jsp\\'" 'jsp)
-(mmm-add-mode-ext-class 'html-helper-mode "\\.jsp\\'" 'html-js)
-(mmm-add-mode-ext-class 'html-helper-mode     "\\.js\\'"  'html-js)
-(mmm-add-mode-ext-class 'html-helper-mode     "\\.html\\'"  'html-js)
-
-(setq mmm-global-mode 'some)
 
 ;;----------------------------------------------------------------------------
 ;; Set up XQuery editing with xquery-mode
@@ -878,11 +844,17 @@ Normally input is edited in Emacs and sent a line at a time."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   (quote
+    ("8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" default)))
  '(dired-sort-menu-saved-config
    (quote
     ((dired-actual-switches . "-al")
      (ls-lisp-ignore-case)
-     (ls-lisp-dirs-first . t)))))
+     (ls-lisp-dirs-first . t))))
+ '(package-selected-packages
+   (quote
+    (dash-functional exec-path-from-shell yasnippet yard-mode yaml-mode xquery-mode workgroups2 virtualenvwrapper tide smex smartparens smart-mode-line robe redo+ rbenv pcache multi-term mmm-mode magit logito jedi hlinum haskell-mode find-file-in-repository enh-ruby-mode ecb discover dired-sort-menu+ company color-theme-solarized autopair auto-package-update ascii-art-to-unicode))))
 
 
 (custom-set-faces
@@ -890,6 +862,6 @@ Normally input is edited in Emacs and sent a line at a time."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(linum ((t :slant normal))) 
+ '(linum ((t :slant normal)))
  '(sh-heredoc ((t (:inherit font-lock-string-face))))
  '(sh-quoted-exec ((t (:inherit font-lock-preprocessor-face)))))
