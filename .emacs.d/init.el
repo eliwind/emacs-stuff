@@ -367,7 +367,7 @@ which are advised by `track-column'"
 (setq company-tooltip-align-annotations t)
 
 ;; formats the buffer before saving
-;(add-hook 'before-save-hook 'tide-format-before-save)
+(add-hook 'before-save-hook 'tide-format-before-save)
 
 (add-hook 'typescript-mode-hook #'setup-tide-mode)
 
@@ -452,12 +452,12 @@ which are advised by `track-column'"
         (font . "Menlo-12")
         ))
 
-;;----------------------------------------------------------------------------
-;; Save/restore window layouts
-;;----------------------------------------------------------------------------
-(require 'workgroups2)
-(setq wg-prefix-key "\C-cw")
-(workgroups-mode 1)
+;; ;;----------------------------------------------------------------------------
+;; ;; Save/restore window layouts
+;; ;;----------------------------------------------------------------------------
+;; (require 'workgroups2)
+;; (setq wg-prefix-key "\C-cw")
+;; (workgroups-mode 1)
 
 ;;----------------------------------------------------------------------------
 ;; Set up environment
@@ -492,9 +492,10 @@ which are advised by `track-column'"
 
 
 ;;----------------------------------------------------------------------------
-;; Line numbers, fringe, and modeline
+;; load exec-path from PATH in shell
 ;;----------------------------------------------------------------------------
 (when (memq window-system '(mac ns x))
+  (setq exec-path-from-shell-check-startup-files nil)
   (exec-path-from-shell-initialize))
 
 ;;----------------------------------------------------------------------------
@@ -540,16 +541,9 @@ which are advised by `track-column'"
 (if window-system
     (server-start))
 
-;; use a more windowsy undo-redo system
-;; (require 'redo+)
-;; (define-key-after
-;;   (lookup-key global-map [menu-bar edit])
-;;   [redo]
-;;   '("Redo" . redo) 'undo)
-;; (define-key-after
-;;   (lookup-key global-map [menu-bar edit])
-;;   [undo-seperator] '("--" . undo-seperator) 'redo)
-;; (setq undo-no-redo t)
+;; undo/redo as a tree
+(require 'undo-tree)
+(global-undo-tree-mode)
 
 ;; set up nicer buffer switching and other stuff
 (ido-mode)
@@ -854,7 +848,7 @@ which are advised by `track-column'"
      (ls-lisp-dirs-first . t))))
  '(package-selected-packages
    (quote
-    (dash-functional exec-path-from-shell yasnippet yard-mode yaml-mode xquery-mode workgroups2 virtualenvwrapper tide smex smartparens smart-mode-line robe redo+ rbenv pcache multi-term mmm-mode magit logito jedi hlinum haskell-mode find-file-in-repository enh-ruby-mode ecb discover dired-sort-menu+ company color-theme-solarized autopair auto-package-update ascii-art-to-unicode))))
+    (undo-tree dash-functional exec-path-from-shell yard-mode yaml-mode xquery-mode workgroups2 virtualenvwrapper tide smex robe redo+ rbenv pcache multi-term mmm-mode logito jedi hlinum find-file-in-repository enh-ruby-mode ecb discover dired-sort-menu+ color-theme-solarized autopair auto-package-update ascii-art-to-unicode))))
 
 
 (custom-set-faces
