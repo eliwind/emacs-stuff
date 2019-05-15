@@ -1,18 +1,14 @@
 
+
+
 ;; Set up package system
 (require 'package)
-(add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/"))
 
+(add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/"))
 (package-initialize)
 
-;; auto-update packages
-(require 'auto-package-update)
-(setq auto-package-update-interval 7)
-(setq auto-package-update-delete-old-versions t)
-(auto-package-update-at-time "12:00")
-(auto-package-update-maybe)
-
-(eval-after-load 'dash '(dash-enable-font-lock))
+(require 'dash)
+(dash-enable-font-lock)
 
 ;;----------------------------------------------------------------------------
 ;; data structure manipuation functions
@@ -388,6 +384,8 @@ which are advised by `track-column'"
 ;; Magit for git integration
 ;;----------------------------------------------------------------------------
 (global-magit-file-mode)
+(with-eval-after-load 'magit
+  (require 'forge))
 
 ;;----------------------------------------------------------------------------
 ;; Set up auxiliary stuff for python
@@ -404,19 +402,24 @@ which are advised by `track-column'"
 (setq ac-use-menu-map t)
 (setq ac-candidate-limit 20)
 
+;; blacken for python formatting
+(setq blacken-executable "~/.pyenv/shims/black")
+
 ;;----------------------------------------------------------------------------
 ;; set up python
 ;;----------------------------------------------------------------------------
+(setq jedi:use-shortcuts t)
 (add-hook 'python-mode-hook
           (lambda ()
+            (blacken-mode)
             (autopair-mode)
             (yas-minor-mode)
             (auto-complete-mode)
             (jedi:setup)
             (jedi:ac-setup)
-            (local-set-key "\C-cd" 'jedi:show-doc)
             (local-set-key (kbd "M-SPC") 'jedi:complete)
-            (local-set-key (kbd "M-.") 'jedi:goto-definition)))
+            (local-set-key (kbd "C-c C-b") 'blacken-buffer)            
+            ))
 
 
 
@@ -449,7 +452,7 @@ which are advised by `track-column'"
         (width . 150)
         (height . 50)
         (cursor-type . bar)
-        (font . "Menlo-12")
+        (font . "Operator Mono-14")
         ))
 
 ;; ;;----------------------------------------------------------------------------
@@ -524,6 +527,7 @@ which are advised by `track-column'"
 (line-number-mode -1)
 (hlinum-activate)
 (global-linum-mode)
+(global-hl-line-mode)
 
 (require 'smart-mode-line)
 (setq sml/theme 'respectful)
@@ -546,7 +550,14 @@ which are advised by `track-column'"
 (global-undo-tree-mode)
 
 ;; set up nicer buffer switching and other stuff
-(ido-mode)
+(require 'ido-completing-read+)
+(ido-mode 1)
+(ido-everywhere 1)
+(ido-ubiquitous-mode 1)
+(ido-vertical-mode 1)
+
+(setq ido-vertical-define-keys 'C-n-C-p-up-down-left-right)
+
 (add-hook 'ido-setup-hook
           (lambda()
             (define-key ido-completion-map
@@ -848,7 +859,7 @@ which are advised by `track-column'"
      (ls-lisp-dirs-first . t))))
  '(package-selected-packages
    (quote
-    (undo-tree dash-functional exec-path-from-shell yard-mode yaml-mode xquery-mode workgroups2 virtualenvwrapper tide smex robe redo+ rbenv pcache multi-term mmm-mode logito jedi hlinum find-file-in-repository enh-ruby-mode ecb discover dired-sort-menu+ color-theme-solarized autopair auto-package-update ascii-art-to-unicode))))
+    (terraform-mode go-mode forge blacken ido-completing-read+ ido-vertical-mode realgud undo-tree dash-functional exec-path-from-shell yard-mode yaml-mode xquery-mode workgroups2 virtualenvwrapper tide smex redo+ rbenv pcache multi-term mmm-mode logito jedi hlinum find-file-in-repository enh-ruby-mode ecb discover dired-sort-menu+ color-theme-solarized autopair auto-package-update ascii-art-to-unicode))))
 
 
 (custom-set-faces
