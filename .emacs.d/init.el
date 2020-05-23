@@ -1,6 +1,3 @@
-
-
-
 ;; Set up package system
 (require 'package)
 
@@ -329,8 +326,6 @@ which are advised by `track-column'"
             (define-key term-raw-map "\C-c\C-k" 'ewd-toggle-term-mode)
             ))
 
-
-
 ;;----------------------------------------------------------------------------
 ;; set up exec-path
 ;;----------------------------------------------------------------------------
@@ -343,6 +338,10 @@ which are advised by `track-column'"
 ;; from recursing into .svn directories
 ;; ----------------------------------------------------------------------------
 (require 'grep)
+
+(require 'company)
+(global-company-mode)
+(company-quickhelp-mode)
 
 ;;----------------------------------------------------------------------------
 ;; Typescript
@@ -384,23 +383,27 @@ which are advised by `track-column'"
 ;; Magit for git integration
 ;;----------------------------------------------------------------------------
 (global-magit-file-mode)
-(with-eval-after-load 'magit
-  (require 'forge))
+;; (with-eval-after-load 'magit
+;;   (require 'forge))
+
+
+;; terraform
+(require 'company-terraform)
+(company-terraform-init)
+
+(add-hook 'terraform-mode-hook
+          (lambda ()
+            (company-mode)))
+
 
 ;;----------------------------------------------------------------------------
 ;; Set up auxiliary stuff for python
 ;;----------------------------------------------------------------------------
-(require 'auto-complete)
 (require 'autopair)
 (require 'yasnippet)
 (require 'flycheck)
 (global-flycheck-mode t)
-(setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc))
-
-; auto-complete mode extra settings
-(setq ac-auto-start 2)
-(setq ac-use-menu-map t)
-(setq ac-candidate-limit 20)
+(setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc python-pylint))
 
 ;; blacken for python formatting
 (setq blacken-executable "~/.pyenv/shims/black")
@@ -409,18 +412,18 @@ which are advised by `track-column'"
 ;; set up python
 ;;----------------------------------------------------------------------------
 (setq jedi:use-shortcuts t)
-(add-hook 'python-mode-hook
-          (lambda ()
-            (blacken-mode)
-            (autopair-mode)
-            (yas-minor-mode)
-            (auto-complete-mode)
-            (jedi:setup)
-            (jedi:ac-setup)
-            (local-set-key (kbd "M-SPC") 'jedi:complete)
-            (local-set-key (kbd "C-c C-b") 'blacken-buffer)            
-            ))
 
+(add-hook 'elpy-mode-hook
+          (lambda ()
+            (highlight-indentation-mode -1)
+            
+            ;; use `blacken` (external tool), not the `black` library directly
+            (blacken-mode)
+            ))
+(elpy-enable)
+(when (load "flycheck" t t)
+  (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
+  (add-hook 'elpy-mode-hook 'flycheck-mode))
 
 
 ;;----------------------------------------------------------------------------
@@ -452,7 +455,7 @@ which are advised by `track-column'"
         (width . 150)
         (height . 50)
         (cursor-type . bar)
-        (font . "Operator Mono-14")
+        (font . "Operator Mono-15")
         ))
 
 ;; ;;----------------------------------------------------------------------------
@@ -492,7 +495,6 @@ which are advised by `track-column'"
 (setq gdb-many-windows t)               ; use many windows for debugging
 (setq ring-bell-function 'ignore)	    ; don't beep
 (setq split-height-threshold nil)       ; split windows horizontally
-
 
 ;;----------------------------------------------------------------------------
 ;; load exec-path from PATH in shell
@@ -549,6 +551,10 @@ which are advised by `track-column'"
 (require 'undo-tree)
 (global-undo-tree-mode)
 
+;; search with ripgrep
+(require 'rg)
+(rg-enable-default-bindings)
+
 ;; set up nicer buffer switching and other stuff
 (require 'ido-completing-read+)
 (ido-mode 1)
@@ -590,6 +596,7 @@ which are advised by `track-column'"
 ;; ;; Paren matching
 (require 'smartparens-config)
 (show-smartparens-global-mode +1)
+(show-paren-mode 1)
 
 ;; Make .com, .out, and .tpl files be text rather than binary
 (when (eq window-system 'w32) 
@@ -634,24 +641,36 @@ which are advised by `track-column'"
 (setq generic-define-mswindows-modes t)
 (require 'generic-x)
 
+
+
 ;;----------------------------------------------------------------------------
 ;; Color theme
 ;; ----------------------------------------------------------------------------
-;; color-theme-solarized from MELPA, hacked to switch definitions for
-;; region and secondary-selection, and to add the right colors for
-;; bold ANSI term colors.
+;; make the fringe stand out from the background
+(setq solarized-distinct-fringe-background t)
+
+(setq solarized-use-less-bold t)
+(setq solarized-use-more-italic t)
+(load-theme 'solarized-dark t)
+(enable-theme 'solarized-dark)
+
+
+;; solarized-them from MELPA, hacked to edit region highlight, and to
+;; add the right colors for bold ANSI term colors.
 ;;
 ;; In solarized-definitions.el:
-;;   - switch definitions for `region' and `secondary-selection'
+;;   - set region:
+;;     `(region ((,class (:background ,base2))))
 ;;   - add the following to the term-color section:
-;;      (term-color-brblack (,@fg-base03 ,@bg-base03))
-;;      (term-color-brred (,@fg-orange ,@bg-orange))
-;;      (term-color-brgreen (,@fg-base01 ,@bg-base01))
-;;      (term-color-bryellow (,@fg-base00 ,@bg-base00))
-;;      (term-color-brblue (,@fg-base0 ,@bg-base0))
-;;      (term-color-brmagenta (,@fg-violet ,@bg-violet))
-;;      (term-color-brcyan (,@fg-base1 ,@bg-base1))
-;;      (term-color-brwhite (,@fg-base3 ,@bg-base3))
+;;     `(term-color-brblack ((t (:foreground ,base03 :background ,base03))))
+;;     `(term-color-brred ((t (:foreground ,orange :background ,orange))))
+;;     `(term-color-brgreen ((t (:foreground ,base01 :background ,base01))))
+;;     `(term-color-bryellow ((t (:foreground ,base00 :background ,base00))))
+;;     `(term-color-brblue ((t (:foreground ,base0 :background ,base0))))
+;;     `(term-color-brmagenta ((t (:foreground ,violet :background ,violet))))
+;;     `(term-color-brcyan ((t (:foreground ,base1 :background ,base1))))
+;;     `(term-color-brwhite ((t (:foreground ,base3 :background ,base3))))
+
 
 ;; define separate faces for "bright" term colors instead of applying
 ;; bold to the non-bright colors
@@ -663,11 +682,6 @@ which are advised by `track-column'"
 (defface term-color-brmagenta nil "")
 (defface term-color-brcyan nil "")
 (defface term-color-brwhite nil "")
-
-;; load theme (which is hacked to set specs for these new faces)
-(setq solarized-bold nil)
-(load-theme 'solarized t)
-(enable-theme 'solarized)
 
 ;; set up advice to use the appropriate colors instead of bolding the
 ;; underlying colors
@@ -691,9 +705,10 @@ which are advised by `track-column'"
 
 ;; solarized sets up term-colors automatically (for term-mode etc),
 ;; but doesn't seem to set up ansi-colors (for comint-mode), so set them
-;; to the same values as term-mode.  
+;; to the same values as term-mode.
+(require 'cl)
 (setq ansi-color-names-vector
-      (map 'vector 'face-foreground
+      (cl-map 'vector 'face-foreground
            [term-color-black term-color-red term-color-green term-color-yellow term-color-blue term-color-cyan term-color-white]))
 (setq ansi-color-faces-vector [default default default italic underline success warning error])
 (setq ansi-color-map (ansi-color-make-color-map))
@@ -851,7 +866,7 @@ which are advised by `track-column'"
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
    (quote
-    ("8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" default)))
+    ("a8245b7cc985a0610d71f9852e9f2767ad1b852c2bdea6f4aadc12cce9c4d6d0" "0598c6a29e13e7112cfbc2f523e31927ab7dce56ebb2016b567e1eff6dc1fd4f" "8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" default)))
  '(dired-sort-menu-saved-config
    (quote
     ((dired-actual-switches . "-al")
@@ -859,7 +874,7 @@ which are advised by `track-column'"
      (ls-lisp-dirs-first . t))))
  '(package-selected-packages
    (quote
-    (terraform-mode go-mode forge blacken ido-completing-read+ ido-vertical-mode realgud undo-tree dash-functional exec-path-from-shell yard-mode yaml-mode xquery-mode workgroups2 virtualenvwrapper tide smex redo+ rbenv pcache multi-term mmm-mode logito jedi hlinum find-file-in-repository enh-ruby-mode ecb discover dired-sort-menu+ color-theme-solarized autopair auto-package-update ascii-art-to-unicode))))
+    (rg company-quickhelp company-terraform solarized-theme elpy terraform-mode go-mode forge blacken ido-completing-read+ ido-vertical-mode realgud undo-tree dash-functional exec-path-from-shell yard-mode yaml-mode xquery-mode workgroups2 virtualenvwrapper tide smex redo+ rbenv pcache multi-term mmm-mode logito jedi hlinum find-file-in-repository enh-ruby-mode ecb discover dired-sort-menu+ autopair auto-package-update ascii-art-to-unicode))))
 
 
 (custom-set-faces
@@ -867,6 +882,7 @@ which are advised by `track-column'"
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(font-lock-comment-face ((t (:slant italic))))
  '(linum ((t :slant normal)))
  '(sh-heredoc ((t (:inherit font-lock-string-face))))
  '(sh-quoted-exec ((t (:inherit font-lock-preprocessor-face)))))
