@@ -455,7 +455,7 @@ which are advised by `track-column'"
         (width . 150)
         (height . 50)
         (cursor-type . bar)
-        (font . "Operator Mono-15")
+        (font . "OperatorMono Nerd Font-15")
         ))
 
 ;; ;;----------------------------------------------------------------------------
@@ -495,6 +495,10 @@ which are advised by `track-column'"
 (setq gdb-many-windows t)               ; use many windows for debugging
 (setq ring-bell-function 'ignore)	    ; don't beep
 (setq split-height-threshold nil)       ; split windows horizontally
+
+;; mac keys
+(setq mac-option-modifier 'meta)
+(setq mac-command-modifier 'super)
 
 ;;----------------------------------------------------------------------------
 ;; load exec-path from PATH in shell
