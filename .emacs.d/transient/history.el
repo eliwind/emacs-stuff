@@ -1,4 +1,6 @@
-((forge-dispatch nil)
+((claude-code-ide-menu nil)
+ (claude-code-transient nil)
+ (forge-dispatch nil)
  (magit-blame
   ("-w")
   nil)

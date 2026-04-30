@@ -1,7 +1,8 @@
 ;; Set up package system
 (require 'package)
 
-(add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/"))
+(add-to-list 'package-archives
+             '("melpa" . "https://melpa.org/packages/") t)
 (package-initialize)
 
 (require 'dash)
@@ -302,20 +303,12 @@ which are advised by `track-column'"
 (require 'shell)
 (setq shell-file-name "zsh")
 (add-hook 'shell-mode-hook
-          (lambda ()
-            ;; disable linum-mode
-            (linum-mode -1)
-            (linum-mode-set-explicitly)
-            
+          (lambda ()            
             (define-key shell-mode-map [up] 'ewd-comint-up)
             (define-key shell-mode-map [down] 'ewd-comint-down)))
 
 (add-hook 'term-mode-hook
           (lambda ()
-            ;; disable linum-mode
-            (linum-mode -1)
-            (linum-mode-set-explicitly)
-            
             (define-key term-mode-map [up] 'ewd-term-up)
             (define-key term-raw-map [up] 'ewd-term-up)
             (define-key term-mode-map [down] 'ewd-term-down)
@@ -343,6 +336,7 @@ which are advised by `track-column'"
 (global-company-mode)
 (company-quickhelp-mode)
 
+
 ;;----------------------------------------------------------------------------
 ;; Typescript
 ;;----------------------------------------------------------------------------
@@ -361,8 +355,6 @@ which are advised by `track-column'"
 ;; aligns annotation to the right hand side
 (setq company-tooltip-align-annotations t)
 
-;; formats the buffer before saving
-(add-hook 'before-save-hook 'tide-format-before-save)
 
 (add-hook 'typescript-mode-hook #'setup-tide-mode)
 
@@ -407,7 +399,6 @@ which are advised by `track-column'"
 
 ;; blacken for python formatting
 (setq blacken-executable "~/.pyenv/shims/black")
-
 ;;----------------------------------------------------------------------------
 ;; set up python
 ;;----------------------------------------------------------------------------
@@ -425,7 +416,38 @@ which are advised by `track-column'"
   (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
   (add-hook 'elpy-mode-hook 'flycheck-mode))
 
+;;----------------------------------------------------------------------------
+;; Set up claude code
+;;----------------------------------------------------------------------------
+;; for eat terminal backend:
+(use-package eat :ensure t)
 
+(use-package monet
+  :vc (:url "https://github.com/stevemolitor/monet" :rev :newest))
+
+;; install claude-code.el
+(use-package claude-code :ensure t
+  :vc (:url "https://github.com/stevemolitor/claude-code.el" :rev :newest)
+  :config 
+  ;; optional IDE integration with Monet
+  (add-hook 'claude-code-process-environment-functions #'monet-start-server-function)
+  (monet-mode 1)
+  
+  (claude-code-mode)
+  :bind-keymap ("C-c c" . claude-code-command-map)
+  
+  ;; Optionally define a repeat map so that "M" will cycle thru Claude auto-accept/plan/confirm modes after invoking claude-code-cycle-mode / C-c M.
+  :bind
+  (:repeat-map my-claude-code-map ("M" . claude-code-cycle-mode)))
+
+
+;; (setq claude-code-ide-terminal-backend 'eat)
+;; (use-package claude-code-ide
+;;   :vc (:url "https://github.com/manzaltu/claude-code-ide.el" :rev :newest)
+;;   :bind ("C-c C-'" . claude-code-ide-menu) ; Set your favorite keybinding
+;;   ;; :config
+;;   ;; (claude-code-ide-emacs-tools-setup)) ; Optionally enable Emacs MCP tools
+;; )
 ;;----------------------------------------------------------------------------
 ;; Make sure TZ env var isn't set
 ;;----------------------------------------------------------------------------
@@ -504,36 +526,13 @@ which are advised by `track-column'"
 ;; load exec-path from PATH in shell
 ;;----------------------------------------------------------------------------
 (when (memq window-system '(mac ns x))
-  (setq exec-path-from-shell-check-startup-files nil)
-  (exec-path-from-shell-initialize))
+   (setq exec-path-from-shell-check-startup-files nil)
+   (exec-path-from-shell-initialize))
 
 ;;----------------------------------------------------------------------------
 ;; Line numbers, fringe, and modeline
 ;;----------------------------------------------------------------------------
-(require 'hlinum)
-(defvar linum-format-fmt
-  "Buffer-local variable for format of line numbers in left margin")
-
-(unless window-system
-  (add-hook 'linum-before-numbering-hook
-	    (lambda ()
-	      (setq-local linum-format-fmt
-			  (let ((w (length (number-to-string
-					    (count-lines (point-min) (point-max))))))
-			    (concat "%" (number-to-string w) "d"))))))
-
-(defun linum-format-func (line)
-  (concat
-   (propertize (format linum-format-fmt line) 'face 'linum)
-   (propertize " " 'face 'fringe)))
-
-(unless window-system
-  (setq linum-format 'linum-format-func))
-
-(line-number-mode -1)
-(hlinum-activate)
-(global-linum-mode)
-(global-hl-line-mode)
+(add-hook 'prog-mode-hook #'display-line-numbers-mode)
 
 (require 'smart-mode-line)
 (setq sml/theme 'respectful)
@@ -548,8 +547,8 @@ which are advised by `track-column'"
 ;; Set up additional packages
 ;;----------------------------------------------------------------------------
 ;; emacs-server
-(if window-system
-    (server-start))
+;(if window-system
+;    (server-start))
 
 ;; undo/redo as a tree
 (require 'undo-tree)
@@ -645,36 +644,18 @@ which are advised by `track-column'"
 (setq generic-define-mswindows-modes t)
 (require 'generic-x)
 
-
-
 ;;----------------------------------------------------------------------------
 ;; Color theme
 ;; ----------------------------------------------------------------------------
-;; make the fringe stand out from the background
+;; ;; make the fringe stand out from the background
 (setq solarized-distinct-fringe-background t)
-
+(setq solarized-high-contrast-mode-line nil)
 (setq solarized-use-less-bold t)
 (setq solarized-use-more-italic t)
+
+
 (load-theme 'solarized-dark t)
 (enable-theme 'solarized-dark)
-
-
-;; solarized-them from MELPA, hacked to edit region highlight, and to
-;; add the right colors for bold ANSI term colors.
-;;
-;; In solarized-definitions.el:
-;;   - set region:
-;;     `(region ((,class (:background ,base2))))
-;;   - add the following to the term-color section:
-;;     `(term-color-brblack ((t (:foreground ,base03 :background ,base03))))
-;;     `(term-color-brred ((t (:foreground ,orange :background ,orange))))
-;;     `(term-color-brgreen ((t (:foreground ,base01 :background ,base01))))
-;;     `(term-color-bryellow ((t (:foreground ,base00 :background ,base00))))
-;;     `(term-color-brblue ((t (:foreground ,base0 :background ,base0))))
-;;     `(term-color-brmagenta ((t (:foreground ,violet :background ,violet))))
-;;     `(term-color-brcyan ((t (:foreground ,base1 :background ,base1))))
-;;     `(term-color-brwhite ((t (:foreground ,base3 :background ,base3))))
-
 
 ;; define separate faces for "bright" term colors instead of applying
 ;; bold to the non-bright colors
@@ -710,7 +691,7 @@ which are advised by `track-column'"
 ;; solarized sets up term-colors automatically (for term-mode etc),
 ;; but doesn't seem to set up ansi-colors (for comint-mode), so set them
 ;; to the same values as term-mode.
-(require 'cl)
+(require 'cl-lib)
 (setq ansi-color-names-vector
       (cl-map 'vector 'face-foreground
            [term-color-black term-color-red term-color-green term-color-yellow term-color-blue term-color-cyan term-color-white]))
@@ -818,7 +799,6 @@ which are advised by `track-column'"
             (modify-syntax-entry ?_ "w" c++-mode-syntax-table)
             (local-unset-key "\C-c:")))
 
-
 ;;----------------------------------------------------------------------------
 ;; Set global keybindings
 ;;----------------------------------------------------------------------------
@@ -868,25 +848,26 @@ which are advised by `track-column'"
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(custom-safe-themes
-   (quote
-    ("a8245b7cc985a0610d71f9852e9f2767ad1b852c2bdea6f4aadc12cce9c4d6d0" "0598c6a29e13e7112cfbc2f523e31927ab7dce56ebb2016b567e1eff6dc1fd4f" "8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" default)))
- '(dired-sort-menu-saved-config
-   (quote
-    ((dired-actual-switches . "-al")
-     (ls-lisp-ignore-case)
-     (ls-lisp-dirs-first . t))))
  '(package-selected-packages
-   (quote
-    (rg company-quickhelp company-terraform solarized-theme elpy terraform-mode go-mode forge blacken ido-completing-read+ ido-vertical-mode realgud undo-tree dash-functional exec-path-from-shell yard-mode yaml-mode xquery-mode workgroups2 virtualenvwrapper tide smex redo+ rbenv pcache multi-term mmm-mode logito jedi hlinum find-file-in-repository enh-ruby-mode ecb discover dired-sort-menu+ autopair auto-package-update ascii-art-to-unicode))))
-
+   '(ascii-art-to-unicode auto-package-update autopair blacken claude-code
+                          color-theme company-quickhelp
+                          company-terraform dash-functional discover eat
+                          ecb elpy exec-path-from-shell
+                          find-file-in-project find-file-in-repository
+                          flycheck forge go-mode graphql hlinum
+                          ido-completing-read+ ido-vertical-mode jedi
+                          logito monet multi-term pcache
+                          py-vterm-interaction pyenv-mode rbenv rg robe
+                          smart-mode-line smartparens smex
+                          solarized-theme undo-tree virtualenvwrapper
+                          web-server xquery-mode yaml-mode yard-mode))
+ '(package-vc-selected-packages
+   '((monet :url "https://github.com/stevemolitor/monet")
+     (claude-code :url "https://github.com/stevemolitor/claude-code.el"))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(font-lock-comment-face ((t (:slant italic))))
- '(linum ((t :slant normal)))
- '(sh-heredoc ((t (:inherit font-lock-string-face))))
- '(sh-quoted-exec ((t (:inherit font-lock-preprocessor-face)))))
+ )
