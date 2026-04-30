@@ -1,0 +1,6 @@
+;;; -*- lisp-data -*-
+(("/Users/eli/.emacs.d/elpa/claude-code-ide/")
+ ("/Users/eli/.emacs.d/elpa/claude-code/")
+ ("/Users/eli/.emacs.d/elpa/eat/") ("/Users/eli/.emacs.d/elpa/monet/")
+ ("/Users/eli/.emacs.d/elpa/emacs-color-theme-solarized/")
+ ("/Users/eli/dev/jellyfish/"))

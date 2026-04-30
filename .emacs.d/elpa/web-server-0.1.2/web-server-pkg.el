@@ -1,0 +1,2 @@
+;; Generated package description from web-server.el  -*- no-byte-compile: t -*-
+(define-package "web-server" "0.1.2" "Emacs Web Server" '((emacs "24.3")) :commit "33afdb46e1cd61251736816d965495525b36c9cd" :authors '(("Eric Schulte" . "schulte.eric@gmail.com")) :maintainer '("Eric Schulte" . "schulte.eric@gmail.com") :keywords '("http" "server" "network") :url "https://github.com/eschulte/emacs-web-server")
