@@ -8,3 +8,12 @@ smex-items
 var/
 var/pcache
 .last-package-update-day
+
+# package-vc installs (own git clones; reinstalled by use-package :vc)
+elpa/monet/
+elpa/claude-code/
+elpa/claude-code-ide/
+# native-compilation cache (machine-specific)
+eln-cache/
+# undo-tree history files
+*.~undo-tree~

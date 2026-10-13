@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t -*-
 ;; Set up package system
 (require 'package)
 
@@ -199,12 +200,9 @@ which are advised by `track-column'"
     (apply orig-fun args)
     (move-to-column col)))
 
-(defun track-column-advice-name (function)
-  (make-symbol (format "track-column-in-%s" function)))
-
 (defun track-column-for (function)
   (add-to-list 'default-column-tracking-functions function)
-  (add-function :around function (track-column-advice-name function)))
+  (advice-add function :around #'track-column-advice))
 
 (-each default-column-tracking-functions 'track-column-for)
 
@@ -374,7 +372,7 @@ which are advised by `track-column'"
 ;;----------------------------------------------------------------------------
 ;; Magit for git integration
 ;;----------------------------------------------------------------------------
-(global-magit-file-mode)
+;; (global-magit-file-mode) ; removed in magit 3; file bindings are on by default (magit-define-global-key-bindings)
 ;; (with-eval-after-load 'magit
 ;;   (require 'forge))
 
@@ -586,7 +584,7 @@ which are advised by `track-column'"
 ;; <F.J.Wright@qmw.ac.uk>.  Available from http://centaur.maths.qmw.ac.uk/Emacs/.
 (add-hook 'dired-load-hook
           (lambda ()
-            (require 'dired-sort-menu)))
+            (require 'dired-sort-menu nil t))) ; optional: package no longer installed
 
 ;; show directories in buffer names
 (require 'uniquify)
